@@ -1,0 +1,43 @@
+MELISSA GARLAND
+UX Principal  |  Design Systems  |  Accessibility
+melissa@garlandstudios.com
+PROFESSIONAL SUMMARY
+Design leader with 20+ years of experience building and scaling design systems, driving enterprise accessibility, and leading cross-functional UX teams. At PowerSchool, grew design system adoption from 0% to nearly 80% across a 40-product portfolio serving millions of users worldwide, and established an accessibility program that delivered VPAT documentation for all 40 products. Combines deep expertise in WCAG compliance, inclusive design, and systems thinking with a proven ability to mentor teams, align design strategy with business goals, and ship accessible, consistent experiences at scale.
+CORE COMPETENCIES
+
+EXPERIENCE
+UX Principal, Design System & Accessibility
+PowerSchool  •  40 products  •  Millions of users worldwide	Apr 2022 – Present
+Lead a cross-functional team of 6 designers, engineers, and writers to build and scale a framework-agnostic design system adopted by nearly 80% of the 40-product portfolio, reducing design and engineering debt.
+Built PowerSchool’s accessibility program from the ground up, delivering VPAT conformance reports for all 40 products within 5 years—from zero prior documentation.
+Trained technical writers and QA engineers on accessibility evaluation using Axe, manual testing, and assistive technology (NVDA, VoiceOver), building a sustainable, scalable audit capability.
+Established and led a cross-organizational committee of accessibility champions to define company-wide accessibility policy, standards, and best practices.
+Pioneered AI-assisted prototyping workflows using Cursor and LLMs to generate reusable code prototypes, bridging the gap between design and development.
+Oversaw localization design for products translated into dozens of languages including complex scripts such as Arabic and Thai.
+Present design strategy and accessibility roadmaps to executive leadership, aligning design goals with business objectives and regulatory compliance.
+Mentor and coach junior designers to develop their craft, accessibility expertise, and leadership capabilities.
+UX Designer
+PowerSchool	Aug 2018 – Apr 2022
+Conducted user research and usability testing to inform design decisions, directly contributing to improved user satisfaction across teacher evaluation tools.
+Created wireframes, prototypes, and high-fidelity mockups for web and mobile applications across the education product suite.
+Led end-to-end design of a suite of teacher evaluation and education-focused HR tools used by school districts nationwide.
+UX Designer
+PeopleAdmin (formerly Performance Matters)	Oct 2015 – Aug 2018
+Defined the UI style guide for a re-branded enterprise application, establishing visual standards, accessibility requirements, and voice and tone guidelines.
+Conducted accessibility audit of customer-facing applications and delivered actionable WCAG 2.0-based remediation recommendations.
+Managed an offshore development team through a full enterprise UI rebrand and platform update.
+UX/UI Designer
+Q2 Software  •  Digital banking (publicly traded)	Jan 2014 – Sep 2015
+Introduced a discount usability testing program using new hires as participants, providing fast design feedback while onboarding employees to the product.
+Led the design of a new treasury management product, opening a new business line for the company.
+Helped define company-wide user research processes and UI/interaction patterns for mobile and desktop banking software.
+Founding Designer → Design Lead
+Tk20, Inc.	Jun 2002 – Jan 2014
+Recruited as a founding member; helped grow the company from 4 employees and 1 client to 80+ employees serving 200+ institutions over 12 years.
+Built and led a design team of 4, providing art direction for all products and customer-facing media while overseeing information architecture for educational assessment and learning management systems.
+Established the company’s design and development training program, embedding usability and accessibility best practices across global teams.
+Created corporate identity, branding, marketing materials, and online presence from scratch.
+EDUCATION & CERTIFICATIONS
+Nielsen Norman Group UX Certification  —  Interaction Design Specialty
+Virginia Commonwealth University  —  BFA, Cum Laude, Communication Arts & Design
+Rhode Island School of Design (RISD)  —  Coursework

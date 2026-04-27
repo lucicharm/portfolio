@@ -6,7 +6,17 @@
       "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/Melissa_Garland_Resume.txt\" /tmp/portfolio-content/)",
       "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-Assessment planning .md\" /tmp/portfolio-content/)",
       "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-PD Admin.md\" /tmp/portfolio-content/)",
-      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-sms.md\" /tmp/portfolio-content/)"
+      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-sms.md\" /tmp/portfolio-content/)",
+      "Bash(cp /tmp/portfolio-content/Melissa_Garland_Resume.txt content/)",
+      "Bash(cp \"/tmp/portfolio-content/case-study-Assessment planning .md\" content/case-studies/)",
+      "Bash(cp \"/tmp/portfolio-content/case-study-PD Admin.md\" content/case-studies/)",
+      "Bash(cp \"/tmp/portfolio-content/case-study-sms.md\" content/case-studies/)",
+      "Bash(cp \"/tmp/portfolio-content/Paper Skill.md\" content/skills/)",
+      "Bash(npm run *)",
+      "Bash(echo \"Dev server PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -E \"\\\\.\\(tsx|ts|json\\)$\")"
     ]
   }
 }
