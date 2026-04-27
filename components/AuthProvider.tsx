@@ -14,5 +14,5 @@ export function AuthProvider({
     return null;
   }
 
-  return children;
+  return <>{children}</>;
 }
