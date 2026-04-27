@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Melissa Garland - UX Portfolio
 
-## Getting Started
+This is a personal portfolio website showcasing the work and experience of Melissa Garland, a UX Principal specializing in design systems, accessibility, and enterprise software.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Responsive Design**: Built with modern web technologies for optimal viewing across devices
+- **Case Studies**: Detailed project showcases with interactive elements
+- **Authentication**: Protected access to view the portfolio content
+- **Accessibility**: Designed with accessibility best practices in mind
+- **Static Export**: Optimized for deployment on GitHub Pages
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Styling**: Tailwind CSS with custom design system
+- **Deployment**: GitHub Pages with GitHub Actions CI/CD
+- **Authentication**: Client-side authentication with local storage
+
+## Local Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/lucicharm/portfolio.git
+   cd portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create environment file:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Edit `.env.local` with your desired credentials.
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment
+
+The site is automatically deployed to GitHub Pages using GitHub Actions. Any push to the main branch triggers a new deployment.
+
+- **Live Site**: [https://lucicharm.github.io/portfolio/](https://lucicharm.github.io/portfolio/)
+- **Build Command**: `npm run build`
+- **Export**: Static files generated in `out/` directory
+
+## Project Structure
+
+```
+portfolio/
+├── app/                 # Next.js app directory
+│   ├── about/          # About page
+│   ├── case-studies/   # Case study pages
+│   ├── contact/        # Contact page
+│   ├── login/          # Authentication page
+│   └── globals.css     # Global styles
+├── components/         # Reusable React components
+├── content/            # Markdown content and assets
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions and data
+└── public/             # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authentication
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The portfolio requires authentication to view content. Default credentials are configured in the environment variables. For production use, update the credentials in `.env.local`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+This is a personal portfolio site. For questions or feedback, please use the contact form on the live site.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is private and not licensed for public use.
