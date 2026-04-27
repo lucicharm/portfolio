@@ -17,8 +17,8 @@ export function useAuth() {
       return;
     }
 
-    // Allow /login to load without redirecting
-    if (pathname === "/login") {
+    // Allow / and /portfolio to load without redirecting
+    if (pathname === "/" || pathname === "/portfolio") {
       setIsChecking(false);
       return;
     }
@@ -37,7 +37,7 @@ export function useAuth() {
 
   const logout = () => {
     clearAuthToken();
-    router.push("/login");
+    router.push("/");
   };
 
   return { isAuthed, isChecking, logout };

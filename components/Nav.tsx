@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/", label: "Work" },
+  { href: "/portfolio", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -21,7 +21,7 @@ export default function Nav() {
         aria-label="Main navigation"
       >
         <Link
-          href="/"
+          href="/portfolio"
           className="font-display font-semibold text-lg tracking-tight text-primary hover:text-secondary transition-colors whitespace-nowrap"
         >
           Melissa Garland
@@ -31,7 +31,7 @@ export default function Nav() {
         <ul className="hidden sm:flex items-center gap-8" role="list">
           {navLinks.map(({ href, label }) => {
             const isActive =
-              href === "/" ? pathname === "/" : pathname.startsWith(href);
+              href === "/portfolio" ? pathname === "/portfolio" : pathname.startsWith(href);
             return (
               <li key={href}>
                 <Link
