@@ -3,16 +3,16 @@
 @theme {
   /* Paper Design Tokens */
   --color-primary: #111111;
-  --color-secondary: #8b5cf6;
-  --color-success: #16a34a;
-  --color-warning: #d97706;
+  --color-secondary: #1B6898;
+  --color-success: #15803d;
+  --color-warning: #b45309;
   --color-danger: #dc2626;
   --color-surface: #ffffff;
   --color-paper: #fafaf8;
   --color-text: #111827;
   --color-muted: #6b7280;
-  --color-border: #e5e7eb;
-  --color-border-strong: #d1d5db;
+  --color-border: #9ca3af;
+  --color-border-strong: #6b7280;
 
   /* Typography — Paper skill: Roboto body, Montserrat display, PT Mono */
   --font-display: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
