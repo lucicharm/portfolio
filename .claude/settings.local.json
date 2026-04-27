@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(mkdir -p /tmp/portfolio-content)",
+      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/Melissa_Garland_Resume.txt\" /tmp/portfolio-content/)",
+      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-Assessment planning .md\" /tmp/portfolio-content/)",
+      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-PD Admin.md\" /tmp/portfolio-content/)",
+      "Bash(cp \"/Users/melissagarland/Documents/Github/portfolio/case-study-sms.md\" /tmp/portfolio-content/)"
+    ]
+  }
+}
