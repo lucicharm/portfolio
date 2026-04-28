@@ -51,7 +51,7 @@ export default function ContactPage() {
                 type="text"
                 required
                 autoComplete="name"
-                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-text placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors"
+                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-body placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors"
                 placeholder="Your name"
               />
               <ValidationError field="name" errors={state.errors} className="font-sans text-sm text-danger" />
@@ -70,7 +70,7 @@ export default function ContactPage() {
                 type="email"
                 required
                 autoComplete="email"
-                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-text placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors"
+                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-body placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors"
                 placeholder="you@example.com"
               />
               <ValidationError field="email" errors={state.errors} className="font-sans text-sm text-danger" />
@@ -88,7 +88,7 @@ export default function ContactPage() {
                 name="message"
                 required
                 rows={6}
-                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-text placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors resize-y"
+                className="font-sans text-sm border border-border rounded px-3 py-2.5 bg-surface text-body placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors resize-y"
                 placeholder="What's on your mind?"
               />
               <ValidationError field="message" errors={state.errors} className="font-sans text-sm text-danger" />

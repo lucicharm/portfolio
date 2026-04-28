@@ -9,7 +9,7 @@
   --color-danger: #dc2626;
   --color-surface: #ffffff;
   --color-paper: #fafaf8;
-  --color-text: #111827;
+  --color-body: #111827;
   --color-muted: #6b7280;
   --color-border: #9ca3af;
   --color-border-strong: #6b7280;
@@ -22,7 +22,7 @@
 
 body {
   background-color: var(--color-surface);
-  color: var(--color-text);
+  color: var(--color-body);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

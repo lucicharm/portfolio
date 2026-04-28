@@ -4,6 +4,11 @@ import type { Metadata } from "next";
 import { getCaseStudyBySlug, caseStudies, type Block } from "@/lib/case-studies";
 import CaseStudyImage from "@/components/CaseStudyImage";
 
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
@@ -24,7 +29,7 @@ function renderBlock(block: Block, idx: number) {
   switch (block.type) {
     case "paragraph":
       return (
-        <p key={idx} className="font-sans text-base text-text leading-relaxed">
+        <p key={idx} className="font-sans text-base text-body leading-relaxed">
           {block.text}
         </p>
       );
@@ -35,7 +40,7 @@ function renderBlock(block: Block, idx: number) {
           {block.items.map((item, i) => (
             <li
               key={i}
-              className="font-sans text-base text-text leading-relaxed flex gap-3"
+              className="font-sans text-base text-body leading-relaxed flex gap-3"
             >
               <span className="text-secondary mt-1 shrink-0" aria-hidden="true">
                 ·
@@ -52,7 +57,7 @@ function renderBlock(block: Block, idx: number) {
           key={idx}
           className="border-l-2 border-secondary pl-5 py-1 bg-paper rounded-r-md"
         >
-          <p className="font-sans text-base text-text leading-relaxed italic">
+          <p className="font-sans text-base text-body leading-relaxed italic">
             {block.text}
           </p>
         </blockquote>
@@ -182,10 +187,10 @@ export default async function CaseStudyPage({ params }: Props) {
         {study.sections.map((section) => (
           <section
             key={section.heading}
-            aria-labelledby={`section-${section.heading}`}
+            aria-labelledby={`section-${slugify(section.heading)}`}
           >
             <h2
-              id={`section-${section.heading}`}
+              id={`section-${slugify(section.heading)}`}
               className="font-display font-semibold text-2xl text-primary mb-6 pb-3 border-b border-border"
             >
               {section.heading}

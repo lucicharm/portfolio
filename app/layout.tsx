@@ -4,7 +4,6 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SkipNav from "@/components/SkipNav";
-import { AuthProvider } from "@/components/AuthProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -45,15 +44,13 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${roboto.variable} ${ptMono.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-surface text-text overflow-x-hidden">
-        <AuthProvider>
+      <body className="min-h-screen flex flex-col bg-surface text-body overflow-x-hidden">
           <SkipNav />
           <Nav />
           <main id="main-content" className="flex-1">
             {children}
           </main>
           <Footer />
-        </AuthProvider>
       </body>
     </html>
   );
