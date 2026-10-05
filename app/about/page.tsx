@@ -13,13 +13,16 @@ const experience = [
     company: "PowerSchool",
     period: "Apr 2022 – Present",
     highlights: [
-      "Lead a cross-functional team of 6 designers, engineers, and writers to build a framework-agnostic design system adopted by ~80% of a 40-product portfolio.",
-      "Built PowerSchool's accessibility program from the ground up — delivered VPAT conformance reports for all 40 products within 5 years, from zero prior documentation.",
-      "Trained technical writers and QA engineers on accessibility evaluation using Axe, NVDA, and VoiceOver, building a sustainable audit capability.",
-      "Established a cross-organizational accessibility champions committee to define company-wide policy, standards, and best practices.",
-      "Pioneered AI-assisted prototyping workflows using Cursor and LLMs to generate reusable code prototypes, bridging design and development.",
-      "Oversaw localization design for products translated into dozens of languages including complex scripts such as Arabic and Thai.",
-      "Present design strategy and accessibility roadmaps to executive leadership.",
+      "Lead a cross-functional team of 6 designers, engineers, and writers building and scaling a framework-agnostic design system adopted by nearly 80% of PowerSchool's 40-product portfolio, reducing design and engineering debt while creating greater consistency across products.",
+      "Built PowerSchool's enterprise accessibility program from the ground up, establishing a repeatable approach to accessibility documentation, evaluation, remediation, and organizational accountability across more than 40 products.",
+      "Delivered VPAT conformance reports for all 40 products within five years, taking the organization from zero prior accessibility documentation to comprehensive product coverage.",
+      "Established and lead a cross-organizational network of accessibility champions, defining company-wide accessibility policy, standards, and best practices while distributing accessibility ownership across product teams.",
+      "Train technical writers and QA engineers in accessibility evaluation using Axe, manual testing, and assistive technologies including NVDA and VoiceOver, building sustainable accessibility capability beyond a centralized expert model.",
+      "Advise product and design teams on accessible interaction patterns, WCAG requirements, design decisions, and remediation priorities throughout the product-development process.",
+      "Present accessibility strategy and design-system roadmaps to executive leadership, translating product quality, accessibility, and regulatory requirements into organizational priorities.",
+      "Mentor and coach designers in interaction design, accessibility, design craft, and leadership, increasing accessibility expertise throughout the design organization.",
+      "Pioneer AI-assisted prototyping workflows using LLMs to rapidly generate reusable code prototypes and bridge the gap between design intent and engineering implementation.",
+      "Oversee localization design for products translated into dozens of languages, including complex writing systems such as Arabic and Thai.",
     ],
   },
   {
@@ -27,9 +30,10 @@ const experience = [
     company: "PowerSchool",
     period: "Aug 2018 – Apr 2022",
     highlights: [
-      "Conducted user research and usability testing that directly contributed to improved satisfaction across teacher evaluation tools.",
-      "Led end-to-end design of a suite of teacher evaluation and education-focused HR tools used by school districts nationwide.",
-      "Created wireframes, prototypes, and high-fidelity mockups for web and mobile applications across the education product suite.",
+      "Conducted user research and usability testing, including research with deaf and blind users, to identify usability and accessibility barriers and inform product design decisions.",
+      "Designed wireframes, prototypes, and high-fidelity experiences for web and mobile applications across the education product suite.",
+      "Led end-to-end product design for teacher evaluation and education-focused HR tools used by school districts nationwide.",
+      "Partnered with cross-functional teams to translate research findings and user needs into practical product improvements.",
     ],
   },
   {
@@ -38,18 +42,18 @@ const experience = [
     period: "Oct 2015 – Aug 2018",
     highlights: [
       "Defined the UI style guide for a re-branded enterprise application, establishing visual standards, accessibility requirements, and voice and tone guidelines.",
-      "Conducted an accessibility audit of customer-facing applications and delivered WCAG 2.0-based remediation recommendations.",
-      "Managed an offshore development team through a full enterprise UI rebrand and platform update.",
+      "Conducted accessibility audits of customer-facing applications and translated WCAG 2.0 findings into actionable remediation recommendations.",
+      "Managed an offshore development team through a full enterprise UI rebrand and platform update, collaborating across design and engineering to carry design decisions through implementation.",
     ],
   },
   {
     title: "UX/UI Designer",
-    company: "Q2 Software · Digital banking (publicly traded)",
+    company: "Q2 Software",
     period: "Jan 2014 – Sep 2015",
     highlights: [
-      "Led the design of a new treasury management product, opening a new business line for the company.",
-      "Introduced a discount usability testing program using new hires as participants, providing fast design feedback.",
+      "Led the design of a new treasury management product that opened a new business line for the company.",
       "Helped define company-wide user research processes and UI/interaction patterns for mobile and desktop banking software.",
+      "Introduced a usability-testing program that provided rapid design feedback while helping new employees learn the product.",
     ],
   },
   {
@@ -57,28 +61,26 @@ const experience = [
     company: "Tk20, Inc.",
     period: "Jun 2002 – Jan 2014",
     highlights: [
-      "Recruited as a founding team member — helped grow the company from 4 employees and 1 client to 80+ employees serving 200+ institutions over 12 years.",
-      "Built and led a design team of 4, providing art direction for all products and customer-facing media.",
-      "Oversaw information architecture for educational assessment and learning management systems.",
+      "Joined as a founding team member and helped grow the company from 4 employees and 1 client to 80+ employees serving more than 200 institutions.",
+      "Built and led a design team of 4, providing art direction across products and customer-facing experiences while overseeing information architecture for educational assessment and learning-management systems.",
       "Established the company's design and development training program, embedding usability and accessibility practices across global teams.",
-      "Created corporate identity, branding, marketing materials, and online presence from scratch.",
+      "Created the company's corporate identity, branding, marketing materials, and online presence from the ground up.",
     ],
   },
 ];
 
 const competencies = [
-  "Design Systems",
-  "Accessibility (WCAG 2.2 AA/AAA)",
-  "VPAT / Conformance Reporting",
-  "Assistive Technology Testing",
-  "User Research & Usability Testing",
-  "Information Architecture",
-  "Interaction Design",
-  "Localization Design",
-  "Cross-functional Team Leadership",
-  "Executive Stakeholder Communication",
-  "Mentorship & Coaching",
-  "AI-Assisted Prototyping",
+  "Accessibility strategy & governance",
+  "WCAG and inclusive product design",
+  "Design systems, components & patterns",
+  "Figma and interaction design",
+  "Assistive technology and screen readers",
+  "Accessibility audits and manual testing",
+  "VPAT / ACR documentation",
+  "Prototyping",
+  "User research & usability testing",
+  "Design team leadership",
+  "AI-assisted prototyping",
 ];
 
 export default function AboutPage() {
@@ -91,18 +93,18 @@ export default function AboutPage() {
           Melissa Garland
         </h1>
         <p className="font-sans text-lg text-muted leading-relaxed mb-4">
-          Design leader with 20+ years of experience building and scaling design
-          systems, driving enterprise accessibility, and leading cross-functional
-          UX teams.
+          Principal UX designer and accessibility leader with 20+ years of
+          experience combining hands-on interaction and visual design with the
+          ability to embed accessibility into products, design systems, and
+          organizational practice.
         </p>
         <p className="font-sans text-base text-muted leading-relaxed">
-          At PowerSchool, I grew design system adoption from 0% to nearly 80%
-          across a 40-product portfolio serving millions of users worldwide, and
-          established an accessibility program that delivered VPAT documentation
-          for all 40 products. I combine deep expertise in WCAG compliance,
-          inclusive design, and systems thinking with a proven ability to mentor
-          teams, align design strategy with business goals, and ship accessible,
-          consistent experiences at scale.
+          At PowerSchool, I built the accessibility program from the ground up,
+          coordinating VPAT/ACR conformance reporting across 40 products and
+          establishing an accessibility champion network that distributes
+          ownership across teams. I lead a design system adopted by nearly 80%
+          of the portfolio, with accessibility integrated into components,
+          patterns, and design-to-engineering workflows.
         </p>
       </header>
 
