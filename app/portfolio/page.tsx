@@ -22,7 +22,7 @@ export default function PortfolioPage() {
             <span className="text-secondary">For everyone.</span>
           </h1>
           <p className="font-sans text-lg text-muted leading-relaxed mb-8 max-w-xl">
-            I build the systems that make good design consistent — and make
+            I build the systems that make good design consistent, and make
             sure those systems work for every user. 20+ years leading design
             systems and accessibility programs in enterprise software.
           </p>
@@ -54,8 +54,7 @@ export default function PortfolioPage() {
           AI-assisted experiences.
         </p>
         <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl mb-12">
-          I don&apos;t just write requirements or run programs. I find the
-          problem, understand the users and workflow, design the solution, and
+          I find the problem, understand the users and workflow, design the solution, and
           increasingly build it myself.
         </p>
         <ul className="flex flex-col divide-y divide-border border-y border-border">

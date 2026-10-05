@@ -74,7 +74,7 @@ function Placeholder({
 const glance = [
   ["Role", "Sole designer and builder; owner of the ACR program"],
   ["Used by", "8 teammates so far"],
-  ["Output", "About 4–6 customer-facing provisional ACR updates published"],
+  ["Output", "About 4 to 6 customer-facing provisional ACR updates published"],
 ];
 
 const steps = [
@@ -94,7 +94,7 @@ const steps = [
 ];
 
 const impact = [
-  ["40+ → 1–4 hrs", "Per ACR update"],
+  ["40+ to 1-4 hrs", "Per ACR update"],
   ["≈90%", "Less production time"],
   ["2,232+ hrs", "Saved across 62 ACRs"],
 ];
@@ -143,9 +143,7 @@ export default function AcrToolPage({
             few hours
           </h1>
           <p className="font-sans text-lg text-[#374151] leading-relaxed max-w-2xl">
-            {description}. I designed and built a tool that drafts Accessibility
-            Conformance Reports (ACRs) from current Jira issues, with human
-            review required before anything is published.
+            {description}
           </p>
           <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-[#aebbb6] pt-6">
             {glance.map(([k, v]) => (
@@ -257,7 +255,7 @@ export default function AcrToolPage({
         id="lessons"
         tone="mint"
         eyebrow="What I learned"
-        title="The hard part wasn't the code"
+        title="Most of the work was changing team habits"
       >
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {lessons.map(([t, d]) => (

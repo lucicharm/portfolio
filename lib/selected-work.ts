@@ -8,7 +8,14 @@ export const selectedWork: SelectedWorkItem[] = [
   {
     slug: "accessibility-programs-tooling",
     title: "Accessibility Programs & Tooling",
-    description: "Building durable systems that make accessibility continuous, scalable, and accountable",
+    description:
+      "I designed and built an internal tool that drafts Accessibility Conformance Reports (ACRs) from Jira issues, with human review before publication. It cut update time from 40+ hours to 1–4 hours per report.",
+  },
+  {
+    slug: "matrix-schedule-accessibility",
+    title: "A Clearer View of the Matrix Schedule",
+    description:
+      "Turning a complex class schedule into a text view screen-reader users can navigate by heading",
   },
   {
     slug: "accessible-design-systems",

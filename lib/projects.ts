@@ -357,6 +357,155 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: "matrix-schedule-accessibility",
+    title: "A Clearer View of the Matrix Schedule",
+    client: "PowerSchool",
+    year: "2022",
+    role: "UX Designer",
+    tags: ["Accessibility", "Inclusive Design", "User Research"],
+    summary:
+      "I interviewed blind screen-reader users and designed a structured text view that made a complex class schedule easier to navigate, while preserving the visual matrix familiar to existing users.",
+    heroImage: {
+      alt: "Placeholder for a recreated, privacy-safe overview comparing the class schedule matrix with its text view",
+      caption:
+        "Image to be added: a recreated schedule overview with all student and staff details fictionalized.",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        heading: "The challenge",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A class schedule is a dense matrix. Days, terms, semesters, and periods organize courses across rows and columns. That visual structure helps people scan the schedule and compare classes. For a person using a screen reader, the same information arrives as spoken output, one item at a time.",
+          },
+          {
+            type: "paragraph",
+            text: "Complex table headers did not always come through accurately in screen readers. Even when the software announced the headers correctly, the number of relationships a listener had to keep in mind made it hard to follow the schedule. The issue was both technical and cognitive: people needed to understand which course belonged to which day, semester, and period without holding the entire grid in memory.",
+          },
+          {
+            type: "paragraph",
+            text: "The visual schedule already served users who depended on the matrix. Replacing it would disrupt a familiar workflow. I focused on an alternate way to reach the same schedule information, so people could continue using the view that suited them.",
+          },
+          {
+            type: "image",
+            alt: "Placeholder for a recreated class schedule matrix using fictional courses, teacher names, and room numbers",
+            caption:
+              "Image to be added: a privacy-safe reconstruction of the original matrix.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "What I learned from users",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I led interviews with blind screen-reader users to understand how they worked with the schedule and where the existing presentation slowed them down. A key need was the ability to jump quickly to different parts of the schedule. Screen readers offer heading navigation, so a person can move directly through a page by its heading structure instead of listening to every preceding item.",
+          },
+          {
+            type: "paragraph",
+            text: "That changed how I framed the problem. Correct header announcements addressed accuracy, while heading navigation addressed the effort of moving through a dense grid. The experience needed to make the schedule's organization available as a set of clear, navigable sections. I designed around the user's task of finding a particular part of the schedule, with table announcements as one part of the experience.",
+          },
+          {
+            type: "image",
+            alt: "Placeholder for a recreated interview synthesis showing the need to jump directly to a day, semester, or class period",
+            caption:
+              "Image to be added: anonymized research notes or a concise summary of the navigation need.",
+            aspect: "standard",
+          },
+        ],
+      },
+      {
+        heading: "Designing the text view",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I designed a text view that presents the same schedule in a logical hierarchy. A text-format link opens the alternate view. The page uses a heading for each day, a nested heading for each term and semester, and another heading for every class period. Course details appear in a list beneath their period heading. Empty periods are stated in text.",
+          },
+          {
+            type: "paragraph",
+            text: "For example, a user can navigate to Day A, move to Term 22-23, Semester 1, and then jump to Period 1. The course name, section number, teacher, room, and term are listed together. Proper heading levels let screen-reader users move through the schedule section by section, while the list keeps the details for each class grouped in a predictable order.",
+          },
+          {
+            type: "paragraph",
+            text: "The structure follows the way people need to make sense of the schedule: first locate a day, then a semester, then a period, and finally review the information for that class. The page makes those groupings explicit, supports direct navigation, and reduces the relationships a listener has to hold in memory.",
+          },
+          {
+            type: "paragraph",
+            text: "The text-format link offers a clear choice at the schedule itself. People who prefer the matrix can keep scanning it visually. People who use a screen reader can open the structured view and move through its heading outline. Both views represent the same schedule, with the text view making its organization explicit in a form that supports the navigation users asked for.",
+          },
+          {
+            type: "paragraph",
+            text: "I chose familiar document structure for the alternate view. Screen-reader users already know how to move by headings, and the outline reflects the schedule's existing organization. The solution gives them a direct route to a day, semester, or period, then presents the relevant details together. The core design decision was to make the information's hierarchy available as navigation.",
+          },
+          {
+            type: "paragraph",
+            text: "The hierarchy also gives users more than one useful level of orientation. A person can browse the schedule's days and semesters first, then move into the details of a period. When they reach a period, the list keeps its course, section number, teacher, room, and term together. The page outline and the content groups work as one system.",
+          },
+          {
+            type: "image",
+            alt: "Placeholder for a recreated text-view screen showing nested day, semester, and class-period headings with grouped course details",
+            caption:
+              "Image to be added: a recreated text view with fictional schedule content.",
+            aspect: "standard",
+          },
+        ],
+      },
+      {
+        heading: "Working through release",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I led the user interviews, designed the alternate view, and partnered with engineering through release. Keeping the matrix and adding a text format meant the team could support the existing visual workflow while making the schedule's content available through a structure that works with screen-reader heading navigation.",
+          },
+          {
+            type: "paragraph",
+            text: "The implementation used semantic markup for the hierarchy. A day is an h2, a term and semester an h3, and each period an h4. Each class's details stay grouped beneath the period they describe. This gives screen-reader users heading navigation and gives the content a clear organization in the page itself.",
+          },
+          {
+            type: "paragraph",
+            text: "That structure also made the relationship between each label and its information explicit in the document. The course name, section number, teacher, room, and term appear together in a list. An empty period is identified in text under its own heading. Users can navigate to the section they need, then read the details in a consistent order.",
+          },
+          {
+            type: "paragraph",
+            text: "The text view shipped. I led interviews before release, but did not run a formal usability test of the finished view with participants. I can describe the release and the feedback I received, but I have no measured task-time improvement or quantified outcome to report.",
+          },
+        ],
+      },
+      {
+        heading: "What changed for one user",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "After release, a school counselor who uses a screen reader emailed to describe what access to the product meant in their work. They said they could read every component, move through schedules efficiently, make needed changes, and share information with staff and families. Their note connected the design decision to the work the schedule supports every day.",
+          },
+          {
+            type: "callout",
+            text: "“I cannot even fully explain how efficient I am now that I can read every component of PowerSchool. I fly through schedules, make the changes I need and can relay information to staff members and families.”",
+          },
+          {
+            type: "paragraph",
+            text: "That message was one user's account; I have no broader study or product metric to quantify the impact. It showed me why navigation structure matters: when people can reach the information they need and understand how it is organized, they can act on it and pass it along with confidence.",
+          },
+        ],
+      },
+      {
+        heading: "Reflection",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "This work reinforced that accessible data must make cells available, provide context, and support practical navigation. Interviews helped me see that screen-reader users wanted to jump between schedule sections, and semantic headings gave them a familiar tool to do that.",
+          },
+          {
+            type: "paragraph",
+            text: "I learned to treat navigation and comprehension as part of the design problem, alongside correct announcements. Preserving the matrix and adding a structured text view let the product keep its familiar visual form while giving screen-reader users another way to find and use the same schedule.",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
