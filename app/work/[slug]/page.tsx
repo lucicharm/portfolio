@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getProjectBySlug, projects, type Block } from "@/lib/projects";
 import { selectedWork } from "@/lib/selected-work";
 import ProjectImage from "@/components/ProjectImage";
+import AcrToolPage from "@/components/AcrToolPage";
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
@@ -121,6 +122,15 @@ export default async function ProjectPage({ params }: Props) {
   if (!study) {
     const selectedItem = selectedWork.find((item) => item.slug === slug);
     if (!selectedItem) notFound();
+
+    if (selectedItem.slug === "accessibility-programs-tooling") {
+      return (
+        <AcrToolPage
+          title={selectedItem.title}
+          description={selectedItem.description}
+        />
+      );
+    }
 
     return (
       <>

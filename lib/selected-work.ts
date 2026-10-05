@@ -6,9 +6,9 @@ export type SelectedWorkItem = {
 
 export const selectedWork: SelectedWorkItem[] = [
   {
-    slug: "accessibility-tooling",
-    title: "Accessibility Tooling",
-    description: "Turning accessibility processes into usable tools",
+    slug: "accessibility-programs-tooling",
+    title: "Accessibility Programs & Tooling",
+    description: "Building durable systems that make accessibility continuous, scalable, and accountable",
   },
   {
     slug: "accessible-design-systems",
