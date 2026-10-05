@@ -12,9 +12,10 @@ function slugify(text: string): string {
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return [
-    ...projects.map((project) => ({ slug: project.slug })),
     ...selectedWork.map((item) => ({ slug: item.slug })),
   ];
 }
