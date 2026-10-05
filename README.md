@@ -6,7 +6,7 @@ This is a personal portfolio website showcasing the work and experience of Melis
 
 - **Responsive Design**: Built with modern web technologies for optimal viewing across devices
 - **Case Studies**: Detailed project showcases with interactive elements
-- **Authentication**: Protected access to view the portfolio content
+- **Password gate**: Client-side gate for casual access control
 - **Accessibility**: Designed with accessibility best practices in mind
 - **Static Export**: Optimized for deployment on GitHub Pages
 
@@ -15,7 +15,7 @@ This is a personal portfolio website showcasing the work and experience of Melis
 - **Framework**: Next.js 16 with App Router
 - **Styling**: Tailwind CSS with custom design system
 - **Deployment**: GitHub Pages with GitHub Actions CI/CD
-- **Authentication**: Client-side authentication with local storage
+- **Password gate**: Client-side password check with local storage
 
 ## Local Development
 
@@ -43,12 +43,14 @@ This is a personal portfolio website showcasing the work and experience of Melis
    ```
    Edit `.env.local` with your desired credentials.
 
-4. Run the development server:
+4. Set `NEXT_PUBLIC_PASSWORD` in `.env.local` to the password you want to use.
+
+5. Run the development server:
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployment
 
@@ -77,7 +79,9 @@ portfolio/
 
 ## Authentication
 
-The portfolio requires authentication to view content. Default credentials are configured in the environment variables. For production use, update the credentials in `.env.local`.
+Set the `AUTH_PASSWORD` GitHub Actions secret for production deployments. The workflow passes it to the static build as `NEXT_PUBLIC_PASSWORD`. For local development, set `NEXT_PUBLIC_PASSWORD` in `.env.local`.
+
+Because this site is a static export, the password check runs in the browser and the password is included in the generated JavaScript. This gate only discourages casual browsing; it does not protect confidential content from someone who can inspect or download the site files. Use server-side authentication and hosting if the content must be private.
 
 ## Contributing
 

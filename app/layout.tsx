@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SkipNav from "@/components/SkipNav";
+import PasswordGate from "@/components/PasswordGate";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -45,12 +46,14 @@ export default function RootLayout({
       className={`${montserrat.variable} ${roboto.variable} ${ptMono.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-surface text-body overflow-x-hidden">
+        <PasswordGate>
           <SkipNav />
           <Nav />
           <main id="main-content" className="flex-1">
             {children}
           </main>
           <Footer />
+        </PasswordGate>
       </body>
     </html>
   );
