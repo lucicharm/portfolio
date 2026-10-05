@@ -39,7 +39,7 @@ export default function PortfolioPage() {
       {/* Selected Work */}
       <section
         aria-labelledby="selected-work-heading"
-        className="max-w-5xl mx-auto px-6 py-16 border-b border-border"
+        className="max-w-5xl mx-auto px-6 py-16"
       >
         <h2
           id="selected-work-heading"
@@ -53,7 +53,7 @@ export default function PortfolioPage() {
           accessibility infrastructure, design systems, inclusive research, and
           AI-assisted experiences.
         </p>
-        <p className="font-sans text-base text-muted leading-relaxed max-w-2xl mb-12">
+        <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl mb-12">
           I don&apos;t just write requirements or run programs. I find the
           problem, understand the users and workflow, design the solution, and
           increasingly build it myself.
@@ -71,7 +71,7 @@ export default function PortfolioPage() {
                     item.title
                   )}
                 </h3>
-                <p className="font-sans text-sm text-muted leading-relaxed">
+                <p className="font-sans text-lg text-muted leading-relaxed">
                   {item.description}
                 </p>
               </div>
