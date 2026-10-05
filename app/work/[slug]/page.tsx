@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getProjectBySlug, projects, type Block } from "@/lib/projects";
+import { selectedWork } from "@/lib/selected-work";
 import ProjectImage from "@/components/ProjectImage";
 
 function slugify(text: string): string {
@@ -12,16 +13,26 @@ function slugify(text: string): string {
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return projects.map((cs) => ({ slug: cs.slug }));
+  return [
+    ...projects.map((project) => ({ slug: project.slug })),
+    ...selectedWork.map((item) => ({ slug: item.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const study = getProjectBySlug(slug);
-  if (!study) return {};
+  if (study) {
+    return {
+      title: study.title,
+      description: study.summary,
+    };
+  }
+  const selectedItem = selectedWork.find((item) => item.slug === slug);
+  if (!selectedItem) return {};
   return {
-    title: study.title,
-    description: study.summary,
+    title: selectedItem.title,
+    description: selectedItem.description,
   };
 }
 
@@ -106,7 +117,36 @@ function renderBlock(block: Block, idx: number) {
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const study = getProjectBySlug(slug);
-  if (!study) notFound();
+  if (!study) {
+    const selectedItem = selectedWork.find((item) => item.slug === slug);
+    if (!selectedItem) notFound();
+
+    return (
+      <>
+        <header className="border-b border-border bg-paper">
+          <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
+            <Link
+              href="/portfolio"
+              className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
+            >
+              ← Back to work
+            </Link>
+            <h1 className="font-display font-bold text-4xl sm:text-5xl text-primary leading-tight tracking-tight mb-4">
+              {selectedItem.title}
+            </h1>
+            <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl">
+              {selectedItem.description}
+            </p>
+          </div>
+        </header>
+        <main className="max-w-3xl mx-auto px-6 py-16">
+          <p className="font-sans text-lg text-muted leading-relaxed">
+            Work in progress. More details coming soon.
+          </p>
+        </main>
+      </>
+    );
+  }
 
   const currentIndex = projects.findIndex((cs) => cs.slug === slug);
   const prev = currentIndex > 0 ? projects[currentIndex - 1] : null;

@@ -63,8 +63,11 @@ export default function PortfolioPage() {
             <li key={item.title} className="py-6">
               <div className="flex flex-col gap-1">
                 <h3 className="font-display font-semibold text-xl text-primary">
-                  {item.href ? (
-                    <Link href={item.href} className="hover:text-secondary hover:underline">
+                  {item.slug ? (
+                    <Link
+                      href={`/work/${item.slug}`}
+                      className="hover:text-secondary hover:underline"
+                    >
                       {item.title}
                     </Link>
                   ) : (
