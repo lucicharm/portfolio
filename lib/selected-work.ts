@@ -7,24 +7,26 @@ export type SelectedWorkItem = {
 export const selectedWork: SelectedWorkItem[] = [
   {
     slug: "accessibility-programs-tooling",
-    title: "Accessibility Programs & Tooling",
+    title: "Accessibility programs & tooling: ACR Generator",
     description:
-      "I designed and built an internal tool that drafts Accessibility Conformance Reports (ACRs) from Jira issues, with human review before publication. It cut update time from 40+ hours to 1–4 hours per report.",
+      "As sole designer and builder, I made a tool that drafts accessibility reports from Jira issues, with every conformance decision left to a human reviewer. Eight teammates now use it.",
   },
   {
     slug: "matrix-schedule-accessibility",
-    title: "A Clearer View of the Matrix Schedule",
+    title: "Accessible design: A Clearer View of the Matrix Schedule",
     description:
       "Turning a complex class schedule into a text view screen-reader users can navigate by heading",
   },
+  /*
   {
     slug: "accessible-design-systems",
-    title: "Accessible Design Systems",
+    title: "Accessible design systems",
     description: "Designing components and patterns with accessibility built in",
   },
+  */
   {
     slug: "accessibility-design-handoff",
-    title: "Accessibility in Design Handoff",
+    title: "Accessibility in design handoff",
     description: "Making accessibility requirements actionable for engineering",
   },
 ];
