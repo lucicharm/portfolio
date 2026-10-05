@@ -1,4 +1,4 @@
-import type { ImageAspect } from "@/components/CaseStudyImage";
+import type { ImageAspect } from "@/components/ProjectImage";
 
 export type Block =
   | { type: "paragraph"; text: string }
@@ -23,7 +23,7 @@ export type Section = {
   blocks: Block[];
 };
 
-export type CaseStudy = {
+export type Project = {
   slug: string;
   title: string;
   client: string;
@@ -32,7 +32,7 @@ export type CaseStudy = {
   tags: string[];
   summary: string;
   heroMetric?: { value: string; label: string };
-  // Hero image sits between the metadata header and the case study body.
+  // Hero image sits between the metadata header and the project body.
   // Leave src undefined to show a placeholder; set src when the image is ready.
   heroImage?: {
     src?: string;
@@ -43,7 +43,7 @@ export type CaseStudy = {
   sections: Section[];
 };
 
-export const caseStudies: CaseStudy[] = [
+export const projects: Project[] = [
   {
     slug: "pd-admin",
     title: "Professional Learning Admin Redesign",
@@ -359,6 +359,6 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
-  return caseStudies.find((cs) => cs.slug === slug);
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((cs) => cs.slug === slug);
 }

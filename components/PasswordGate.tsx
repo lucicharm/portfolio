@@ -4,6 +4,10 @@ import { useState, useSyncExternalStore, type FormEvent } from "react";
 
 const AUTH_STORAGE_KEY = "portfolio-authenticated";
 const AUTH_CHANGE_EVENT = "portfolio-auth-change";
+// Hi, curious code reader! I know this isn't secure: on a static site the
+// password is bundled into client-side JavaScript. Think of this as a friendly
+// "please don't wander in" sign for casual visitors, not a lock on sensitive
+// content.
 const configuredPassword = process.env.NEXT_PUBLIC_PASSWORD;
 
 function subscribeToAuthentication(onChange: () => void) {

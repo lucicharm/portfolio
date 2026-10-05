@@ -15,7 +15,7 @@ const aspectClass: Record<ImageAspect, string> = {
   portrait: "aspect-[3/4]",  // 3:4   — mobile screens
 };
 
-export default function CaseStudyImage({
+export default function ProjectImage({
   src,
   alt,
   caption,

@@ -4,18 +4,19 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "20+ years of UX leadership in design systems and accessibility. Currently UX Principal at PowerSchool.",
+    "UX Principal with 20+ years of experience in accessibility, design systems, and inclusive product design. Currently at PowerSchool, serving millions of users worldwide.",
 };
 
 const experience = [
   {
     title: "UX Principal, Design System & Accessibility",
     company: "PowerSchool",
+    scope: "40 products · Millions of users worldwide",
     period: "Apr 2022 – Present",
     highlights: [
       "Lead a cross-functional team of 6 designers, engineers, and writers building and scaling a framework-agnostic design system adopted by nearly 80% of PowerSchool's 40-product portfolio, reducing design and engineering debt while creating greater consistency across products.",
       "Built PowerSchool's enterprise accessibility program from the ground up, establishing a repeatable approach to accessibility documentation, evaluation, remediation, and organizational accountability across more than 40 products.",
-      "Delivered VPAT conformance reports for all 40 products within five years, taking the organization from zero prior accessibility documentation to comprehensive product coverage.",
+      "Managed the VPAT/ACR program across 40 products, defining scope, managing third-party accessibility vendors, and driving the organization from zero prior accessibility documentation to comprehensive product coverage within five years.",
       "Established and lead a cross-organizational network of accessibility champions, defining company-wide accessibility policy, standards, and best practices while distributing accessibility ownership across product teams.",
       "Train technical writers and QA engineers in accessibility evaluation using Axe, manual testing, and assistive technologies including NVDA and VoiceOver, building sustainable accessibility capability beyond a centralized expert model.",
       "Advise product and design teams on accessible interaction patterns, WCAG requirements, design decisions, and remediation priorities throughout the product-development process.",
@@ -71,12 +72,17 @@ const experience = [
 
 const competencies = [
   "Accessibility strategy & governance",
-  "WCAG and inclusive product design",
-  "Design systems, components & patterns",
-  "Figma and interaction design",
+  "WCAG",
+  "Inclusive product design",
+  "Design systems",
+  "Accessible components & patterns",
+  "Interaction design",
+  "Figma",
   "Assistive technology and screen readers",
-  "Accessibility audits and manual testing",
+  "Accessibility audits",
+  "Manual accessibility testing",
   "VPAT / ACR documentation",
+  "Design strategy",
   "Prototyping",
   "User research & usability testing",
   "Design team leadership",
@@ -131,6 +137,9 @@ export default function AboutPage() {
                   <p className="font-sans text-sm text-muted">
                     {role.company}
                   </p>
+                  {role.scope && (
+                    <p className="font-sans text-sm text-muted">{role.scope}</p>
+                  )}
                   <p className="font-mono text-xs text-muted">{role.period}</p>
                 </div>
                 <ul className="space-y-2" role="list">

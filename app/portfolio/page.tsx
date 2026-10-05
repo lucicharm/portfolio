@@ -1,5 +1,5 @@
-import CaseStudyCard from "@/components/CaseStudyCard";
-import { caseStudies } from "@/lib/case-studies";
+import Link from "next/link";
+import { selectedWork } from "@/lib/selected-work";
 
 export default function PortfolioPage() {
   return (
@@ -34,58 +34,52 @@ export default function PortfolioPage() {
           </a>
         </div>
 
-        {/* Stats */}
-        <dl className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8">
-          <div className="flex flex-col gap-1">
-            <dt className="sr-only">design system adoption</dt>
-            <dd>
-              <span className="font-display font-bold text-4xl text-primary">
-                ~80%
-              </span>
-            </dd>
-            <dd className="font-sans text-sm text-muted">design system adoption</dd>
-            <dd className="font-sans text-xs text-muted">across 40 products</dd>
-          </div>
-          <div className="flex flex-col gap-1">
-            <dt className="sr-only">VPATs delivered</dt>
-            <dd>
-              <span className="font-display font-bold text-4xl text-primary">
-                40
-              </span>
-            </dd>
-            <dd className="font-sans text-sm text-muted">VPATs delivered</dd>
-            <dd className="font-sans text-xs text-muted">from zero prior documentation</dd>
-          </div>
-          <div className="flex flex-col gap-1">
-            <dt className="sr-only">years experience</dt>
-            <dd>
-              <span className="font-display font-bold text-4xl text-primary">
-                20+
-              </span>
-            </dd>
-            <dd className="font-sans text-sm text-muted">years experience</dd>
-            <dd className="font-sans text-xs text-muted">in enterprise UX</dd>
-          </div>
-        </dl>
       </section>
 
-      {/* Case Studies */}
+      {/* Selected Work */}
       <section
-        aria-labelledby="case-studies-heading"
-        className="max-w-5xl mx-auto px-6 py-16"
+        aria-labelledby="selected-work-heading"
+        className="max-w-5xl mx-auto px-6 py-16 border-b border-border"
       >
         <h2
-          id="case-studies-heading"
-          className="font-display font-bold text-3xl text-primary mb-12"
+          id="selected-work-heading"
+          className="font-display font-bold text-3xl text-primary mb-4"
         >
-          Case Studies
+          Selected Work
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {caseStudies.map((study) => (
-            <CaseStudyCard key={study.slug} study={study} />
+        <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl mb-6">
+          I design systems, tools, and product experiences that make complex
+          software easier to use and more accessible. My recent work spans
+          accessibility infrastructure, design systems, inclusive research, and
+          AI-assisted experiences.
+        </p>
+        <p className="font-sans text-base text-muted leading-relaxed max-w-2xl mb-12">
+          I don&apos;t just write requirements or run programs. I find the
+          problem, understand the users and workflow, design the solution, and
+          increasingly build it myself.
+        </p>
+        <ul className="flex flex-col divide-y divide-border border-y border-border">
+          {selectedWork.map((item) => (
+            <li key={item.title} className="py-6">
+              <div className="flex flex-col gap-1">
+                <h3 className="font-display font-semibold text-xl text-primary">
+                  {item.href ? (
+                    <Link href={item.href} className="hover:text-secondary hover:underline">
+                      {item.title}
+                    </Link>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
+                <p className="font-sans text-sm text-muted leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
+
     </>
   );
 }

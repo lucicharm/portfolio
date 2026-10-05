@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCaseStudyBySlug, caseStudies, type Block } from "@/lib/case-studies";
-import CaseStudyImage from "@/components/CaseStudyImage";
+import { getProjectBySlug, projects, type Block } from "@/lib/projects";
+import ProjectImage from "@/components/ProjectImage";
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
@@ -12,12 +12,12 @@ function slugify(text: string): string {
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return projects.map((cs) => ({ slug: cs.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = getCaseStudyBySlug(slug);
+  const study = getProjectBySlug(slug);
   if (!study) return {};
   return {
     title: study.title,
@@ -92,7 +92,7 @@ function renderBlock(block: Block, idx: number) {
 
     case "image":
       return (
-        <CaseStudyImage
+        <ProjectImage
           key={idx}
           src={block.src}
           alt={block.alt}
@@ -103,21 +103,21 @@ function renderBlock(block: Block, idx: number) {
   }
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const study = getCaseStudyBySlug(slug);
+  const study = getProjectBySlug(slug);
   if (!study) notFound();
 
-  const currentIndex = caseStudies.findIndex((cs) => cs.slug === slug);
-  const prev = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+  const currentIndex = projects.findIndex((cs) => cs.slug === slug);
+  const prev = currentIndex > 0 ? projects[currentIndex - 1] : null;
   const next =
-    currentIndex < caseStudies.length - 1
-      ? caseStudies[currentIndex + 1]
+    currentIndex < projects.length - 1
+      ? projects[currentIndex + 1]
       : null;
 
   return (
     <>
-      {/* Case Study Header */}
+      {/* Project Header */}
       <header className="border-b border-border bg-paper">
         <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
           <Link
@@ -169,7 +169,7 @@ export default async function CaseStudyPage({ params }: Props) {
         {/* Hero image — full width within the header band */}
         {study.heroImage && (
           <div className="max-w-5xl mx-auto px-6 pb-12">
-            <CaseStudyImage
+            <ProjectImage
               src={study.heroImage.src}
               alt={study.heroImage.alt}
               caption={study.heroImage.caption}
@@ -179,10 +179,10 @@ export default async function CaseStudyPage({ params }: Props) {
         )}
       </header>
 
-      {/* Case Study Body */}
+      {/* Project Body */}
       <article
         className="max-w-3xl mx-auto px-6 py-16 space-y-16"
-        aria-label={`Case study: ${study.title}`}
+        aria-label={`Project: ${study.title}`}
       >
         {study.sections.map((section) => (
           <section
@@ -202,15 +202,15 @@ export default async function CaseStudyPage({ params }: Props) {
         ))}
       </article>
 
-      {/* Case Study Navigation */}
+      {/* Project Navigation */}
       <nav
-        aria-label="Case study navigation"
+        aria-label="Project navigation"
         className="max-w-5xl mx-auto px-6 py-12 border-t border-border"
       >
         <div className="flex flex-col sm:flex-row justify-between gap-6">
           {prev ? (
             <Link
-              href={`/case-studies/${prev.slug}`}
+              href={`/work/${prev.slug}`}
               className="flex flex-col gap-1 group max-w-xs"
             >
               <span className="font-sans text-xs text-muted">← Previous</span>
@@ -223,7 +223,7 @@ export default async function CaseStudyPage({ params }: Props) {
           )}
           {next && (
             <Link
-              href={`/case-studies/${next.slug}`}
+              href={`/work/${next.slug}`}
               className="flex flex-col gap-1 group max-w-xs sm:text-right"
             >
               <span className="font-sans text-xs text-muted">Next →</span>

@@ -5,7 +5,7 @@ This is a personal portfolio website showcasing the work and experience of Melis
 ## Features
 
 - **Responsive Design**: Built with modern web technologies for optimal viewing across devices
-- **Case Studies**: Detailed project showcases with interactive elements
+- **Selected Work**: Curated work samples and project write-ups with interactive elements
 - **Password gate**: Client-side gate for casual access control
 - **Accessibility**: Designed with accessibility best practices in mind
 - **Static Export**: Optimized for deployment on GitHub Pages
@@ -66,7 +66,7 @@ The site is automatically deployed to GitHub Pages using GitHub Actions. Any pus
 portfolio/
 ├── app/                 # Next.js app directory
 │   ├── about/          # About page
-│   ├── case-studies/   # Case study pages
+│   ├── work/           # Project pages
 │   ├── contact/        # Contact page
 │   ├── login/          # Authentication page
 │   └── globals.css     # Global styles

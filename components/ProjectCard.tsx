@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { CaseStudy } from "@/lib/case-studies";
+import type { Project } from "@/lib/projects";
 
-export default function CaseStudyCard({ study }: { study: CaseStudy }) {
+export default function ProjectCard({ study }: { study: Project }) {
   return (
     <article className="group border border-border rounded-lg p-8 bg-surface hover:border-secondary transition-colors flex flex-col gap-6">
       <div className="flex flex-wrap gap-2">
@@ -39,11 +39,11 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
       )}
 
       <Link
-        href={`/case-studies/${study.slug}`}
+        href={`/work/${study.slug}`}
         className="font-sans text-sm font-medium text-secondary hover:underline group-hover:underline mt-auto"
-        aria-label={`Read case study: ${study.title}`}
+        aria-label={`Read project: ${study.title}`}
       >
-        Read case study →
+        Read project →
       </Link>
     </article>
   );
