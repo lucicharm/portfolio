@@ -10,11 +10,25 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-// The Work page is served at both / and /portfolio.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 function isCurrent(href: string, pathname: string) {
-  return href === "/portfolio"
-    ? pathname === "/" || pathname === "/portfolio"
-    : pathname.startsWith(href);
+  const routePath = pathname.startsWith(`${basePath}/`)
+    ? pathname.slice(basePath.length)
+    : pathname === basePath
+      ? "/"
+      : pathname;
+
+  if (href === "/portfolio") {
+    return (
+      routePath === "/" ||
+      routePath === "/portfolio" ||
+      routePath === "/work" ||
+      routePath.startsWith("/work/")
+    );
+  }
+
+  return routePath === href || routePath.startsWith(`${href}/`);
 }
 
 export default function Nav() {
