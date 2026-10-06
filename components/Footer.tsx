@@ -11,6 +11,13 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-primary transition-colors">
             Get in touch
           </Link>
+          <a
+            href="https://www.linkedin.com/in/magarland/"
+            rel="me"
+            className="hover:text-primary transition-colors"
+          >
+            LinkedIn
+          </a>
           <span>UX Principal · Design Systems · Accessibility</span>
         </div>
       </div>

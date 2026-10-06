@@ -110,7 +110,15 @@ export default function ContactPage() {
         </h1>
         <p className="font-sans text-base text-muted leading-relaxed mb-10">
           Interested in working together or want to talk design systems and
-          accessibility? Send me a note. All fields are required.
+          accessibility? Send me a note, or find me on{" "}
+          <a
+            href="https://www.linkedin.com/in/magarland/"
+            rel="me"
+            className="text-secondary underline underline-offset-2 hover:text-primary"
+          >
+            LinkedIn
+          </a>
+          . All fields are required.
         </p>
 
         {state.succeeded ? (
