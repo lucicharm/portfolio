@@ -101,15 +101,12 @@ function Thumbnail({ item }: { item: SelectedWorkItem }) {
 
 export default function WorkCard({ item }: { item: SelectedWorkItem }) {
   return (
-    <article className="group relative flex items-start gap-5 sm:gap-8">
-      <div className="relative w-24 sm:w-40 shrink-0 aspect-[4/3] overflow-hidden rounded-lg border border-divider bg-paper transition-colors group-hover:border-secondary">
+    <article className="group relative flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8">
+      <div className="relative w-24 sm:w-40 shrink-0 aspect-[4/3] overflow-hidden rounded-lg border border-divider bg-paper transition-colors group-hover:border-secondary group-focus-within:border-secondary">
         <Thumbnail item={item} />
       </div>
 
       <div className="flex flex-col gap-2">
-        {item.inProgress && (
-          <p className="font-mono text-sm text-muted">Work in progress</p>
-        )}
         <h3 className="font-display font-semibold text-xl text-primary leading-snug">
           {item.slug ? (
             // The stretched link makes the whole card, image included, clickable.
@@ -123,6 +120,10 @@ export default function WorkCard({ item }: { item: SelectedWorkItem }) {
             item.title
           )}
         </h3>
+        {/* After the heading, so people navigating by heading reach it. */}
+        {item.inProgress && (
+          <p className="font-mono text-sm text-muted">Work in progress</p>
+        )}
         <p className="font-sans text-lg text-body leading-relaxed">
           {item.description}
         </p>
