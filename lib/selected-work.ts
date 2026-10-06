@@ -7,6 +7,9 @@ export type SelectedWorkItem = {
   // Slug of the case study this item is an appendix of. Appendices keep
   // their own page but are left out of the Selected Work list.
   parent?: string;
+  // Drawn tile for the Work page card, picked to echo the case study.
+  // Items without one get a plain title tile.
+  thumbnail?: "products" | "swatches" | "schedule" | "messages";
 };
 
 export const selectedWork: SelectedWorkItem[] = [
@@ -15,6 +18,7 @@ export const selectedWork: SelectedWorkItem[] = [
     title: "Accessibility program: From no documentation to 40 products",
     description:
       "I built PowerSchool's accessibility program from nothing: an ACR process, tooling, a champions network, and training. Every product now has an ACR, and teams own accessibility instead of waiting on me to approve it.",
+    thumbnail: "products",
   },
   {
     slug: "accessible-design-systems",
@@ -22,12 +26,14 @@ export const selectedWork: SelectedWorkItem[] = [
     description:
       "In a palette of about 100 colors, a small set of semantic tokens carries meaning. Contrast is checked once on token pairs, and one three-band focus ring works on every background.",
     inProgress: true,
+    thumbnail: "swatches",
   },
   {
     slug: "matrix-schedule-accessibility",
     title: "Accessible design: A clearer view of the matrix schedule",
     description:
       "Turning a complex class schedule into a text view screen-reader users can navigate by heading",
+    thumbnail: "schedule",
   },
   {
     slug: "sms-job-offers",
@@ -35,6 +41,7 @@ export const selectedWork: SelectedWorkItem[] = [
     description:
       "Fewer than 5% of automated job-offer calls were answered. I designed two-way text offers that work on any phone, with no app or data plan, so substitutes can accept a job with one reply.",
     inProgress: true,
+    thumbnail: "messages",
   },
   // Appendices to the accessibility program case study.
   {

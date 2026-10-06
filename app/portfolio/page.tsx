@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WorkCard from "@/components/WorkCard";
 import { topLevelWork } from "@/lib/selected-work";
 
 export default function PortfolioPage() {
@@ -60,31 +61,10 @@ export default function PortfolioPage() {
           I find the problem, understand the users and workflow, design the solution, and
           increasingly build it myself.
         </p>
-        <ul className="flex flex-col divide-y divide-border border-y border-border">
+        <ul className="flex flex-col gap-16" role="list">
           {topLevelWork.map((item) => (
-            <li key={item.title} className="py-6">
-              <div className="flex flex-col gap-1">
-                <h3 className="font-display font-semibold text-xl text-primary">
-                  {item.slug ? (
-                    <Link
-                      href={`/work/${item.slug}`}
-                      className="underline decoration-1 underline-offset-4 hover:text-secondary"
-                    >
-                      {item.title}
-                    </Link>
-                  ) : (
-                    item.title
-                  )}
-                </h3>
-                {item.inProgress && (
-                  <p className="font-mono text-sm text-muted">
-                    Work in progress
-                  </p>
-                )}
-                <p className="font-sans text-lg text-muted leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
+            <li key={item.title}>
+              <WorkCard item={item} />
             </li>
           ))}
         </ul>
