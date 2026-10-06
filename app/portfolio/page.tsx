@@ -17,9 +17,9 @@ export default function PortfolioPage() {
             id="hero-heading"
             className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-primary leading-tight tracking-tight mb-6"
           >
-            Accessibility built into the system.
+            Design that scales.
             <br />
-            <span className="text-secondary">Not checked at the end.</span>
+            <span className="text-secondary">For everyone.</span>
           </h1>
           <p className="font-sans text-lg text-muted leading-relaxed mb-8 max-w-xl">
             I lead accessibility programs and the design systems that carry
