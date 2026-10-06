@@ -1,9 +1,3 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-export default function Home() {
-  const router = useRouter();
-  useEffect(() => { router.replace("/portfolio"); }, [router]);
-  return null;
-}
+// The Work page is the home page. A client-side redirect here would render a
+// blank page before navigating, and nothing at all without JavaScript.
+export { default } from "./portfolio/page";

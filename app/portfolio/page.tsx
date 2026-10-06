@@ -68,7 +68,7 @@ export default function PortfolioPage() {
                   {item.slug ? (
                     <Link
                       href={`/work/${item.slug}`}
-                      className="hover:text-secondary hover:underline"
+                      className="underline decoration-1 underline-offset-4 hover:text-secondary"
                     >
                       {item.title}
                     </Link>
@@ -76,6 +76,11 @@ export default function PortfolioPage() {
                     item.title
                   )}
                 </h3>
+                {item.inProgress && (
+                  <p className="font-mono text-sm text-muted">
+                    Work in progress
+                  </p>
+                )}
                 <p className="font-sans text-lg text-muted leading-relaxed">
                   {item.description}
                 </p>

@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useSyncExternalStore, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+} from "react";
 
 const AUTH_STORAGE_KEY = "portfolio-authenticated";
 const AUTH_CHANGE_EVENT = "portfolio-auth-change";
@@ -23,20 +29,35 @@ function getAuthenticationSnapshot() {
   return window.localStorage.getItem(AUTH_STORAGE_KEY) === "true";
 }
 
-function getServerAuthenticationSnapshot() {
-  return false;
+// Unknown until the browser can read localStorage. Rendering the gate on the
+// server would flash it, and a screen reader could start reading it, for
+// visitors who have already unlocked the site.
+function getServerAuthenticationSnapshot(): boolean | null {
+  return null;
 }
 
 export default function PasswordGate({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const isAuthenticated = useSyncExternalStore(
+  const isAuthenticated = useSyncExternalStore<boolean | null>(
     subscribeToAuthentication,
     getAuthenticationSnapshot,
     getServerAuthenticationSnapshot,
   );
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
+  const justUnlocked = useRef(false);
+
+  // The form, and the button that had focus, disappear on unlock. Move focus
+  // to the page heading so keyboard and screen-reader users start there.
+  useEffect(() => {
+    if (!isAuthenticated || !justUnlocked.current) return;
+    justUnlocked.current = false;
+    const heading = document.querySelector<HTMLElement>("#main-content h1");
+    if (!heading) return;
+    heading.tabIndex = -1;
+    heading.focus();
+  }, [isAuthenticated]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,12 +66,22 @@ export default function PasswordGate({
       return;
     }
 
+    justUnlocked.current = true;
     window.localStorage.setItem(AUTH_STORAGE_KEY, "true");
     window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
     setHasError(false);
   }
 
   if (isAuthenticated) return children;
+  if (isAuthenticated === null) {
+    return (
+      <noscript>
+        <p className="font-sans text-base text-body p-6">
+          This portfolio needs JavaScript. Please enable it and reload the page.
+        </p>
+      </noscript>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-surface px-6 py-16 flex items-center justify-center">
@@ -93,7 +124,7 @@ export default function PasswordGate({
                 }}
                 aria-invalid={hasError}
                 aria-describedby={hasError ? "password-error" : undefined}
-                className="w-full rounded-md border border-border bg-surface px-3 py-2.5 font-sans text-base text-primary"
+                className="w-full rounded-md border border-border-strong bg-surface px-3 py-2.5 font-sans text-base text-primary"
               />
               {hasError && (
                 <p

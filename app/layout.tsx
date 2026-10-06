@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${roboto.variable} ${ptMono.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-surface text-body overflow-x-hidden">
+      <body className="min-h-screen flex flex-col bg-surface text-body">
         <PasswordGate>
           <SkipNav />
           <Nav />

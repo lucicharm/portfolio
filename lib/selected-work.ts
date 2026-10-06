@@ -2,6 +2,8 @@ export type SelectedWorkItem = {
   slug: string;
   title: string;
   description: string;
+  // Labels the item and its case study as unfinished.
+  inProgress?: boolean;
 };
 
 export const selectedWork: SelectedWorkItem[] = [
@@ -28,14 +30,13 @@ export const selectedWork: SelectedWorkItem[] = [
     title: "Accessibility in design handoff",
     description: "Making accessibility requirements actionable for engineering",
   },
-  /*
   {
     slug: "sms-job-offers",
     title: "Inclusive product design: SMS job offers for substitute teachers",
     description:
       "Fewer than 5% of automated job-offer calls were answered. I designed two-way text offers that work on any phone, with no app or data plan, so substitutes can accept a job with one reply.",
+    inProgress: true,
   },
-  */
   /*
   {
     slug: "accessible-design-systems",

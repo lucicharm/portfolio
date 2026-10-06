@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
   { href: "/portfolio", label: "Work" },
@@ -10,12 +10,32 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+// The Work page is served at both / and /portfolio.
+function isCurrent(href: string, pathname: string) {
+  return href === "/portfolio"
+    ? pathname === "/" || pathname === "/portfolio"
+    : pathname.startsWith(href);
+}
+
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Escape closes the menu and returns focus to the button that opened it.
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      buttonRef.current?.focus();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
-    <header className="border-b border-border bg-surface sticky top-0 z-40">
+    <header className="border-b border-border bg-surface sm:sticky sm:top-0 z-40">
       <nav
         className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between"
         aria-label="Main navigation"
@@ -30,8 +50,7 @@ export default function Nav() {
         {/* Desktop nav */}
         <ul className="hidden sm:flex items-center gap-8" role="list">
           {navLinks.map(({ href, label }) => {
-            const isActive =
-              href === "/portfolio" ? pathname === "/portfolio" : pathname.startsWith(href);
+            const isActive = isCurrent(href, pathname);
             return (
               <li key={href}>
                 <Link
@@ -50,6 +69,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
+          ref={buttonRef}
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -86,8 +106,7 @@ export default function Nav() {
         >
           <ul className="flex flex-col gap-4" role="list">
             {navLinks.map(({ href, label }) => {
-              const isActive =
-                href === "/" ? pathname === "/" : pathname.startsWith(href);
+              const isActive = isCurrent(href, pathname);
               return (
                 <li key={href}>
                   <Link

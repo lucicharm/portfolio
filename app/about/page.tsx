@@ -230,7 +230,7 @@ export default function AboutPage() {
               href="/contact"
               className="font-sans text-sm text-secondary hover:underline"
             >
-              Send me a message →
+              Send me a message<span aria-hidden="true"> →</span>
             </Link>
           </section>
         </aside>
@@ -239,10 +239,10 @@ export default function AboutPage() {
       {/* Back to work */}
       <div className="mt-16 pt-12 border-t border-border">
         <Link
-          href="/"
+          href="/portfolio"
           className="font-sans text-sm font-medium text-secondary hover:underline"
         >
-          ← View my work
+          <span aria-hidden="true">← </span>View my work
         </Link>
       </div>
     </div>

@@ -146,7 +146,7 @@ export default async function ProjectPage({ params }: Props) {
               href="/portfolio"
               className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
             >
-              ← Back to work
+              <span aria-hidden="true">← </span>Back to work
             </Link>
             <h1 className="font-display font-bold text-4xl sm:text-5xl text-primary leading-tight tracking-tight mb-4">
               {selectedItem.title}
@@ -156,15 +156,18 @@ export default async function ProjectPage({ params }: Props) {
             </p>
           </div>
         </header>
-        <main className="max-w-3xl mx-auto px-6 py-16">
+        <div className="max-w-3xl mx-auto px-6 py-16">
           <p className="font-sans text-lg text-muted leading-relaxed">
             Work in progress. More details coming soon.
           </p>
-        </main>
+        </div>
         <ProjectNav slug={slug} />
       </>
     );
   }
+
+  const inProgress = selectedWork.find((item) => item.slug === slug)
+    ?.inProgress;
 
   const byline = [study.client, study.year, study.role].filter(
     (item): item is string => Boolean(item),
@@ -179,14 +182,22 @@ export default async function ProjectPage({ params }: Props) {
             href="/portfolio"
             className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
           >
-            ← Back to work
+            <span aria-hidden="true">← </span>Back to work
           </Link>
+
+          {inProgress && (
+            <p className="font-sans text-base text-body border-l-2 border-secondary bg-surface px-4 py-3 mb-6 max-w-2xl">
+              <strong className="font-semibold">Work in progress.</strong>{" "}
+              This case study is still being written, and its images are
+              placeholders.
+            </p>
+          )}
 
           <div className="flex flex-wrap gap-2 mb-4">
             {study.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-xs text-muted border border-border rounded px-2 py-0.5 bg-surface"
+                className="font-mono text-sm text-muted border border-border rounded px-2 py-0.5 bg-surface"
               >
                 {tag}
               </span>

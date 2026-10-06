@@ -19,6 +19,8 @@ function withBasePath(src: string) {
   return src.startsWith("/") ? `${basePath}${src}` : src;
 }
 
+// Captions use #4b5563 rather than text-muted: they also sit on tinted
+// section backgrounds, where text-muted drops below 4.5:1.
 const aspectClass: Record<ImageAspect, string> = {
   wide: "aspect-video",      // 16:9  — screenshots, dashboards, flow diagrams
   standard: "aspect-[4/3]",  // 4:3   — general UI, wireframes
@@ -46,15 +48,15 @@ export default function ProjectImage({
           sizes="(max-width: 768px) 100vw, 672px"
         />
         {caption && (
-          <figcaption className="font-sans text-xs text-muted mt-2 text-center leading-relaxed">
+          <figcaption className="font-sans text-sm text-[#4b5563] mt-2 leading-relaxed">
             {caption}
           </figcaption>
         )}
         {/* Screenshots of text shrink at column width; offer the original. */}
-        <p className="text-center">
+        <p>
           <a
             href={fullSrc}
-            className="inline-block py-1 font-sans text-xs text-secondary underline underline-offset-2 hover:text-primary"
+            className="inline-block py-1 font-sans text-sm text-secondary underline underline-offset-2 hover:text-primary"
           >
             View full-size image
             <span className="sr-only">: {caption ?? alt}</span>
@@ -107,7 +109,7 @@ export default function ProjectImage({
         )}
       </div>
       {caption && (
-        <figcaption className="font-sans text-xs text-muted mt-2 text-center leading-relaxed">
+        <figcaption className="font-sans text-sm text-[#4b5563] mt-2 leading-relaxed">
           {caption}
         </figcaption>
       )}

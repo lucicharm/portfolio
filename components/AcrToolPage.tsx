@@ -101,7 +101,7 @@ export default function AcrToolPage({
             href="/portfolio"
             className="font-sans text-sm text-[#374151] underline underline-offset-4 hover:text-primary transition-colors mb-10 inline-block"
           >
-            ← Back to work
+            <span aria-hidden="true">← </span>Back to work
           </Link>
           <p
             className={`font-sans text-xs font-bold uppercase tracking-wider ${TEAL} mb-4`}
