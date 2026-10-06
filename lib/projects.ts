@@ -16,6 +16,9 @@ export type Block =
       alt: string;
       caption?: string;
       aspect?: ImageAspect;
+      // Intrinsic pixel size; set both to show the whole image uncropped.
+      width?: number;
+      height?: number;
     };
 
 export type Section = {
@@ -26,9 +29,10 @@ export type Section = {
 export type Project = {
   slug: string;
   title: string;
-  client: string;
-  year: string;
-  role: string;
+  // Optional: omitted values are left out of the byline.
+  client?: string;
+  year?: string;
+  role?: string;
   tags: string[];
   summary: string;
   heroMetric?: { value: string; label: string };
@@ -39,6 +43,8 @@ export type Project = {
     alt: string;
     caption?: string;
     aspect?: ImageAspect;
+    width?: number;
+    height?: number;
   };
   sections: Section[];
 };
@@ -46,7 +52,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "pd-admin",
-    title: "Professional Learning Admin Redesign",
+    title: "Professional Learning admin redesign",
     client: "PowerSchool",
     year: "2021–2022",
     role: "UX Principal",
@@ -61,7 +67,7 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        heading: "The Problem",
+        heading: "The problem",
         blocks: [
           {
             type: "paragraph",
@@ -90,7 +96,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Design Approach",
+        heading: "Design approach",
         blocks: [
           {
             type: "paragraph",
@@ -160,11 +166,11 @@ export const projects: Project[] = [
   },
   {
     slug: "sms-job-offers",
-    title: "SMS Job Offers for Substitute Management",
+    title: "SMS job offers for substitute management",
     client: "PowerSchool",
     year: "2022",
     role: "Lead UX Designer",
-    tags: ["Product Design", "Feature Design", "Accessibility", "Mobile-First"],
+    tags: ["Product Design", "Feature Design", "Inclusive Research", "Mobile-First"],
     summary:
       "Designed a two-way SMS system to replace phone-based job offers for substitute teachers — solving a <5% call answer rate, cutting over $1M in annual telecom costs, and giving substitutes a better way to accept jobs.",
     heroMetric: { value: "<5%", label: "of phone calls were being answered" },
@@ -175,7 +181,7 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        heading: "The Problem",
+        heading: "The problem",
         blocks: [
           {
             type: "paragraph",
@@ -204,13 +210,17 @@ export const projects: Project[] = [
             text: "There was also a strong equity angle: SMS works on any phone, doesn't require a data plan or a smartphone, and doesn't require a running app. For a workforce that often works across multiple districts, with varying levels of tech access, this mattered.",
           },
           {
+            type: "paragraph",
+            text: "We also interviewed deaf users as part of the research. An automated phone offer only works if you can hear it when it rings. A text message can be read on the substitute's own schedule, without needing to hear anything.",
+          },
+          {
             type: "callout",
             text: "Competitive advantage: at the time of this project, Frontline — the primary competitor — did not offer two-way SMS job offers. This feature gave PowerSchool a clear differentiator in the market.",
           },
         ],
       },
       {
-        heading: "Feature Design",
+        heading: "Feature design",
         blocks: [
           {
             type: "paragraph",
@@ -260,7 +270,7 @@ export const projects: Project[] = [
   },
   {
     slug: "assessment-planning",
-    title: "Assessment Planning Tool Redesign",
+    title: "Assessment planning tool redesign",
     client: "Tk20",
     year: "2012",
     role: "Lead UX Designer",
@@ -275,7 +285,7 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        heading: "The Problem",
+        heading: "The problem",
         blocks: [
           {
             type: "paragraph",
@@ -301,7 +311,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "The Design Tension",
+        heading: "The design tension",
         blocks: [
           {
             type: "paragraph",
@@ -314,7 +324,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Design Approach",
+        heading: "Design approach",
         blocks: [
           {
             type: "paragraph",
@@ -359,19 +369,13 @@ export const projects: Project[] = [
   },
   {
     slug: "matrix-schedule-accessibility",
-    title: "A Clearer View of the Matrix Schedule",
+    title: "A clearer view of the matrix schedule",
     client: "PowerSchool",
     year: "2022",
     role: "UX Designer",
     tags: ["Accessibility", "Inclusive Design", "User Research"],
     summary:
       "I interviewed blind screen-reader users and designed a structured text view that made a complex class schedule easier to navigate, while preserving the visual matrix familiar to existing users.",
-    heroImage: {
-      alt: "Placeholder for a recreated, privacy-safe overview comparing the class schedule matrix with its text view",
-      caption:
-        "Image to be added: a recreated schedule overview with all student and staff details fictionalized.",
-      aspect: "wide",
-    },
     sections: [
       {
         heading: "The challenge",
@@ -390,10 +394,12 @@ export const projects: Project[] = [
           },
           {
             type: "image",
-            alt: "Placeholder for a recreated class schedule matrix using fictional courses, teacher names, and room numbers",
+            src: "/images/matrix/original-matrix.png",
+            width: 2466,
+            height: 872,
+            alt: "The original Matrix Schedule page. A color-coded grid shows Day A of the 22-23 school year, with semesters S1 and S2 as rows and class periods 1 through 7, including 4A and 4B, as columns. Each cell stacks a course name, section number, teacher, room, and term. Some courses span both semesters, and period 4B is empty.",
             caption:
-              "Image to be added: a privacy-safe reconstruction of the original matrix.",
-            aspect: "wide",
+              "The original matrix. Understanding one class means relating its cell to the day, semester, and period headers around it. Sample data.",
           },
         ],
       },
@@ -407,13 +413,6 @@ export const projects: Project[] = [
           {
             type: "paragraph",
             text: "That changed how I framed the problem. Correct header announcements addressed accuracy, while heading navigation addressed the effort of moving through a dense grid. The experience needed to make the schedule's organization available as a set of clear, navigable sections. I designed around the user's task of finding a particular part of the schedule, with table announcements as one part of the experience.",
-          },
-          {
-            type: "image",
-            alt: "Placeholder for a recreated interview synthesis showing the need to jump directly to a day, semester, or class period",
-            caption:
-              "Image to be added: anonymized research notes or a concise summary of the navigation need.",
-            aspect: "standard",
           },
         ],
       },
@@ -446,10 +445,21 @@ export const projects: Project[] = [
           },
           {
             type: "image",
-            alt: "Placeholder for a recreated text-view screen showing nested day, semester, and class-period headings with grouped course details",
+            src: "/images/matrix/updated-matrix.png",
+            width: 2466,
+            height: 946,
+            alt: "The updated Schedule page. The color-coded matrix is unchanged, and a new Text format link sits directly below the page title.",
             caption:
-              "Image to be added: a recreated text view with fictional schedule content.",
-            aspect: "standard",
+              "The matrix stays as it was. A Text format link below the title opens the alternate view.",
+          },
+          {
+            type: "image",
+            src: "/images/matrix/text-view.png",
+            width: 1446,
+            height: 2032,
+            alt: "The text view of the schedule. Below the title, a Matrix format link returns to the grid. The heading Day A is followed by the heading Term 22-23, Semester 1, then a heading for each class period. Under each period, a bulleted list gives the course name in bold, section number, teacher, room, and term. Under Period 4B, the text reads Empty Period.",
+            caption:
+              "The text view. Users jump by heading to a day, semester, or period, then read that class's details as a list. Sample data, so courses differ from the matrix above.",
           },
         ],
       },
@@ -463,6 +473,15 @@ export const projects: Project[] = [
           {
             type: "paragraph",
             text: "The implementation used semantic markup for the hierarchy. A day is an h2, a term and semester an h3, and each period an h4. Each class's details stay grouped beneath the period they describe. This gives screen-reader users heading navigation and gives the content a clear organization in the page itself.",
+          },
+          {
+            type: "image",
+            src: "/images/matrix/engineering-handoff.png",
+            width: 2368,
+            height: 2032,
+            alt: "Engineering handoff annotations for the text view. On the left, the rendered text view has callouts labeled H2, H3, H4, and unordered list. On the right, a code panel shows the markup: Day A as an h2, Term 22-23, Semester 1 as an h3, each period as an h4, and each period's course details in an unordered list with the course name in bold.",
+            caption:
+              "Handoff documentation specifying heading levels and list markup for engineering.",
           },
           {
             type: "paragraph",
@@ -501,6 +520,162 @@ export const projects: Project[] = [
           {
             type: "paragraph",
             text: "I learned to treat navigation and comprehension as part of the design problem, alongside correct announcements. Preserving the matrix and adding a structured text view let the product keep its familiar visual form while giving screen-reader users another way to find and use the same schedule.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "acr-dashboard",
+    title: "ACR Dashboard",
+    client: "PowerSchool",
+    year: "2026",
+    role: "Designer and builder",
+    tags: ["Accessibility Programs", "Internal Tools", "Data Visualization"],
+    summary:
+      "I designed and built an internal dashboard that tracks the status of every ACR and rolls accessibility issues up into executive reporting. It shows leadership how the program is doing and shows me where to focus training.",
+    heroImage: {
+      src: "/images/acr-dashboard/dashboard-main1.png",
+      width: 1109,
+      height: 940,
+      alt: "The ACR Dashboard home page. Summary cards show portfolio conformance at 40%, meaning 22 of 55 criteria have no open defects across 6 products; conformance status of 1 conformant, 1 partially conformant, and 4 non-conformant products; and 1,692 open defects, all as of June 2, 2026. A conformance trend line built from weekly Jira snapshots falls from 100% to about 40%. An ACR status panel counts 2 current, 1 expiring soon, 2 expired, and 2 missing reports.",
+      caption:
+        "The dashboard home: overall conformance, product status, open defects, the trend over time, and which ACRs need renewal.",
+    },
+    sections: [
+      {
+        heading: "The problem",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Producing ACRs was one problem. Knowing where the program stood was another. Leadership needed an overall view of accessibility conformance across products. The program needed to know which ACRs were current, which were about to expire, and where accessibility issues were concentrated.",
+          },
+        ],
+      },
+      {
+        heading: "What the dashboard shows",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Portfolio conformance: the share of WCAG criteria with no open defects across all tracked products",
+              "Conformance status: how many products are conformant, partially conformant, or non-conformant",
+              "Open defects across products, with an as-of date on every figure",
+              "A conformance trend built from weekly Jira snapshots",
+              "ACR status: current (within 12 months), expiring soon (renewal within 60 days), expired, or missing",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "The Products view gives each product's most recent ACR, its status, and its open and closed Jira issues. Every metric carries a plain-language definition, so an executive can read the numbers without knowing how ACRs work.",
+          },
+          {
+            type: "image",
+            src: "/images/acr-dashboard/dashboard-products.png",
+            width: 1109,
+            height: 940,
+            alt: "The Products page. A table lists seven products with the date of each product's most recent ACR and a status badge of Current, Expiring soon, or Expired, or a dash where no ACR exists. Columns show total Jira tickets, closed issues, open issues, and a bar showing the mix of closed and open issues. One product shows No Jira data.",
+            caption:
+              "Each product's latest ACR, its renewal status, and its open and closed issues.",
+          },
+        ],
+      },
+      {
+        heading: "From data to training priorities",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Grouping issues by WCAG success criterion shows where problems cluster across the whole portfolio. In this snapshot, 1.3.1 Info and Relationships has far more open issues than any other criterion, followed by 2.1.1 Keyboard and 1.1.1 Non-text Content.",
+          },
+          {
+            type: "paragraph",
+            text: "A pattern that repeats across products is a training need, not a one-off bug. The dashboard tells me which skills to teach so that teams stop introducing the same issues.",
+          },
+          {
+            type: "image",
+            src: "/images/acr-dashboard/dashboard-main2.png",
+            width: 1109,
+            height: 940,
+            alt: "The Issues by success criteria chart for WCAG 2.2 Level A. Each criterion has a gray bar for open issues and a green bar for closed issues. 1.3.1 Info and Relationships has by far the longest open bar, followed by 2.1.1 Keyboard and 1.1.1 Non-text Content. Many criteria have no issues.",
+            caption:
+              "Open and closed issues by success criterion. A few criteria account for most of the open issues.",
+          },
+          {
+            type: "image",
+            src: "/images/acr-dashboard/dashboard-overview.png",
+            width: 1109,
+            height: 940,
+            alt: "The WCAG Overview page, grouped by principle. A bar chart compares open and closed issues across all products: Perceivable has about 940 open, Robust about 470, Operable about 340, and Understandable under 100, with far fewer closed in each. Below, a Perceivable table lists each success criterion with its level and open and closed counts, starting with 1.1.1 Non-text Content at 65 open and 46 closed.",
+            caption:
+              "Issues grouped by WCAG principle, with a table for each principle's success criteria.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "accessibility-design-handoff",
+    title: "Accessibility in design handoff",
+    tags: ["Accessibility", "Interaction Design", "Design Handoff"],
+    summary:
+      "Examples of the handoff files I give engineering. Each one specifies how a component works with a keyboard and a screen reader, not just how it looks, so engineers don't have to guess.",
+    sections: [
+      {
+        heading: "Why handoff matters",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A visual spec answers what a component looks like. It leaves out how it works with a keyboard, where focus goes, and what a screen reader says. If the design doesn't answer those questions, engineers answer them during development, one component at a time. My handoff files answer them before development starts.",
+          },
+        ],
+      },
+      // To add a handoff example: copy the section below, put its image in
+      // /public/images/handoff/ (or reuse an existing folder), and set width
+      // and height to the image's pixel size.
+      {
+        heading: "Example: Reordering a list with drag and drop",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Administrators reorder a list of District Quick Links. Drag and drop is the familiar way to do that, but it only works with a mouse. WCAG 2.2 requires a keyboard path (2.1.1 Keyboard) and a way to complete dragging actions without dragging (2.5.7 Dragging Movements).",
+          },
+          {
+            type: "image",
+            src: "/images/drag-drop/drag-drop-table-row.png",
+            width: 3862,
+            height: 1892,
+            alt: "Design specification for reordering District Quick Links. On the left, a product page lists eight quick links in a table with link text, URL, and edit and delete buttons. Instructions above the table explain dragging or using Space and the arrow keys. The Job Opportunities row is lifted in drag mode with a focus outline. Numbered callouts mark the grab, edit, and delete buttons. On the right, notes specify the screen-reader announcements for grabbing, moving, and dropping a row, and each button's type, hidden label, states, and behavior.",
+            caption:
+              "The handoff spec: the list in drag mode, with interaction notes and button annotations.",
+          },
+          {
+            type: "paragraph",
+            text: "The spec defines one interaction that works with a mouse or a keyboard:",
+          },
+          {
+            type: "list",
+            items: [
+              "Instructions above the list explain both methods: drag with a mouse, or press Space on a row's grab button to enter drag mode",
+              "In drag mode, the arrow keys move the row and a second press of Space drops it",
+              "The lifted row shows a focus outline and a drop shadow, so it is clear what is being moved",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "It also scripts what a screen reader announces at each step:",
+          },
+          {
+            type: "list",
+            items: [
+              "On focus: \u201cPress Spacebar to grab and reorder\u201d",
+              "On grab: \u201cJob Opportunities grabbed. Current position 5 of 8.\u201d",
+              "On each move: \u201cNew position: 6 of 8.\u201d",
+              "On drop: \u201cJob Opportunities dropped. Position 4 of 8.\u201d",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Each icon button is annotated with its type, hidden label, states, and behavior. Labels include the row's link text, such as \u201cGrab Job Opportunities\u201d or \u201cDelete Job Opportunities\u201d, so a screen-reader user knows which row each button acts on. The spec also links to the accessible drag-and-drop patterns it builds on.",
           },
         ],
       },

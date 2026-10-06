@@ -7,7 +7,17 @@ type Props = {
   alt: string;
   caption?: string;
   aspect?: ImageAspect;
+  // Intrinsic pixel size. When set, the image keeps its own proportions
+  // instead of being cropped to `aspect`, and links to the full-size file.
+  width?: number;
+  height?: number;
 };
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function withBasePath(src: string) {
+  return src.startsWith("/") ? `${basePath}${src}` : src;
+}
 
 const aspectClass: Record<ImageAspect, string> = {
   wide: "aspect-video",      // 16:9  — screenshots, dashboards, flow diagrams
@@ -20,13 +30,46 @@ export default function ProjectImage({
   alt,
   caption,
   aspect = "wide",
+  width,
+  height,
 }: Props) {
+  if (src && width && height) {
+    const fullSrc = withBasePath(src);
+    return (
+      <figure className="my-2">
+        <Image
+          src={fullSrc}
+          alt={alt}
+          width={width}
+          height={height}
+          className="w-full h-auto rounded-lg border border-border"
+          sizes="(max-width: 768px) 100vw, 672px"
+        />
+        {caption && (
+          <figcaption className="font-sans text-xs text-muted mt-2 text-center leading-relaxed">
+            {caption}
+          </figcaption>
+        )}
+        {/* Screenshots of text shrink at column width; offer the original. */}
+        <p className="text-center">
+          <a
+            href={fullSrc}
+            className="inline-block py-1 font-sans text-xs text-secondary underline underline-offset-2 hover:text-primary"
+          >
+            View full-size image
+            <span className="sr-only">: {caption ?? alt}</span>
+          </a>
+        </p>
+      </figure>
+    );
+  }
+
   return (
     <figure className="my-2">
       <div className={`relative w-full ${aspectClass[aspect]} rounded-lg overflow-hidden`}>
         {src ? (
           <Image
-            src={src}
+            src={withBasePath(src)}
             alt={alt}
             fill
             className="object-cover"

@@ -171,7 +171,7 @@ export default function AboutPage() {
               id="competencies-heading"
               className="font-display font-semibold text-lg text-primary mb-4"
             >
-              Core Competencies
+              Core competencies
             </h2>
             <ul className="space-y-2" role="list">
               {competencies.map((c) => (
@@ -194,7 +194,7 @@ export default function AboutPage() {
               id="education-heading"
               className="font-display font-semibold text-lg text-primary mb-4"
             >
-              Education & Certifications
+              Education & certifications
             </h2>
             <ul className="space-y-4" role="list">
               <li className="font-sans text-sm text-muted">

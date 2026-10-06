@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProjectBySlug, projects, type Block } from "@/lib/projects";
+import { getProjectBySlug, type Block } from "@/lib/projects";
 import { selectedWork } from "@/lib/selected-work";
 import ProjectImage from "@/components/ProjectImage";
 import AcrToolPage from "@/components/AcrToolPage";
+import ProjectNav from "@/components/ProjectNav";
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
@@ -111,6 +112,8 @@ function renderBlock(block: Block, idx: number) {
           alt={block.alt}
           caption={block.caption}
           aspect={block.aspect}
+          width={block.width}
+          height={block.height}
         />
       );
   }
@@ -125,10 +128,13 @@ export default async function ProjectPage({ params }: Props) {
 
     if (selectedItem.slug === "accessibility-programs-tooling") {
       return (
-        <AcrToolPage
-          title={selectedItem.title}
-          description={selectedItem.description}
-        />
+        <>
+          <AcrToolPage
+            title={selectedItem.title}
+            description={selectedItem.description}
+          />
+          <ProjectNav slug={slug} />
+        </>
       );
     }
 
@@ -155,16 +161,14 @@ export default async function ProjectPage({ params }: Props) {
             Work in progress. More details coming soon.
           </p>
         </main>
+        <ProjectNav slug={slug} />
       </>
     );
   }
 
-  const currentIndex = projects.findIndex((cs) => cs.slug === slug);
-  const prev = currentIndex > 0 ? projects[currentIndex - 1] : null;
-  const next =
-    currentIndex < projects.length - 1
-      ? projects[currentIndex + 1]
-      : null;
+  const byline = [study.client, study.year, study.role].filter(
+    (item): item is string => Boolean(item),
+  );
 
   return (
     <>
@@ -172,7 +176,7 @@ export default async function ProjectPage({ params }: Props) {
       <header className="border-b border-border bg-paper">
         <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
           <Link
-            href="/"
+            href="/portfolio"
             className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
           >
             ← Back to work
@@ -193,13 +197,16 @@ export default async function ProjectPage({ params }: Props) {
             {study.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-1 mb-6 font-sans text-sm text-muted">
-            <span>{study.client}</span>
-            <span aria-hidden="true">·</span>
-            <span>{study.year}</span>
-            <span aria-hidden="true">·</span>
-            <span>{study.role}</span>
-          </div>
+          {byline.length > 0 && (
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1 mb-6 font-sans text-sm text-muted">
+              {byline.map((item, i) => (
+                <span key={item} className="contents">
+                  {i > 0 && <span aria-hidden="true">·</span>}
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
+          )}
 
           <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl">
             {study.summary}
@@ -225,6 +232,8 @@ export default async function ProjectPage({ params }: Props) {
               alt={study.heroImage.alt}
               caption={study.heroImage.caption}
               aspect={study.heroImage.aspect}
+              width={study.heroImage.width}
+              height={study.heroImage.height}
             />
           </div>
         )}
@@ -253,38 +262,7 @@ export default async function ProjectPage({ params }: Props) {
         ))}
       </article>
 
-      {/* Project Navigation */}
-      <nav
-        aria-label="Project navigation"
-        className="max-w-5xl mx-auto px-6 py-12 border-t border-border"
-      >
-        <div className="flex flex-col sm:flex-row justify-between gap-6">
-          {prev ? (
-            <Link
-              href={`/work/${prev.slug}`}
-              className="flex flex-col gap-1 group max-w-xs"
-            >
-              <span className="font-sans text-xs text-muted">← Previous</span>
-              <span className="font-display font-semibold text-primary group-hover:text-secondary transition-colors">
-                {prev.title}
-              </span>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {next && (
-            <Link
-              href={`/work/${next.slug}`}
-              className="flex flex-col gap-1 group max-w-xs sm:text-right"
-            >
-              <span className="font-sans text-xs text-muted">Next →</span>
-              <span className="font-display font-semibold text-primary group-hover:text-secondary transition-colors">
-                {next.title}
-              </span>
-            </Link>
-          )}
-        </div>
-      </nav>
+      <ProjectNav slug={slug} />
     </>
   );
 }

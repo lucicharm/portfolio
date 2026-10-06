@@ -11,20 +11,23 @@ export default function PortfolioPage() {
       >
         <div className="max-w-2xl">
           <p className="font-mono text-sm text-muted mb-4">
-            UX Principal · Design Systems · Accessibility
+            UX Principal · Accessibility · Design Systems
           </p>
           <h1
             id="hero-heading"
             className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-primary leading-tight tracking-tight mb-6"
           >
-            Design that scales.
+            Accessibility built into the system.
             <br />
-            <span className="text-secondary">For everyone.</span>
+            <span className="text-secondary">Not checked at the end.</span>
           </h1>
           <p className="font-sans text-lg text-muted leading-relaxed mb-8 max-w-xl">
-            I build the systems that make good design consistent, and make
-            sure those systems work for every user. 20+ years leading design
-            systems and accessibility programs in enterprise software.
+            I lead accessibility programs and the design systems that carry
+            them. At PowerSchool, I took 40 products from no accessibility
+            documentation to comprehensive coverage, built a champions network
+            that spreads ownership across teams, and lead a design system used
+            by nearly 80% of the portfolio. Before that, 20+ years of hands-on
+            interaction and visual design.
           </p>
           <a
             href="/contact"
@@ -45,7 +48,7 @@ export default function PortfolioPage() {
           id="selected-work-heading"
           className="font-display font-bold text-3xl text-primary mb-4"
         >
-          Selected Work
+          Selected work
         </h2>
         <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl mb-6">
           I design systems, tools, and product experiences that make complex

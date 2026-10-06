@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import ProjectImage from "@/components/ProjectImage";
 
 const INK = "text-[#14261f]";
 const TEAL = "text-[#0b5d4f]";
@@ -40,36 +41,7 @@ function Band({
   );
 }
 
-function Placeholder({
-  title,
-  show,
-  alt,
-}: {
-  title: string;
-  show: string;
-  alt: string;
-}) {
-  return (
-    <figure className="mt-8 border-2 border-dashed border-[#6b7f77] rounded-xl bg-[#f4f6f5] p-6">
-      <p
-        className={`font-sans text-xs font-bold uppercase tracking-wider ${TEAL} mb-1`}
-      >
-        Screenshot placeholder
-      </p>
-      <figcaption className={`font-display font-semibold text-lg ${INK} mb-2`}>
-        {title}
-      </figcaption>
-      <p className="font-sans text-base text-[#374151] leading-relaxed">
-        <span className="font-semibold">To show: </span>
-        {show}
-      </p>
-      <p className="font-sans text-sm text-[#374151] leading-relaxed mt-2">
-        <span className="font-semibold">Alt text: </span>
-        {alt}
-      </p>
-    </figure>
-  );
-}
+const SHOT = { width: 1091, height: 940 };
 
 const glance = [
   ["Role", "Sole designer and builder; owner of the ACR program"],
@@ -161,10 +133,11 @@ export default function AcrToolPage({
       </header>
 
       <div className="max-w-5xl mx-auto px-6 pb-14">
-        <Placeholder
-          title="Product overview"
-          show="Full-width screenshot of the tool on the WCAG criteria view, with product details and related Jira issues visible."
-          alt="Internal ACR drafting tool showing product information, WCAG criteria, related Jira accessibility issues, and draft remarks ready for human review."
+        <ProjectImage
+          src="/images/acr-updater/updater-general-tab.png"
+          {...SHOT}
+          alt="The ACR Updater's General Information tab. A header shows the report type, WCAG 2.2 Level A and AA, and the report's Jira label, with Logout and Export to Word buttons. Tabs for General Information, WCAG 2.2, Revised Section 508, and EN 301 549 sit above a form with fields for product name, version, report date, product description, and evaluation methods."
+          caption="The working view: product details, four standards tabs, and export to Word."
         />
       </div>
 
@@ -211,21 +184,36 @@ export default function AcrToolPage({
           AI drafts the language. It never decides whether a product conforms.
         </p>
 
-        <Placeholder
-          title="Jira connection and evaluation setup"
-          show="The Jira connection state, the open-issues scope, and the form for product and evaluation details. Blur any sensitive project data."
-          alt="Tool setup screen with an active Jira connection, issue scope, and fields for product and evaluation details."
-        />
-        <Placeholder
-          title="Reviewing a WCAG criterion"
-          show="One WCAG 2.2 criterion with its related Jira issues, the proposed conformance level, and the editable draft explanation."
-          alt="WCAG 2.2 criterion review screen showing related open Jira issues, a proposed conformance level, and an editable draft explanation."
-        />
-        <Placeholder
-          title="Standards tabs and Word export"
-          show="Tabs for WCAG 2.2, Revised Section 508 and EN 301 549, with the export-to-Word action."
-          alt="ACR tool with tabs for WCAG 2.2, Revised Section 508, and EN 301 549, and an action to export an editable Word document."
-        />
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ProjectImage
+            src="/images/acr-updater/updater-login1.png"
+            {...SHOT}
+            alt="The ACR Updater start screen. An introduction explains that the tool loads accessibility issues by Jira label, and that each issue must also carry a WCAG success criterion label in the format WCAG_X.X.X. Below, a Get Started panel offers an optional drag-and-drop upload for an existing VPAT PDF."
+            caption="Start: optionally import an existing VPAT PDF."
+          />
+          <ProjectImage
+            src="/images/acr-updater/updater-login2.png"
+            {...SHOT}
+            alt="The rest of the start screen: required fields for Jira email address, Jira API token, and the VPAT Jira label for the report, a Continue button, and a privacy notice saying credentials stay in the browser session and are sent only to the company's Jira."
+            caption="Connect: Jira credentials and the label that ties issues to this report."
+          />
+        </div>
+        <div className="mt-8">
+          <ProjectImage
+            src="/images/acr-updater/updater-wcag-tab2.png"
+            {...SHOT}
+            alt="Part of the WCAG 2.2 review table. Criterion 1.2.3, Audio Description or Media Alternative, is set to Supports, with a red asterisk marking a drafted explanation that needs review. Criterion 1.3.1, Info and Relationships, is set to Partially Supports. Its draft explanation summarizes problems with table headers, headings, and form labels, and ten related Jira issues are listed beside it with statuses from Open to Closed."
+            caption="Each criterion shows a proposed conformance level, an editable draft explanation, and the Jira issues behind it. A red asterisk flags drafts that need a person's review."
+          />
+        </div>
+        <div className="mt-8">
+          <ProjectImage
+            src="/images/acr-updater/updater-508-tab.png"
+            {...SHOT}
+            alt="The Revised Section 508 tab. Criteria such as 302.1 Without Vision, 302.2 With Limited Vision, and 302.3 Without Perception of Color are each set to Partially Supports, with a remark listing the WCAG criteria that have documented issues, such as 1.4.3 Contrast (Minimum) and 1.4.11 Non-text Contrast."
+            caption="Section 508 remarks point back to the WCAG criteria with documented issues."
+          />
+        </div>
       </Band>
 
       <Band
