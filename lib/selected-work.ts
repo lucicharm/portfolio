@@ -7,7 +7,7 @@ export type SelectedWorkItem = {
 export const selectedWork: SelectedWorkItem[] = [
   {
     slug: "accessibility-programs-tooling",
-    title: "Accessibility programs & tooling: ACR Generator",
+    title: "Accessibility programs & tooling: Accessibility conformance report (ACR) Generator",
     description:
       "As sole designer and builder, I made a tool that drafts accessibility reports from Jira issues, with every conformance decision left to a human reviewer. Eight teammates now use it.",
   },
