@@ -28,12 +28,14 @@ export const selectedWork: SelectedWorkItem[] = [
     title: "Accessibility in design handoff",
     description: "Making accessibility requirements actionable for engineering",
   },
+  /*
   {
     slug: "sms-job-offers",
     title: "Inclusive product design: SMS job offers for substitute teachers",
     description:
       "Fewer than 5% of automated job-offer calls were answered. I designed two-way text offers that work on any phone, with no app or data plan, so substitutes can accept a job with one reply.",
   },
+  */
   /*
   {
     slug: "accessible-design-systems",
