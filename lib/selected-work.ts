@@ -25,7 +25,6 @@ export const selectedWork: SelectedWorkItem[] = [
     title: "Design systems: Accessibility built into the tokens",
     description:
       "In a palette of about 100 colors, a small set of semantic tokens carries meaning. Contrast is checked once on token pairs, and one three-band focus ring works on every background.",
-    inProgress: true,
     thumbnail: "swatches",
   },
   {
