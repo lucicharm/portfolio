@@ -89,19 +89,21 @@ const lessons = [
 export default function AcrToolPage({
   title,
   description,
+  back,
 }: {
   title: string;
   description: string;
+  back: { href: string; label: string };
 }) {
   return (
     <>
       <header className="bg-white">
         <div className="max-w-5xl mx-auto px-6 pt-12 pb-14">
           <Link
-            href="/portfolio"
+            href={back.href}
             className="font-sans text-sm text-[#374151] underline underline-offset-4 hover:text-primary transition-colors mb-10 inline-block"
           >
-            <span aria-hidden="true">← </span>Back to work
+            <span aria-hidden="true">← </span>{back.label}
           </Link>
           <p
             className={`font-sans text-xs font-bold uppercase tracking-wider ${TEAL} mb-4`}

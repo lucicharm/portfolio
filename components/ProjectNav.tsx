@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { selectedWork } from "@/lib/selected-work";
+import { selectedWork, topLevelWork } from "@/lib/selected-work";
 
 // Card titles carry a category prefix ("Accessible design: …"); the nav only
 // needs the project name after it.
@@ -9,21 +9,36 @@ function shortTitle(title: string) {
 }
 
 // Previous/next links follow the Selected Work order on the portfolio page.
+// An appendix steps through its siblings instead, ending at its parent.
 export default function ProjectNav({ slug }: { slug: string }) {
-  const index = selectedWork.findIndex((item) => item.slug === slug);
-  const prev = index > 0 ? selectedWork[index - 1] : null;
+  const item = selectedWork.find((work) => work.slug === slug);
+  const sequence = item?.parent
+    ? selectedWork.filter((work) => work.parent === item.parent)
+    : topLevelWork;
+  const index = sequence.findIndex((work) => work.slug === slug);
+  const prev = index > 0 ? sequence[index - 1] : null;
   const next =
-    index >= 0 && index < selectedWork.length - 1
-      ? selectedWork[index + 1]
-      : null;
+    index >= 0 && index < sequence.length - 1 ? sequence[index + 1] : null;
+  const parent = selectedWork.find((work) => work.slug === item?.parent);
 
-  if (!prev && !next) return null;
+  if (!prev && !next && !parent) return null;
 
   return (
     <nav
       aria-label="Project navigation"
       className="max-w-5xl mx-auto px-6 py-12 border-t border-border"
     >
+      {parent && (
+        <p className="font-sans text-sm text-muted mb-8">
+          Appendix to{" "}
+          <Link
+            href={`/work/${parent.slug}`}
+            className="font-medium text-secondary underline underline-offset-4"
+          >
+            {parent.title.split(":")[0]}
+          </Link>
+        </p>
+      )}
       <div className="flex flex-col sm:flex-row justify-between gap-6">
         {prev ? (
           <Link

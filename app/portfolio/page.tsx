@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { selectedWork } from "@/lib/selected-work";
+import { topLevelWork } from "@/lib/selected-work";
 
 export default function PortfolioPage() {
   return (
@@ -29,12 +29,12 @@ export default function PortfolioPage() {
             by nearly 80% of the portfolio. Before that, 20+ years of hands-on
             interaction and visual design.
           </p>
-          <a
+          <Link
             href="/contact"
             className="inline-flex items-center gap-2 font-sans text-sm font-medium bg-primary text-surface px-5 py-2.5 rounded hover:bg-secondary transition-colors"
           >
             Get in touch
-          </a>
+          </Link>
         </div>
 
       </section>
@@ -61,7 +61,7 @@ export default function PortfolioPage() {
           increasingly build it myself.
         </p>
         <ul className="flex flex-col divide-y divide-border border-y border-border">
-          {selectedWork.map((item) => (
+          {topLevelWork.map((item) => (
             <li key={item.title} className="py-6">
               <div className="flex flex-col gap-1">
                 <h3 className="font-display font-semibold text-xl text-primary">

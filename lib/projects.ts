@@ -5,6 +5,18 @@ export type Block =
   | { type: "list"; items: string[] }
   | { type: "metrics"; items: { value: string; label: string; note?: string }[] }
   | { type: "callout"; text: string }
+  // Numbered stages of a story, shown as a vertical timeline.
+  | { type: "stages"; items: { when?: string; title: string; text: string }[] }
+  // Interactive or calculated figures built from data in /lib.
+  | {
+      type: "figure";
+      name: "token-diagram" | "contrast-checks" | "focus-rings" | "pairing-rules";
+    }
+  // Cards linking to related pages, such as a case study's appendices.
+  | {
+      type: "links";
+      items: { href: string; eyebrow?: string; title: string; text: string }[];
+    }
   | {
       type: "image";
       // Leave src undefined to show a placeholder.
@@ -614,27 +626,168 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "accessibility-design-handoff",
-    title: "Accessibility in design handoff",
-    tags: ["Accessibility", "Interaction Design", "Design Handoff"],
+    slug: "accessibility-program",
+    title: "Building PowerSchool's accessibility program",
+    client: "PowerSchool",
+    role: "UX Principal; owner of the accessibility program",
+    tags: ["Accessibility Programs", "Strategy", "Training", "Internal Tools"],
     summary:
-      "Examples of the handoff files I give engineering. Each one specifies how a component works with a keyboard and a screen reader, not just how it looks, so engineers don't have to guess.",
+      "PowerSchool had 40 products and no accessibility documentation. Starting in 2021, I built a program that gave every product an ACR, brought audits in-house, measures conformance across the portfolio, and spreads ownership across teams so that accessibility doesn't wait on one reviewer.",
+    heroMetric: { value: "40 of 40", label: "products with an ACR, up from none" },
     sections: [
       {
-        heading: "Why handoff matters",
+        heading: "Where we started",
         blocks: [
           {
             type: "paragraph",
-            text: "A visual spec answers what a component looks like. It leaves out how it works with a keyboard, where focus goes, and what a screen reader says. If the design doesn't answer those questions, engineers answer them during development, one component at a time. My handoff files answer them before development starts.",
+            text: "Customers ask for an accessibility conformance report (ACR) to understand how well a product meets accessibility standards. Across 40 products, PowerSchool had none, and no view of how any product, or the portfolio as a whole, was doing.",
+          },
+          {
+            type: "paragraph",
+            text: "Writing reports would not fix that on its own. The program had to produce documentation, keep it current at a cost the business could sustain, and change how 40 product teams worked, without routing every decision through one person.",
           },
         ],
       },
-      // To add a handoff example: copy the section below, put its image in
-      // /public/images/handoff/ (or reuse an existing folder), and set width
-      // and height to the image's pixel size.
       {
-        heading: "Example: Reordering a list with drag and drop",
+        heading: "How the program grew",
         blocks: [
+          {
+            type: "stages",
+            items: [
+              {
+                when: "Before 2021",
+                title: "No documentation",
+                text: "40 products, no ACRs, and no shared way to record accessibility issues.",
+              },
+              {
+                when: "2021",
+                title: "Third-party ACRs",
+                text: "I defined the scope of each audit and managed the accessibility vendors who produced our first reports. Each one cost $20,000 to $25,000, so reports were renewed only about every two years, and customers complained that they were out of date.",
+              },
+              {
+                when: "June 2024",
+                title: "In-house audits",
+                text: "I trained six UX team members, content writers and specialists, to test with Axe, manual testing, NVDA, and VoiceOver, and to write VPATs. We now publish provisional in-house ACRs between the third-party reports, so customers get current information without paying for a vendor audit each time.",
+              },
+              {
+                title: "Tooling",
+                text: "An in-house update still took more than 40 hours. I designed and built an ACR Generator that drafts updates from Jira issues, and a dashboard that tracks every report and issue.",
+              },
+              {
+                title: "A champions network",
+                text: "About 14 champions from every department except HR (we're recruiting there) meet every two months to decide accessibility policy and process, then carry those decisions back into their teams.",
+              },
+              {
+                title: "Training at scale",
+                text: "I trained product owners and managers on the accessibility ticket process, and the UX organization on screen readers and accessible markup. I also recommended role-based accessibility training for the whole company.",
+              },
+              {
+                when: "Today",
+                title: "40 products",
+                text: "Every product in the portfolio has an ACR, and the program can keep them current.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Who I trained",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Each group learned what its role needs to do, so accessibility work doesn't come back to me by default.",
+          },
+          {
+            type: "metrics",
+            items: [
+              {
+                value: "190",
+                label: "Product owners and managers",
+                note: "The process for managing accessibility tickets in Jira",
+              },
+              {
+                value: "40",
+                label: "The whole UX organization",
+                note: "Testing with a screen reader",
+              },
+              {
+                value: "30",
+                label: "UX designers and writers",
+                note: "Accessibility markup",
+              },
+              {
+                value: "6",
+                label: "In-house testers and VPAT writers",
+                note: "Axe, manual testing, NVDA, VoiceOver, and writing ACRs",
+              },
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Beyond what I could teach myself, I recommended accessibility training by role for the entire organization. The champions committee also decided that QA needed more accessibility training. The whole QA organization has since built up its accessibility testing skills, and most products now run automated accessibility tests as part of their release cycle.",
+          },
+        ],
+      },
+      {
+        heading: "How I measure progress",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Counting ACRs shows coverage. It doesn't show whether products are getting more accessible. I built the ACR Dashboard so that leadership and I look at the same numbers, each with a plain-language definition and an as-of date:",
+          },
+          {
+            type: "list",
+            items: [
+              "Coverage and freshness: whether each product's ACR is current (within 12 months), expiring soon, expired, or missing",
+              "Portfolio conformance: the share of WCAG criteria with no open defects across all tracked products",
+              "Product status: how many products are conformant, partially conformant, or non-conformant",
+              "Trend: conformance over time, built from weekly Jira snapshots",
+              "Where issues cluster: open and closed issues grouped by WCAG success criterion",
+            ],
+          },
+          {
+            type: "image",
+            src: "/images/acr-dashboard/dashboard-main1.png",
+            width: 1109,
+            height: 940,
+            alt: "The ACR Dashboard home page. Summary cards show portfolio conformance at 40%, meaning 22 of 55 criteria have no open defects across 6 products; conformance status of 1 conformant, 1 partially conformant, and 4 non-conformant products; and 1,692 open defects, all as of June 2, 2026. A conformance trend line built from weekly Jira snapshots falls from 100% to about 40%. An ACR status panel counts 2 current, 1 expiring soon, 2 expired, and 2 missing reports.",
+            caption:
+              "One view for leadership and for me: conformance, product status, open defects, the trend, and which ACRs need renewal.",
+          },
+          {
+            type: "paragraph",
+            text: "The last measure decides what I teach. When the same criterion fails across many products, it's a skills gap, not a one-off bug. In the current snapshot, 1.3.1 Info and Relationships has far more open issues than any other criterion, followed by 2.1.1 Keyboard and 1.1.1 Non-text Content, so those topics come first in training.",
+          },
+        ],
+      },
+      {
+        heading: "How I avoided becoming the approval gate",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The obvious model was for every design and release to come to me for an accessibility sign-off. With 40 products, that makes one person the bottleneck, and teams learn to treat accessibility as someone else's job. I spread the decisions out instead:",
+          },
+          {
+            type: "list",
+            items: [
+              "Champions own accessibility in their departments. Policy and process come from the committee, which meets every two months, so teams apply shared rules instead of asking me case by case. The committee, not me, decided QA needed more accessibility training.",
+              "Testers test. Six trained UX team members audit products and write ACRs, so reports don't wait on me or on a vendor.",
+              "Testing is part of the release. QA teams test for accessibility themselves, and automated accessibility tests run in the release cycle of most products, so problems surface before a review would have caught them.",
+              "Product owners own their backlog. The 190 product owners and managers I trained manage accessibility tickets in their own teams' Jira process.",
+              "The tooling is shared. Eight teammates use the ACR Generator. It drafts the busywork, and a person on the team makes every conformance decision.",
+              "Conventions are taught, not mandated. The tooling depends on teams labeling Jira issues consistently, and I got there with training, short docs, and explaining why.",
+              "Questions are answered before development. Design handoff specifies keyboard behavior and screen-reader output, so engineers don't need a review to find out what to build.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Example: accessibility in design handoff",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A visual spec shows what a component looks like. It doesn't say how it works with a keyboard, where focus goes, or what a screen reader announces. If the design leaves those questions open, engineers answer them one component at a time, or wait for a review. These handoff files answer them before development starts.",
+          },
           {
             type: "paragraph",
             text: "Administrators reorder a list of District Quick Links. Drag and drop is the familiar way to do that, but it only works with a mouse. WCAG 2.2 requires a keyboard path (2.1.1 Keyboard) and a way to complete dragging actions without dragging (2.5.7 Dragging Movements).",
@@ -676,6 +829,160 @@ export const projects: Project[] = [
           {
             type: "paragraph",
             text: "Each icon button is annotated with its type, hidden label, states, and behavior. Labels include the row's link text, such as \u201cGrab Job Opportunities\u201d or \u201cDelete Job Opportunities\u201d, so a screen-reader user knows which row each button acts on. The spec also links to the accessible drag-and-drop patterns it builds on.",
+          },
+        ],
+      },
+      {
+        heading: "Results",
+        blocks: [
+          {
+            type: "metrics",
+            items: [
+              {
+                value: "40 of 40",
+                label: "Products with an ACR",
+                note: "Up from none in 2021",
+              },
+              {
+                value: "14",
+                label: "Accessibility champions",
+                note: "From every department except HR",
+              },
+              {
+                value: "8",
+                label: "Teammates using the ACR Generator",
+              },
+              {
+                value: "40+ to 1–4 hrs",
+                label: "Per ACR update (projected)",
+                note: "Based on a 40-hour manual baseline; not yet measured",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What's next",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Measure real ACR production time with the Generator, to replace the projected figure",
+              "Move from Jira epics to durable audit labels that stay attached to each issue as work moves",
+              "Use the issue clusters to plan the next round of champion and tester training",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Appendices",
+        blocks: [
+          {
+            type: "links",
+            items: [
+              {
+                href: "/work/accessibility-programs-tooling",
+                eyebrow: "Appendix A",
+                title: "ACR Generator",
+                text: "The internal tool that drafts ACR updates from Jira issues, with every conformance decision left to a person.",
+              },
+              {
+                href: "/work/acr-dashboard",
+                eyebrow: "Appendix B",
+                title: "ACR Dashboard",
+                text: "How the dashboard tracks every ACR, reports conformance to executives, and shows where to focus training.",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "accessible-design-systems",
+    title: "Accessibility built into the design system",
+    client: "PowerSchool",
+    role: "UX Principal, Design System & Accessibility",
+    tags: ["Design Systems", "Design Tokens", "Accessibility"],
+    summary:
+      "I lead a framework-agnostic design system used by nearly 80% of PowerSchool's 40 products. Accessibility decisions live in its color tokens, so teams get contrast and focus right by default instead of checking each component.",
+    heroMetric: { value: "~80%", label: "of the 40-product portfolio uses the system" },
+    sections: [
+      {
+        heading: "The problem",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Teachers love color, so the palette has about 100 colors. Only a few of them can signal meaning: a link, an action, success, or an error. With 40 products and many teams, the system has to make the accessible choice the default, not something each team checks for itself.",
+          },
+        ],
+      },
+      {
+        heading: "Three layers of tokens",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Each layer only points one step back. Primitives are the raw palette. Semantic tokens give a color a job. Components use semantic tokens, never raw colors. The rest of the palette isn't mapped to any semantic token, so teachers can use it freely without weakening the colors that carry meaning.",
+          },
+          { type: "figure", name: "token-diagram" },
+          {
+            type: "paragraph",
+            text: "One primitive often does several jobs. navy-500 is link text, the primary button, and the info icon, but each job has its own token, so links can change without touching buttons.",
+          },
+        ],
+      },
+      {
+        heading: "Pairing rules built into the palette",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Teachers and teams use far more than the semantic colors, so the palette itself has to be safe to combine. Its levels work as rules: on a 100-level background, icons can use any 500 color and text can use any 600 color. On any 500-level or darker background, text is white. Anyone who knows the rule can pick an accessible pair from about 100 colors without a contrast checker.",
+          },
+          { type: "figure", name: "pairing-rules" },
+        ],
+      },
+      {
+        heading: "Contrast is checked once, on pairs",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Because components only use semantic tokens, contrast is checked on the pairs of tokens that are allowed together, not on every component state. Every component built from those pairs inherits the result.",
+          },
+          { type: "figure", name: "contrast-checks" },
+          {
+            type: "paragraph",
+            text: "Every pair passes. The closest is a link inside an info message, at 4.6:1 against the 4.5:1 minimum.",
+          },
+        ],
+      },
+      {
+        heading: "One focus ring for every background",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "With about 100 colors in use, a single-color focus indicator would disappear on some of them. The focus-ring token is three bands, white, navy-500, and navy-100, so at least one band always contrasts with the background. Teams never choose a focus color for each component.",
+          },
+          { type: "figure", name: "focus-rings" },
+        ],
+      },
+      {
+        heading: "Guardrails: what teams can and can't change",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Colors are built into the components. Teams use a button or a message as it is, and can't change its colors, so contrast and focus stay correct in every product that uses the system.",
+              "Where teams do choose colors, a set of skills enforces proper color usage, so the pairing rules hold outside the components too.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Status never relies on color alone",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Success, error, and info messages each pair an icon with text: a 500-level icon and 600-level text on a 100-level background. The icon and the words carry the meaning for people who can't tell the colors apart, which meets WCAG 1.4.1 Use of Color.",
           },
         ],
       },

@@ -2,13 +2,34 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getProjectBySlug, type Block } from "@/lib/projects";
-import { selectedWork } from "@/lib/selected-work";
+import { selectedWork, type SelectedWorkItem } from "@/lib/selected-work";
 import ProjectImage from "@/components/ProjectImage";
 import AcrToolPage from "@/components/AcrToolPage";
 import ProjectNav from "@/components/ProjectNav";
+import TokenDiagram from "@/components/TokenDiagram";
+import {
+  ContrastChecks,
+  FocusRingSamples,
+  PairingRules,
+} from "@/components/TokenFigures";
+
+const figures = {
+  "token-diagram": TokenDiagram,
+  "contrast-checks": ContrastChecks,
+  "focus-rings": FocusRingSamples,
+  "pairing-rules": PairingRules,
+};
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+// Appendices link back to the case study they belong to.
+function backLink(item: SelectedWorkItem | undefined) {
+  const parent = selectedWork.find((other) => other.slug === item?.parent);
+  return parent
+    ? { href: `/work/${parent.slug}`, label: `Back to ${parent.title.split(":")[0]}` }
+    : { href: "/portfolio", label: "Back to work" };
 }
 
 
@@ -104,6 +125,67 @@ function renderBlock(block: Block, idx: number) {
         </dl>
       );
 
+    case "stages":
+      return (
+        <ol key={idx} className="relative border-l-2 border-border ml-3" role="list">
+          {block.items.map((stage, i) => (
+            <li key={stage.title} className="relative pl-8 pb-8 last:pb-0">
+              <span
+                className="absolute -left-[15px] top-0 flex h-7 w-7 items-center justify-center rounded-full bg-secondary font-mono text-sm text-surface"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </span>
+              {stage.when && (
+                <p className="font-mono text-sm text-[#4b5563] mb-1">
+                  {stage.when}
+                </p>
+              )}
+              <h3 className="font-display font-semibold text-lg text-primary leading-snug">
+                <span className="sr-only">Stage {i + 1}: </span>
+                {stage.title}
+              </h3>
+              <p className="font-sans text-base text-body leading-relaxed mt-1">
+                {stage.text}
+              </p>
+            </li>
+          ))}
+        </ol>
+      );
+
+    case "links":
+      return (
+        <ul key={idx} className="grid grid-cols-1 sm:grid-cols-2 gap-6" role="list">
+          {block.items.map((link) => (
+            <li
+              key={link.href}
+              className="relative border border-border rounded-lg p-6 bg-paper hover:border-secondary transition-colors flex flex-col gap-2"
+            >
+              {link.eyebrow && (
+                <p className="font-mono text-sm text-[#4b5563]">{link.eyebrow}</p>
+              )}
+              <h3 className="font-display font-semibold text-lg text-primary">
+                {/* The stretched link makes the whole card clickable. */}
+                <Link
+                  href={link.href}
+                  className="underline decoration-1 underline-offset-4 hover:text-secondary after:absolute after:inset-0"
+                >
+                  {link.title}
+                </Link>
+              </h3>
+              <p className="font-sans text-base text-body leading-relaxed">
+                {link.text}
+              </p>
+            </li>
+          ))}
+        </ul>
+      );
+
+    case "figure": {
+      const Figure = figures[block.name];
+      return <Figure key={idx} />;
+    }
+
     case "image":
       return (
         <ProjectImage
@@ -132,6 +214,7 @@ export default async function ProjectPage({ params }: Props) {
           <AcrToolPage
             title={selectedItem.title}
             description={selectedItem.description}
+            back={backLink(selectedItem)}
           />
           <ProjectNav slug={slug} />
         </>
@@ -166,8 +249,9 @@ export default async function ProjectPage({ params }: Props) {
     );
   }
 
-  const inProgress = selectedWork.find((item) => item.slug === slug)
-    ?.inProgress;
+  const selectedItem = selectedWork.find((item) => item.slug === slug);
+  const inProgress = selectedItem?.inProgress;
+  const back = backLink(selectedItem);
 
   const byline = [study.client, study.year, study.role].filter(
     (item): item is string => Boolean(item),
@@ -179,17 +263,16 @@ export default async function ProjectPage({ params }: Props) {
       <header className="border-b border-border bg-paper">
         <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
           <Link
-            href="/portfolio"
+            href={back.href}
             className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
           >
-            <span aria-hidden="true">← </span>Back to work
+            <span aria-hidden="true">← </span>{back.label}
           </Link>
 
           {inProgress && (
             <p className="font-sans text-base text-body border-l-2 border-secondary bg-surface px-4 py-3 mb-6 max-w-2xl">
               <strong className="font-semibold">Work in progress.</strong>{" "}
-              This case study is still being written, and its images are
-              placeholders.
+              This case study is still being written.
             </p>
           )}
 
