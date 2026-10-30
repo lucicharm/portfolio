@@ -118,7 +118,15 @@ export default function ContactPage() {
           >
             LinkedIn
           </a>
-          . All fields are required.
+          . All fields are required. Messages are sent through Formspree;
+          see the{" "}
+          <Link
+            href="/privacy"
+            className="text-secondary underline underline-offset-2 hover:text-primary"
+          >
+            Privacy notice
+          </Link>
+          .
         </p>
 
         {state.succeeded ? (

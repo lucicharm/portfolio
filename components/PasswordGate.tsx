@@ -7,6 +7,7 @@ import {
   useSyncExternalStore,
   type FormEvent,
 } from "react";
+import { usePathname } from "next/navigation";
 
 const AUTH_STORAGE_KEY = "portfolio-authenticated";
 const AUTH_CHANGE_EVENT = "portfolio-auth-change";
@@ -36,14 +37,24 @@ function getServerAuthenticationSnapshot(): boolean | null {
   return null;
 }
 
-export default function PasswordGate({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  const isAuthenticated = useSyncExternalStore<boolean | null>(
+export function useIsAuthenticated() {
+  return useSyncExternalStore<boolean | null>(
     subscribeToAuthentication,
     getAuthenticationSnapshot,
     getServerAuthenticationSnapshot,
   );
+}
+
+// Pages anyone can read without the password.
+export function isPublicPath(pathname: string) {
+  return pathname.endsWith("/privacy");
+}
+
+export default function PasswordGate({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const pathname = usePathname();
+  const isAuthenticated = useIsAuthenticated();
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
   const justUnlocked = useRef(false);
@@ -72,6 +83,7 @@ export default function PasswordGate({
     setHasError(false);
   }
 
+  if (isPublicPath(pathname)) return children;
   if (isAuthenticated) return children;
   if (isAuthenticated === null) {
     return (

@@ -11,6 +11,9 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-primary transition-colors">
             Get in touch
           </Link>
+          <Link href="/privacy" className="hover:text-primary transition-colors">
+            Privacy
+          </Link>
           <a
             href="https://www.linkedin.com/in/magarland/"
             rel="me"
