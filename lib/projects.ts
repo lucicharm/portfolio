@@ -988,6 +988,430 @@ export const projects: Project[] = [
       },
     ],
   },
+  // Draft outline. "To fill in" callouts are open questions for Melissa;
+  // replace each with prose before removing `draft` in selected-work.ts.
+  {
+    slug: "design-system-operations",
+    title: "Running a design system across 40 products",
+    client: "PowerSchool",
+    year: "2022–present",
+    role: "UX Principal; design system lead",
+    tags: ["Design Systems", "Leadership", "Adoption", "Governance"],
+    summary:
+      "I lead the cross-functional team of 6 that built PowerSchool's framework-agnostic design system. Adoption grew from 0% to nearly 80% of a 40-product portfolio, which cut design and engineering debt and made products more consistent.",
+    heroMetric: { value: "~80%", label: "of 40 products use the system" },
+    heroImage: {
+      alt: "Chart of design system adoption across PowerSchool's 40 products over time, rising from 0% to nearly 80%",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        heading: "The outcome",
+        blocks: [
+          {
+            type: "metrics",
+            items: [
+              { value: "0% → ~80%", label: "of products on the design system" },
+              { value: "40", label: "products in the portfolio" },
+              { value: "6", label: "designers, engineers, and writers on my team" },
+            ],
+          },
+          {
+            type: "callout",
+            text: "To fill in: When did the work start, and how long did it take to reach ~80%? How do you count a product as having adopted the system (some components, all new work, fully migrated)? Is there any number for the debt reduction, such as fewer custom components, faster builds, or fewer UI bugs?",
+          },
+        ],
+      },
+      {
+        heading: "Where we started",
+        blocks: [
+          {
+            type: "callout",
+            text: "To fill in: What did teams use before the system (their own libraries, copied styles, nothing)? Why did the company decide to build one, and who sponsored it? What did the inconsistency cost customers who use several PowerSchool products?",
+          },
+          {
+            type: "image",
+            alt: "Side-by-side screenshots of the same control, such as a button or date picker, in several PowerSchool products before the design system",
+            caption: "To fill in: before-state examples.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "Why the system is framework-agnostic",
+        blocks: [
+          {
+            type: "callout",
+            text: "To fill in: Which frameworks do the 40 products use? How is the system built so all of them can use it? What other approaches did you consider, and what did you give up by choosing this one?",
+          },
+        ],
+      },
+      {
+        heading: "The team",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I lead a cross-functional team of 6 designers, engineers, and writers who build and maintain the system.",
+          },
+          {
+            type: "callout",
+            text: "To fill in: How did you build or shape the team? How is the work split between roles? How do you plan and prioritize work with them?",
+          },
+        ],
+      },
+      {
+        heading: "Getting 40 products to adopt it",
+        blocks: [
+          {
+            type: "stages",
+            items: [
+              {
+                title: "To fill in: first adopter",
+                text: "Which product went first, and why that one?",
+              },
+              {
+                title: "To fill in: early growth",
+                text: "What helped the next teams move over: migration help, office hours, a roadmap commitment, a requirement from leadership?",
+              },
+              {
+                title: "To fill in: the turning point",
+                text: "When did teams start asking for the system instead of you asking them?",
+              },
+              {
+                title: "Nearly 80%",
+                text: "To fill in: Where adoption stands now, and what's left.",
+              },
+            ],
+          },
+          {
+            type: "callout",
+            text: "To fill in: A team that pushed back, what their concern was, and how you won them over. Why the last ~20% hasn't adopted it, and your plan for them.",
+          },
+        ],
+      },
+      {
+        heading: "How teams contribute and how decisions get made",
+        blocks: [
+          {
+            type: "callout",
+            text: "To fill in: How does a product team ask for a new component or change one? Who decides what goes into the system? How do you handle a team that needs something the system doesn't have yet?",
+          },
+          {
+            type: "image",
+            alt: "Diagram of the contribution process, from a product team's request to a released component",
+            caption: "To fill in: contribution or governance diagram.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "Accessibility built in",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Accessibility is part of the system's foundations. Semantic color tokens carry meaning, contrast is checked once on the token pairs that are allowed together, and one three-band focus ring works on every background. Every product that adopts the system inherits that work.",
+          },
+          {
+            type: "links",
+            items: [
+              {
+                href: "/work/accessible-design-systems",
+                eyebrow: "Related case study",
+                title: "Accessibility built into the tokens",
+                text: "How the token layers, pairing rules, and focus ring keep about 100 colors accessible.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Designing for dozens of languages",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I oversee localization design for products translated into dozens of languages, including Arabic and Thai.",
+          },
+          {
+            type: "callout",
+            text: "To fill in: How does the system handle right-to-left layouts and longer or taller text? One specific problem the system solved for localized products.",
+          },
+        ],
+      },
+      {
+        heading: "Reporting to leadership",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I present design system roadmaps to executive leadership and tie them to product quality, accessibility, and regulatory requirements.",
+          },
+          {
+            type: "callout",
+            text: "To fill in: What do you measure and report? A decision or investment from leadership that came out of those reviews.",
+          },
+          {
+            type: "image",
+            alt: "Excerpt from an executive roadmap or adoption report, with confidential details removed",
+            caption: "To fill in: roadmap or report excerpt.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "What I learned",
+        blocks: [
+          {
+            type: "callout",
+            text: "To fill in: What would you do differently if you started again? What do you know now about getting teams to adopt a system that you didn't know at the start?",
+          },
+        ],
+      },
+    ],
+  },
+  // Draft. "To fill in" callouts are open questions for Melissa.
+  {
+    slug: "ai-prototyping",
+    title: "AI-assisted prototyping with the design system built in",
+    client: "PowerSchool",
+    role: "UX Principal; led the team and wrote many of the design system skills",
+    tags: ["AI Prototyping", "Design Systems", "Internal Tools", "User Research"],
+    summary:
+      "My team built a prototyping template and a VS Code extension so our designers can prototype with AI in real code that follows our design system. When a designer needs to break a rule, the AI offers options that follow the system first, then records the exception and the reason, so engineers know what to build.",
+    heroImage: {
+      alt: "A designer's prototype open in VS Code, with the prototyping extension panel showing the installed design system release and template version",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        heading: "The outcome",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Twelve designers on my UX team build their prototypes in real code with an AI agent. Every prototype starts from the design system, stays on its latest release, and records each place where it breaks a system rule and why.",
+          },
+          {
+            type: "paragraph",
+            text: "Engineers get production-ready code they can reuse, and they've been very happy with it. I expect this to cut development time a lot.",
+          },
+          {
+            type: "metrics",
+            items: [
+              { value: "12", label: "designers using it" },
+              { value: "~16", label: "prototypes built" },
+              { value: "9", label: "months in use, and still improving" },
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Measuring that saving is still an open problem. The effort estimates on our Jira tickets are the only measure we have so far, and I'm not convinced they're accurate. Next, we'll run a retrospective with the development team to get a better picture of their output.",
+          },
+          {
+            type: "paragraph",
+            text: "It was a collaborative project. My team built the template and the VS Code extension, engineers contributed, and I wrote many of the skills that enforce the design system.",
+          },
+        ],
+      },
+      {
+        heading: "Prototypes that looked right but weren't",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Designers had started building prototypes with AI tools on their own. Their styles imitated the design system without using its code. That confused engineers, and these prototypes caused more confusion than our old Figma mockups.",
+          },
+          {
+            type: "paragraph",
+            text: "We could have sent designers back to Figma. We decided to make coded prototypes the official way to work, for four reasons:",
+          },
+          {
+            type: "list",
+            items: [
+              "Designers had already chosen to prototype with AI. Guiding that work was more useful than banning it.",
+              "Leadership wanted the design team using AI.",
+              "Code is a better handoff. It carries every state, error, and accessibility detail that a mockup has to describe in notes.",
+              "Engineers can reuse the code instead of rebuilding screens from mockups.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "A starting point built from the design system",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Our answer was a template. It gives each designer an empty project that already contains a coded version of our design system (React). Designers build their prototypes inside it, so every button, field, and color comes from the system from the start.",
+          },
+          {
+            type: "paragraph",
+            text: "The team works in GitHub Copilot, an AI assistant inside VS Code, the code editor we use. Copilot offers models from OpenAI, Anthropic, Google, and others. We wrote skills for it: written instructions that tell the AI how to use the design system. The skills give every model the same rules.",
+          },
+          {
+            type: "paragraph",
+            text: "Over time we refined the skills until a designer could describe a screen in plain words or paste a design from Figma, and the result would still follow the design system.",
+          },
+        ],
+      },
+      {
+        heading: "Making Figma match the code",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Pasting from Figma only works if Figma and the code agree. We rebuilt every component in our Figma library as an exact match of the coded component and renamed every layer to match. To help with the rebuild, I wrote a skill for Figma's AI agent that loads the design system's code in a safe test space and reads it.",
+          },
+          {
+            type: "image",
+            alt: "A Figma frame on the left and the coded prototype the AI built from it on the right, using the same design system components",
+            caption: "To fill in: a Figma design and the prototype built from it.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "What designers told us",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "After the team had used the template for a while, I interviewed 5 of the 12 designers. Four problems came up:",
+          },
+          {
+            type: "list",
+            items: [
+              "Keeping their copy of the template up to date was too hard.",
+              "They weren't sure their work followed the design system.",
+              "They weren't sure their prototypes were accessible.",
+              "The template sometimes held them to the system too tightly, with no room to break a rule when a design needed to.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Many of the changes that followed came straight from these interviews, including the ways designers can now break the rules and check their work.",
+          },
+          {
+            type: "callout",
+            text: "To fill in (optional): A quote from an interview you can share.",
+          },
+        ],
+      },
+      {
+        heading: "Keeping everyone up to date",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Updating the template meant using Git, a developer tool for managing versions of code. Designers weren't familiar with it and were struggling. This was the first problem we fixed, because outdated copies caused the others. My team built a VS Code extension that does the updating for them. It installs the latest skills, the latest design system release, and the newest template. Designers open VS Code and start on current code.",
+          },
+          {
+            type: "paragraph",
+            text: "That didn't fix the prototypes that already existed. Because updating was hard, many designers had started new work by copying an old prototype, which carried an outdated design system along with it. We wrote a skill that brings those prototypes up to the latest design system release and fixes problems left over from older versions of the template.",
+          },
+          {
+            type: "image",
+            alt: "The extension panel in VS Code, showing the installed skills, the design system release, and the template version, each marked up to date",
+            caption: "To fill in: the extension panel.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "Room to break the rules, with a record",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Our users range from children who can't read yet to highly technical administrators. Their needs are complex, and the design system can't cover every case. When the template was too strict, designers had two bad options: block the work, or build look-alike prototypes outside the template again. Designers asked for room to break the rules, and recorded exceptions also show the design system team what to add next.",
+          },
+          {
+            type: "paragraph",
+            text: "I wrote skills that let designers break a design system rule on purpose. When a request breaks a rule, the AI first offers alternatives that follow the system. If none of them work, the designer explains why the exception is needed, and the AI builds it.",
+          },
+          {
+            type: "paragraph",
+            text: "Every exception and its reason goes on a page in the prototype, along with notes for engineers. Engineers can see exactly where a prototype departs from the system and why.",
+          },
+          {
+            type: "image",
+            alt: "The AI's reply to a request that breaks a design system rule: two alternatives that follow the system, and a prompt asking the designer to explain the exception if neither works",
+            caption: "To fill in: the AI offering alternatives that follow the system.",
+            aspect: "wide",
+          },
+          {
+            type: "image",
+            alt: "The exceptions page in a prototype, listing each exception, the designer's reason, and notes for engineers",
+            caption: "To fill in: the exceptions page.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "Common exceptions become system updates",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The exceptions list also shows the design system team where the system falls short. When the same exception keeps coming up, we change the system.",
+          },
+          {
+            type: "paragraph",
+            text: "The select menu is one example. Some fields had too many options to show in a select menu without breaking it. Now it can search the full list without loading every option, and people can add a new item on the spot. With more than 250 items, it switches from a dropdown to a panel with a filter.",
+          },
+          {
+            type: "image",
+            alt: "The updated select menu in two states: a dropdown with search and an option to add a new item, and, for more than 250 items, a side panel with a filter field",
+            caption: "To fill in: the select menu as a dropdown and as a panel.",
+            aspect: "wide",
+          },
+        ],
+      },
+      {
+        heading: "Checking the work",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "So designers know whether their work follows the system, we wrote a skill that checks a prototype against the design system. It produces a report showing what follows the system and what doesn't. Anything that doesn't is added to the exceptions list.",
+          },
+          {
+            type: "image",
+            alt: "A design system check report for a prototype, listing items that follow the system and items that don't, with the ones that don't marked as added to the exceptions list",
+            caption: "To fill in: a design system check report.",
+            aspect: "wide",
+          },
+          {
+            type: "paragraph",
+            text: "For accessibility, prototypes use the design system's own components, which already include the code that screen readers and other assistive technology rely on. Buttons that show only an icon need a text label. Skills match each approved icon to the right label. Where there's no match, the AI makes its best guess, and our UX content team reviews those labels. I trained them to update the code themselves.",
+          },
+          {
+            type: "paragraph",
+            text: "When a design needs accessibility notes for engineers, a Figma skill I wrote creates the annotation document. VS Code and Figma are connected.",
+          },
+        ],
+      },
+      {
+        heading: "A better handoff",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Designers used to hand off Figma files that weren't consistent with each other. Now they hand off a link to the prototype's code, along with its exceptions list.",
+          },
+          {
+            type: "paragraph",
+            text: "Much of the annotation we used to write is gone. The prototypes are built from reusable design system code, which already covers every component state, the error states, and accessibility. Engineers can reuse the code, and the exceptions list shows them which parts are custom and why.",
+          },
+          {
+            type: "callout",
+            text: "To fill in (optional): Something an engineer said about the new handoff.",
+          },
+        ],
+      },
+      {
+        heading: "What I learned",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Designers are uncomfortable with code. Prompting works some of the time, but they want consistent results, and they prefer a visual interface for getting them. As a first step, we built a prompt library linked to the skills.",
+          },
+          {
+            type: "paragraph",
+            text: "For now, designers use the prompt library from a separate site. Next, we plan to replace the prompts with a visual interface inside the VS Code extension. That's why the extension came first: the visual interface will be built on it.",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {

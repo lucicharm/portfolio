@@ -4,6 +4,9 @@ export type SelectedWorkItem = {
   description: string;
   // Labels the item and its case study as unfinished.
   inProgress?: boolean;
+  // Shown in `npm run dev` only; left out of production builds, so an
+  // outline with open questions never reaches the live site.
+  draft?: boolean;
   // Slug of the case study this item is an appendix of. Appendices keep
   // their own page but are left out of the Selected Work list.
   parent?: string;
@@ -12,7 +15,14 @@ export type SelectedWorkItem = {
   thumbnail?: "products" | "swatches" | "schedule" | "messages";
 };
 
-export const selectedWork: SelectedWorkItem[] = [
+const allWork: SelectedWorkItem[] = [
+  {
+    slug: "ai-prototyping",
+    title: "AI-assisted prototyping: Design system rules built into every prototype",
+    description:
+      "My team built tools that let 12 designers prototype with AI in real code that follows our design system. When a design needs to break a rule, the exception and the reason are recorded for engineers.",
+    inProgress: true,
+  },
   {
     slug: "accessibility-program",
     title: "Accessibility program: From no documentation to 40 products",
@@ -26,6 +36,14 @@ export const selectedWork: SelectedWorkItem[] = [
     description:
       "In a palette of about 100 colors, a small set of semantic tokens carries meaning. Contrast is checked once on token pairs, and one three-band focus ring works on every background.",
     thumbnail: "swatches",
+  },
+  {
+    slug: "design-system-operations",
+    title: "Design systems: From 0% to nearly 80% adoption across 40 products",
+    description:
+      "I lead the team of 6 that built PowerSchool's framework-agnostic design system and got it adopted by nearly 80% of a 40-product portfolio.",
+    draft: true,
+    inProgress: true,
   },
   {
     slug: "matrix-schedule-accessibility",
@@ -58,6 +76,10 @@ export const selectedWork: SelectedWorkItem[] = [
     parent: "accessibility-program",
   },
 ];
+
+export const selectedWork = allWork.filter(
+  (item) => !item.draft || process.env.NODE_ENV !== "production",
+);
 
 // The case studies listed on the Work page, in order.
 export const topLevelWork = selectedWork.filter((item) => !item.parent);

@@ -12,7 +12,7 @@ export default function PortfolioPage() {
       >
         <div className="max-w-2xl">
           <p className="font-mono text-sm text-muted mb-4">
-            UX Principal · Accessibility · Design Systems
+            UX Principal · Design Systems · Accessibility
           </p>
           <h1
             id="hero-heading"
@@ -22,20 +22,40 @@ export default function PortfolioPage() {
             <br />
             <span className="text-secondary">For everyone.</span>
           </h1>
-          <p className="font-sans text-lg text-muted leading-relaxed mb-8 max-w-xl">
-            I lead accessibility programs and the design systems that carry
-            them. At PowerSchool, I took 40 products from no accessibility
-            documentation to comprehensive coverage, built a champions network
-            that spreads ownership across teams, and lead a design system used
-            by nearly 80% of the portfolio. Before that, 20+ years of hands-on
-            interaction and visual design.
+          <p className="font-sans text-lg text-muted leading-relaxed mb-4 max-w-xl">
+            I&apos;ve spent 20+ years in design, most recently leading design
+            systems and accessibility across 40 enterprise products. Here&apos;s
+            what I can do for your team:
           </p>
+          <ul className="space-y-2 mb-8 max-w-xl" role="list">
+            {[
+              "Build a design system that product teams adopt, and run it as it grows.",
+              "Make accessibility part of every team's everyday work, with the process, tools, and training to keep it there.",
+              "Set up AI prototyping that follows your design system and hands engineers code they can reuse.",
+              "Lead and grow designers, and tie design decisions to what leadership cares about.",
+            ].map((item) => (
+              <li
+                key={item}
+                className="font-sans text-lg text-muted leading-relaxed flex gap-3"
+              >
+                <span
+                  className="size-2 shrink-0 rounded-full bg-secondary mt-[0.6em]"
+                  aria-hidden="true"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 font-sans text-sm font-medium bg-primary text-surface px-5 py-2.5 rounded hover:bg-secondary transition-colors"
           >
             Get in touch
           </Link>
+          <p className="font-mono text-sm text-muted mt-8">
+            This portfolio is a work in progress. I&apos;m adding case studies
+            and screenshots as I finish them.
+          </p>
         </div>
 
       </section>
