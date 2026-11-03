@@ -1,0 +1,32 @@
+<div class="prose">
+<p>These prototypes were designed to meet WCAG 2.2 Level AA. The checks below support that, but they aren’t a conformance claim. All automated tests ran in headless Chrome against 36 pages (9 per direction) and this comparison page.</p>
+<h3>Verified</h3>
+<ul>
+<li><strong>Contrast:</strong> 72 foreground and background pairs measured with the WCAG formula, including every text color on every tinted surface and on D's chalk column guides. All pass. The lowest text pair is C's link on its light-blue panel at 4.57:1; D's lowest is 6.3:1, for secondary text over a guide line. Body text is at least 6.4:1 on every surface in every direction.</li>
+<li><strong>axe-core 4 (WCAG 2.0, 2.1 and 2.2 A/AA, plus best practices):</strong> 0 violations on all 36 pages and this page. axe couldn't decide some contrast results: text over A's and D's column guides, B's and D's chalk underline, and decorative or hidden glyphs. Each of those was checked by hand against the measured pairs.</li>
+<li><strong>Reflow at 320px:</strong> no horizontal scrolling on any page, and none with the WCAG 1.4.12 text-spacing overrides applied (line height 1.5, letter spacing 0.12em, word spacing 0.16em, paragraph spacing 2em).</li>
+<li><strong>Keyboard focus:</strong> tabbed through all 520 focus stops. Every stop showed an outline or ring of at least 2px; in C the ring goes around the whole tile. In A and D, the two directions with a sticky header and sticky outline, every focused element stayed at least 99% visible at 1280×900, 1280×560 and 320×640.</li>
+<li><strong>Structure:</strong> each page has a skip link, labeled landmarks, one h1, and no skipped heading levels. Card links are named by the full case-study title, and decorative drawings are hidden from assistive tech.</li>
+<li><strong>Pointer targets:</strong> axe's 2.5.8 target-size rule passes. Nav links, buttons, back links and footer links are at least 44px tall.</li>
+<li><strong>Reduced motion:</strong> with prefers-reduced-motion set to reduce, no animation or transition runs longer than 10ms. B's and D's underline animation and C's hover lift are all off.</li>
+<li><strong>Fonts:</strong> all seven web font families load from Google Fonts, and each has a system fallback.</li>
+</ul>
+<h3>Not verified, or still uncertain</h3>
+<ul>
+<li>No screen-reader testing (VoiceOver, NVDA, JAWS). Priorities: stretched-link cards, the hidden “H2” tags in A's outline, and the visually hidden colons in B and C's titles.</li>
+<li>Tested in Chromium only. Safari and Firefox weren't tested; Firefox before version 128 reads CSS-generated quote marks aloud.</li>
+<li>Real browser zoom at 200% and 400% wasn't tested; it was simulated with a 320px viewport.</li>
+<li>Windows High Contrast and other forced-color modes weren't tested on Windows. C's focus ring depends on the fallback outline.</li>
+<li>No testing with people, including how readable B's and D's serif body text is for low-vision and dyslexic readers.</li>
+<li>The directions have no dark theme; the current site has none either.</li>
+</ul>
+<h3>Manual testing still needed before production</h3>
+<ul>
+<li>A screen-reader pass on one home page and one case study in the chosen direction.</li>
+<li>Keyboard and 400% zoom checks in Safari and Firefox, plus a forced-colors check on Windows.</li>
+<li>A re-check of contrast after any palette change; palettes.mjs recomputes every pair.</li>
+<li>The current mobile menu (with Escape to close) should carry over. The prototypes let the three nav links wrap instead.</li>
+</ul>
+<h3>Content changes in the prototypes</h3>
+<p>The copy comes straight from the repository. The only additions are presentational: short labels on the four offers in A and C (Design systems, Accessibility, AI prototyping, Leadership), a “Note” tag in A, field labels (Client, Year, Role, Tags) on case-study metadata, and a new drawing for the AI-prototyping tile, which has none on the live site.</p>
+</div>
