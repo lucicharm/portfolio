@@ -12,7 +12,7 @@
   --color-rule-strong: #4c7086; /* boundaries: 5.21:1 on paper, 4.98:1 on panel */
   --color-mark: #256F9D;        /* links, labels, focus: 5.38:1 paper, 5.15:1 panel, 5.29:1 guide */
   --color-mark-wash: #f0f5f5;   /* chip fill; mark text on it is 4.97:1 */
-  --color-guide: #fcfbfa;       /* hero column guides, decorative */
+  --color-guide: #eef0f1;       /* hero column guides: visible, same tint step as the prototype's */
   /* Contact form status only. Success is teal-leaning to stay in the
      family; danger stays a plain warm red so an error never reads as the
      brand accent. Contrast on paper: 5.39:1 and 5.66:1. */
