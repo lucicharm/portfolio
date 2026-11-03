@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Roboto, PT_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -7,23 +7,17 @@ import SkipNav from "@/components/SkipNav";
 import PasswordGate from "@/components/PasswordGate";
 import Analytics from "@/components/Analytics";
 
-const montserrat = Montserrat({
+// Public Sans is a variable font, so every weight comes in one file.
+const publicSans = Public_Sans({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-public-sans",
   display: "swap",
 });
 
-const roboto = Roboto({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
-  display: "swap",
-});
-
-const ptMono = PT_Mono({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-pt-mono",
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -44,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${roboto.variable} ${ptMono.variable}`}
+      className={`${publicSans.variable} ${plexMono.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-surface text-body">
+      <body className="min-h-screen flex flex-col">
         <Analytics />
         <PasswordGate>
           <SkipNav />

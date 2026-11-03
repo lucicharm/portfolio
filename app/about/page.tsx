@@ -89,22 +89,25 @@ const competencies = [
   "AI-assisted prototyping",
 ];
 
+const labelClass = "font-mono text-sm tracking-[0.02em]";
+const sideHeadingClass = "text-lg font-extrabold mb-4";
+
 export default function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="wrap py-16">
       {/* Header */}
-      <header className="max-w-2xl mb-16 pb-16 border-b border-border">
-        <p className="font-mono text-sm text-muted mb-3">About</p>
-        <h1 className="font-display font-bold text-4xl text-primary mb-6 leading-tight">
+      <header className="max-w-[44rem] mb-16 pb-16 border-b border-rule grid grid-cols-[minmax(0,1fr)] gap-5">
+        <p className={`${labelClass} text-ink-2`}>About</p>
+        <h1 className="text-3xl font-extrabold leading-[1.08] tracking-[-0.03em]">
           Melissa Garland
         </h1>
-        <p className="font-sans text-lg text-muted leading-relaxed mb-4">
+        <p className="text-lg leading-normal text-ink-2">
           Principal UX designer and accessibility leader with 20+ years of
           experience combining hands-on interaction and visual design with the
           ability to embed accessibility into products, design systems, and
           organizational practice.
         </p>
-        <p className="font-sans text-base text-muted leading-relaxed">
+        <p className="text-ink-2">
           At PowerSchool, I built the accessibility program from the ground up,
           coordinating VPAT/ACR conformance reporting across 40 products and
           establishing an accessibility champion network that distributes
@@ -114,48 +117,29 @@ export default function AboutPage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-16">
         {/* Experience */}
-        <div className="lg:col-span-2">
-          <h2 className="font-display font-semibold text-2xl text-primary mb-10">
+        <div>
+          <h2 className="text-2xl font-extrabold tracking-[-0.02em] mb-8">
             Experience
           </h2>
-          <ol className="relative space-y-12" role="list">
+          <ol className="border-t border-ink" role="list">
             {experience.map((role) => (
               <li
                 key={`${role.title}-${role.company}`}
-                className="border-l-2 border-border pl-8 relative"
+                className="grid grid-cols-[minmax(0,1fr)] gap-3 border-b border-rule py-8"
               >
-                <div
-                  className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-secondary"
-                  aria-hidden="true"
-                />
-                <div className="flex flex-col gap-1 mb-3">
-                  <h3 className="font-display font-semibold text-lg text-primary leading-snug">
+                <div className="grid gap-1">
+                  <h3 className="text-lg font-semibold leading-[1.3]">
                     {role.title}
                   </h3>
-                  <p className="font-sans text-sm text-muted">
-                    {role.company}
-                  </p>
-                  {role.scope && (
-                    <p className="font-sans text-sm text-muted">{role.scope}</p>
-                  )}
-                  <p className="font-mono text-xs text-muted">{role.period}</p>
+                  <p className="text-ink-2">{role.company}</p>
+                  {role.scope && <p className="text-ink-2">{role.scope}</p>}
+                  <p className={`${labelClass} text-mark`}>{role.period}</p>
                 </div>
-                <ul className="space-y-2" role="list">
+                <ul className="dash-list grid gap-2 pl-5" role="list">
                   {role.highlights.map((h, i) => (
-                    <li
-                      key={i}
-                      className="font-sans text-sm text-muted leading-relaxed flex gap-2"
-                    >
-                      <span
-                        className="text-secondary shrink-0 mt-0.5"
-                        aria-hidden="true"
-                      >
-                        ·
-                      </span>
-                      {h}
-                    </li>
+                    <li key={i}>{h}</li>
                   ))}
                 </ul>
               </li>
@@ -164,24 +148,21 @@ export default function AboutPage() {
         </div>
 
         {/* Sidebar */}
-        <aside className="space-y-12">
+        <div className="grid content-start gap-12">
           {/* Competencies */}
-          <section aria-labelledby="competencies-heading">
-            <h2
-              id="competencies-heading"
-              className="font-display font-semibold text-lg text-primary mb-4"
-            >
+          <section
+            aria-labelledby="competencies-heading"
+            className="border-t border-ink pt-4"
+          >
+            <h2 id="competencies-heading" className={sideHeadingClass}>
               Core competencies
             </h2>
-            <ul className="space-y-2" role="list">
+            <ul className="flex flex-wrap gap-1.5" role="list">
               {competencies.map((c) => (
                 <li
                   key={c}
-                  className="font-sans text-sm text-muted flex items-start gap-2"
+                  className="rounded-xs border border-rule-strong px-2 font-mono text-sm"
                 >
-                  <span className="text-secondary shrink-0" aria-hidden="true">
-                    ·
-                  </span>
                   {c}
                 </li>
               ))}
@@ -189,58 +170,55 @@ export default function AboutPage() {
           </section>
 
           {/* Education */}
-          <section aria-labelledby="education-heading">
-            <h2
-              id="education-heading"
-              className="font-display font-semibold text-lg text-primary mb-4"
-            >
+          <section
+            aria-labelledby="education-heading"
+            className="border-t border-ink pt-4"
+          >
+            <h2 id="education-heading" className={sideHeadingClass}>
               Education & certifications
             </h2>
-            <ul className="space-y-4" role="list">
-              <li className="font-sans text-sm text-muted">
-                <p className="font-medium text-primary text-sm">
+            <ul className="grid gap-4" role="list">
+              <li>
+                <p className="font-semibold">
                   Nielsen Norman Group UX Certification
                 </p>
-                <p>Interaction Design Specialty</p>
+                <p className="text-ink-2">Interaction Design Specialty</p>
               </li>
-              <li className="font-sans text-sm text-muted">
-                <p className="font-medium text-primary text-sm">
+              <li>
+                <p className="font-semibold">
                   Virginia Commonwealth University
                 </p>
-                <p>BFA, Cum Laude · Communication Arts & Design</p>
-              </li>
-              <li className="font-sans text-sm text-muted">
-                <p className="font-medium text-primary text-sm">
-                  Rhode Island School of Design
+                <p className="text-ink-2">
+                  BFA, Cum Laude · Communication Arts & Design
                 </p>
-                <p>Coursework</p>
+              </li>
+              <li>
+                <p className="font-semibold">Rhode Island School of Design</p>
+                <p className="text-ink-2">Coursework</p>
               </li>
             </ul>
           </section>
 
           {/* Contact */}
-          <section aria-labelledby="contact-heading">
-            <h2
-              id="contact-heading"
-              className="font-display font-semibold text-lg text-primary mb-4"
-            >
+          <section
+            aria-labelledby="contact-heading"
+            className="border-t border-ink pt-4"
+          >
+            <h2 id="contact-heading" className={sideHeadingClass}>
               Contact
             </h2>
-            <Link
-              href="/contact"
-              className="font-sans text-sm text-secondary hover:underline"
-            >
+            <Link href="/contact" className="inline-flex min-h-11 items-center gap-1">
               Send me a message<span aria-hidden="true"> →</span>
             </Link>
           </section>
-        </aside>
+        </div>
       </div>
 
       {/* Back to work */}
-      <div className="mt-16 pt-12 border-t border-border">
+      <div className="mt-16 pt-10 border-t border-rule">
         <Link
           href="/portfolio"
-          className="font-sans text-sm font-medium text-secondary hover:underline"
+          className="inline-flex min-h-11 items-center gap-1 font-semibold"
         >
           <span aria-hidden="true">← </span>View my work
         </Link>

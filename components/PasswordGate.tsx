@@ -88,7 +88,7 @@ export default function PasswordGate({
   if (isAuthenticated === null) {
     return (
       <noscript>
-        <p className="font-sans text-base text-body p-6">
+        <p className="p-6">
           This portfolio needs JavaScript. Please enable it and reload the page.
         </p>
       </noscript>
@@ -96,30 +96,30 @@ export default function PasswordGate({
   }
 
   return (
-    <main className="min-h-screen bg-surface px-6 py-16 flex items-center justify-center">
+    <main className="min-h-screen px-4 py-16 flex items-center justify-center">
       <section
         aria-labelledby="password-gate-title"
-        className="w-full max-w-md border border-border rounded-lg bg-paper p-8 sm:p-10"
+        className="w-full max-w-md border border-rule-strong border-t-ink border-t-2 p-6 sm:p-10"
       >
-        <p className="font-mono text-xs text-muted uppercase tracking-widest mb-3">
+        <p className="font-mono text-sm tracking-[0.02em] text-ink-2 mb-3">
           Melissa Garland · UX Principal
         </p>
         <h1
           id="password-gate-title"
-          className="font-display font-bold text-3xl text-primary tracking-tight"
+          className="text-2xl font-extrabold tracking-[-0.02em]"
         >
           Private portfolio
         </h1>
-        <p className="font-sans text-base text-muted leading-relaxed mt-3 mb-8">
+        <p className="text-ink-2 mt-3 mb-8">
           Enter the password to view this portfolio.
         </p>
 
         {configuredPassword ? (
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="grid gap-5">
             <div>
               <label
                 htmlFor="portfolio-password"
-                className="block font-sans text-sm font-medium text-primary mb-2"
+                className="block font-semibold mb-2"
               >
                 Password
               </label>
@@ -136,13 +136,13 @@ export default function PasswordGate({
                 }}
                 aria-invalid={hasError}
                 aria-describedby={hasError ? "password-error" : undefined}
-                className="w-full rounded-md border border-border-strong bg-surface px-3 py-2.5 font-sans text-base text-primary"
+                className="w-full min-h-11 rounded-xs border border-rule-strong bg-paper px-3 py-2 text-ink"
               />
               {hasError && (
                 <p
                   id="password-error"
                   role="alert"
-                  className="font-sans text-sm text-danger mt-2"
+                  className="text-sm text-danger mt-2"
                 >
                   That password wasn’t correct. Please try again.
                 </p>
@@ -150,13 +150,13 @@ export default function PasswordGate({
             </div>
             <button
               type="submit"
-              className="w-full rounded-md bg-primary px-4 py-3 font-sans text-sm font-medium text-surface hover:bg-secondary transition-colors"
+              className="w-full min-h-11 rounded-xs bg-ink px-4 py-2 font-semibold text-paper hover:bg-mark"
             >
               View portfolio
             </button>
           </form>
         ) : (
-          <p role="alert" className="font-sans text-sm text-danger">
+          <p role="alert" className="text-sm text-danger">
             Password protection hasn’t been configured for this site.
           </p>
         )}

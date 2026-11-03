@@ -1,45 +1,221 @@
 @import "tailwindcss";
 
+/* Direction A · Handoff. Every color pair, with its measured ratio, is
+   listed in design-directions/palettes.mjs; re-measure there if one changes.
+   Defaults are cleared so only measured colors and the type scale exist. */
 @theme {
-  /* Paper Design Tokens */
-  --color-primary: #111111;
-  --color-secondary: #0B6BCB;
+  --color-*: initial;
+  --color-paper: #ffffff;       /* page */
+  --color-ink: #15171c;         /* text, 17.9:1 on paper */
+  --color-ink-2: #4b5160;       /* secondary text, 7.9:1 on paper, 7.3:1 on panel */
+  --color-panel: #f4f5f7;       /* spec panels, row hover */
+  --color-rule: #d5d8de;        /* decorative rules only */
+  --color-rule-strong: #737985; /* boundaries that need 3:1 (4.4:1) */
+  --color-mark: #9e1459;        /* links, labels, focus (7.8:1 on paper) */
+  --color-mark-wash: #fceef5;   /* chip fill; mark text on it is 6.9:1 */
+  --color-guide: #f0f1f4;       /* hero column guides, decorative */
+  /* Contact form status only. 5.0:1 and 4.8:1 on paper. */
   --color-success: #15803d;
-  --color-warning: #b45309;
   --color-danger: #dc2626;
-  --color-surface: #ffffff;
-  --color-paper: #fafaf8;
-  --color-body: #111827;
-  --color-muted: #6b7280;
-  /* Decorative rules and image frames. Interactive boundaries that need
-     3:1 contrast keep --color-border. */
-  --color-divider: #e5e7eb;
-  --color-border: #9ca3af;
-  --color-border-strong: #6b7280;
 
-  /* Typography — Paper skill: Roboto body, Montserrat display, PT Mono */
-  --font-display: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
-  --font-sans: var(--font-roboto), "Roboto", system-ui, sans-serif;
-  --font-mono: var(--font-pt-mono), "PT Mono", ui-monospace, monospace;
+  --font-*: initial;
+  --font-sans: var(--font-public-sans), "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Major-third scale on a 17px body. Mono labels never go below sm. */
+  --text-*: initial;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.3125rem;
+  --text-lg--line-height: 1.4;
+  --text-xl: 1.625rem;
+  --text-xl--line-height: 1.2;
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+  --text-2xl--line-height: 1.15;
+  --text-3xl: clamp(2.25rem, 1.5rem + 3.6vw, 4rem);
+  --text-3xl--line-height: 1.05;
 }
 
-body {
-  background-color: var(--color-surface);
-  color: var(--color-body);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --gutter: max(1rem, min(4vw, 2.5rem));
+  /* The three-band focus ring from the design-system case study, in this
+     site's colors. From the inside out: paper, mark, mark-wash. The mark
+     band is at least 6.9:1 against paper, panel and mark-wash; on a dark
+     surface such as the ink button, the paper band is 17.9:1. */
+  --ring: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-mark),
+    0 0 0 7px var(--color-mark-wash);
+  /* Links inside a sentence drop the outer band, which would cover the
+     neighboring words and lines. Prose only sits on paper or panel, where
+     the mark band alone is at least 7.1:1. */
+  --ring-inline: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-mark);
 }
 
-/* WCAG 2.4.11 — keep focused elements and anchor targets clear of the
-   sticky header (64px) when the browser scrolls them into view. */
-html {
-  scroll-padding-top: 5rem;
+/* Sticky header and outline only when the window can spare the room, so
+   they never cover content when zoomed. */
+@custom-variant tall-sm (@media (min-width: 40rem) and (min-height: 30rem));
+@custom-variant tall-lg (@media (min-width: 64rem) and (min-height: 40rem));
+
+@utility wrap {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-/* WCAG 2.2 AA — globally visible focus ring */
-:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 2px;
-  border-radius: 2px;
+@layer base {
+  html {
+    /* WCAG 2.4.11: keep focused elements and anchor targets, ring
+       included, clear of the 4rem sticky header. */
+    scroll-padding-top: 5rem;
+    /* Room for the 7px focus ring when the browser scrolls a focused
+       element up from the bottom edge. */
+    scroll-padding-bottom: 1rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  a {
+    color: var(--color-mark);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+  a:hover {
+    text-decoration-thickness: 3px;
+  }
+
+  /* The transparent outline shows only in forced-colors mode, where the
+     box-shadow ring is removed. Browsers match :focus-visible for keyboard
+     focus, not for mouse clicks (text fields excepted). */
+  :focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--ring);
+  }
+
+  /* In this codebase a link without a class is one inside running text. */
+  :where(p, li, dd) > a:not([class]):focus-visible {
+    box-shadow: var(--ring-inline);
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline-color: CanvasText;
+    }
+  }
+}
+
+@layer components {
+  /* Faint 12-column guides behind the home page hero. */
+  .column-guides {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-guide) 0 1px,
+        transparent 1px calc(100% / 12)
+      )
+      content-box;
+  }
+
+  /* A link whose ::after covers its whole row or card. The ring goes
+     around the row; where :has() isn't supported, the link keeps its own
+     ring and the row still tints. */
+  /* Scrolling a focused title into view brings the rest of its row, and
+     the ring around it, along. */
+  .stretched-link {
+    scroll-margin-bottom: 12rem;
+  }
+  .stretched-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  @supports selector(:has(*)) {
+    .stretched-link:focus-visible {
+      box-shadow: none;
+    }
+    .link-row:has(.stretched-link:focus-visible) {
+      box-shadow: var(--ring);
+    }
+    @media (forced-colors: active) {
+      .link-row:has(.stretched-link:focus-visible) {
+        outline: 2px solid CanvasText;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  /* Crop marks at the four corners of a work-row drawing. */
+  .crop-marks {
+    --c: var(--color-rule-strong);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--c), var(--c)) left 0 top 0 / 10px 1px no-repeat,
+      linear-gradient(var(--c), var(--c)) left 0 top 0 / 1px 10px no-repeat,
+      linear-gradient(var(--c), var(--c)) right 0 top 0 / 10px 1px no-repeat,
+      linear-gradient(var(--c), var(--c)) right 0 top 0 / 1px 10px no-repeat,
+      linear-gradient(var(--c), var(--c)) left 0 bottom 0 / 10px 1px no-repeat,
+      linear-gradient(var(--c), var(--c)) left 0 bottom 0 / 1px 10px no-repeat,
+      linear-gradient(var(--c), var(--c)) right 0 bottom 0 / 10px 1px no-repeat,
+      linear-gradient(var(--c), var(--c)) right 0 bottom 0 / 1px 10px no-repeat;
+  }
+  .link-row:hover .crop-marks,
+  .link-row:focus-within .crop-marks {
+    --c: var(--color-mark);
+  }
+
+  /* Line drawings: one stroke width at any size. */
+  .line-drawing * {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1px;
+  }
+  .line-drawing .stroke-line {
+    stroke-width: 1.5px;
+  }
+
+  .dash-list li::marker {
+    content: "– ";
+    color: var(--color-mark);
+  }
+
+  /* An opening quote mark with empty alt text, so it isn't read aloud. */
+  .quote-mark::before {
+    content: "“" / "";
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--color-mark);
+  }
+}
+
+/* WCAG 2.3.3 and user preference: nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

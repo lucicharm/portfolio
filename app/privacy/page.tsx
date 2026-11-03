@@ -7,24 +7,23 @@ export const metadata: Metadata = {
     "How this portfolio handles analytics, the password gate, the contact form, and hosting on GitHub Pages.",
 };
 
-const linkClass =
-  "text-secondary underline underline-offset-2 hover:text-primary";
-const headingClass = "font-display font-semibold text-2xl text-primary mb-3";
+const headingClass =
+  "text-xl font-extrabold tracking-[-0.015em] pb-3 mb-4 border-b border-rule";
 
 export default function PrivacyPage() {
   return (
-    <article className="max-w-3xl mx-auto px-6 py-16">
-      <header className="mb-10">
-        <p className="font-mono text-sm text-muted mb-3">Privacy</p>
-        <h1 className="font-display font-bold text-4xl text-primary mb-4 leading-tight">
+    <article className="wrap py-16">
+      <header className="mb-12 grid max-w-[44rem] grid-cols-[minmax(0,1fr)] gap-5">
+        <p className="font-mono text-sm tracking-[0.02em] text-ink-2">Privacy</p>
+        <h1 className="text-3xl font-extrabold leading-[1.08] tracking-[-0.03em]">
           Privacy notice
         </h1>
-        <p className="font-sans text-sm text-muted">
+        <p className="font-mono text-sm tracking-[0.02em] text-ink-2">
           Last updated October 30, 2026
         </p>
       </header>
 
-      <div className="space-y-10 font-sans text-base leading-relaxed text-body">
+      <div className="grid max-w-[44rem] grid-cols-[minmax(0,1fr)] gap-12">
         <section aria-labelledby="who-heading">
           <h2 id="who-heading" className={headingClass}>
             Who runs this site
@@ -32,15 +31,9 @@ export default function PrivacyPage() {
           <p>
             This portfolio is run by Melissa Garland. For questions about this
             notice or your data, use the{" "}
-            <Link href="/contact" className={linkClass}>
-              contact form
-            </Link>{" "}
+            <Link href="/contact">contact form</Link>{" "}
             or message me on{" "}
-            <a
-              href="https://www.linkedin.com/in/magarland/"
-              rel="me"
-              className={linkClass}
-            >
+            <a href="https://www.linkedin.com/in/magarland/" rel="me">
               LinkedIn
             </a>
             .
@@ -58,10 +51,7 @@ export default function PrivacyPage() {
             system, and screen size. GoatCounter doesn&apos;t use cookies and
             doesn&apos;t store IP addresses or anything else that identifies
             you. See{" "}
-            <a
-              href="https://www.goatcounter.com/help/privacy"
-              className={linkClass}
-            >
+            <a href="https://www.goatcounter.com/help/privacy">
               GoatCounter&apos;s privacy policy
             </a>
             .
@@ -90,10 +80,7 @@ export default function PrivacyPage() {
             sent through Formspree and delivered to my email so I can respond.
             I keep messages only as long as needed to reply and follow up, and
             I&apos;ll delete them if you ask. See{" "}
-            <a
-              href="https://formspree.io/legal/privacy-policy/"
-              className={linkClass}
-            >
+            <a href="https://formspree.io/legal/privacy-policy/">
               Formspree&apos;s privacy policy
             </a>
             .
@@ -107,10 +94,7 @@ export default function PrivacyPage() {
           <p>
             This site is hosted on GitHub Pages. GitHub may log visitors&apos;
             IP addresses for security, as described in the{" "}
-            <a
-              href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-              className={linkClass}
-            >
+            <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
               GitHub General Privacy Statement
             </a>
             . I don&apos;t have access to those logs. Fonts are served from
@@ -126,15 +110,13 @@ export default function PrivacyPage() {
             Depending on where you live, you may have the right to access,
             correct, or delete personal data I hold about you, or to object to
             how it&apos;s used. To make a request,{" "}
-            <Link href="/contact" className={linkClass}>
-              get in touch
-            </Link>
+            <Link href="/contact">get in touch</Link>
             . You can also complain to your local data protection authority.
           </p>
         </section>
 
         <p>
-          <Link href="/portfolio" className={linkClass}>
+          <Link href="/portfolio" className="inline-flex min-h-11 items-center">
             Return to the portfolio
           </Link>
         </p>
