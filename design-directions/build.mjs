@@ -303,4 +303,5 @@ await writeFile(path.join(OUT, "index.html"), shellHtml);
 console.log(`Wrote ${files.length + 1} files to ${OUT}`);
 const fails = results.filter((r) => !r.pass);
 console.log(fails.length ? `Contrast failures: ${fails.length}` : `All ${results.length} contrast pairs pass.`);
+if (fails.length) process.exitCode = 1;
 await writeFile(path.join(OUT, "files.json"), JSON.stringify(files, null, 2));
