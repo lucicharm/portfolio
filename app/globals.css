@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
-/* Direction A · Handoff. Every color pair, with its measured ratio, is
-   listed in design-directions/palettes.mjs; re-measure there if one changes.
-   Defaults are cleared so only measured colors and the type scale exist. */
+/* Live site palette. Actual text, border, button, and focus-ring pairs are
+   checked by design-directions/tools/site-contrast.mjs. */
 @theme {
   --color-*: initial;
-  --color-paper: #ffffff;       /* page */
-  --color-ink: #15171c;         /* text, 17.9:1 on paper */
-  --color-ink-2: #4b5160;       /* secondary text, 7.9:1 on paper, 7.3:1 on panel */
-  --color-panel: #f4f5f7;       /* spec panels, row hover */
-  --color-rule: #d5d8de;        /* decorative rules only */
-  --color-rule-strong: #737985; /* boundaries that need 3:1 (4.4:1) */
-  --color-mark: #9e1459;        /* links, labels, focus (7.8:1 on paper) */
-  --color-mark-wash: #fceef5;   /* chip fill; mark text on it is 6.9:1 */
-  --color-guide: #f0f1f4;       /* hero column guides, decorative */
-  /* Contact form status only. 5.0:1 and 4.8:1 on paper. */
-  --color-success: #15803d;
-  --color-danger: #dc2626;
+  --color-paper: #FEFDFC;       /* page, warm off-white */
+  --color-ink: #0b2942;         /* text, 14.66:1 on paper, 14.01:1 on panel */
+  --color-ink-2: #1F3F73;       /* secondary text: 10.25:1 paper, 9.80:1 panel, 10.07:1 guide */
+  --color-panel: #f8f8f7;       /* spec panels, row hover */
+  --color-rule: #e6e8e9;        /* decorative rules only */
+  --color-rule-strong: #4c7086; /* boundaries: 5.21:1 on paper, 4.98:1 on panel */
+  --color-mark: #256F9D;        /* links, labels, focus: 5.38:1 paper, 5.15:1 panel, 5.29:1 guide */
+  --color-mark-wash: #f0f5f5;   /* chip fill; mark text on it is 4.97:1 */
+  --color-guide: #fcfbfa;       /* hero column guides, decorative */
+  /* Contact form status only. Success is teal-leaning to stay in the
+     family; danger stays a plain warm red so an error never reads as the
+     brand accent. Contrast on paper: 5.39:1 and 5.66:1. */
+  --color-success: #0f766e;
+  --color-danger: #c62222;
 
   --font-*: initial;
   --font-sans: var(--font-public-sans), "Public Sans", "Helvetica Neue", Arial, sans-serif;
@@ -42,13 +43,13 @@
   --gutter: max(1rem, min(4vw, 2.5rem));
   /* The three-band focus ring from the design-system case study, in this
      site's colors. From the inside out: paper, mark, mark-wash. The mark
-     band is at least 6.9:1 against paper, panel and mark-wash; on a dark
-     surface such as the ink button, the paper band is 17.9:1. */
+     band is at least 4.97:1 against paper, panel and mark-wash; on a dark
+     surface such as the ink button, the paper band is 14.66:1. */
   --ring: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-mark),
     0 0 0 7px var(--color-mark-wash);
   /* Links inside a sentence drop the outer band, which would cover the
      neighboring words and lines. Prose only sits on paper or panel, where
-     the mark band alone is at least 7.1:1. */
+     the mark band alone clears at least 5.15:1. */
   --ring-inline: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-mark);
 }
 

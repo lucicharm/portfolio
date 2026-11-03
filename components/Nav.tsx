@@ -71,7 +71,7 @@ export default function Nav() {
                 <Link
                   href={href}
                   aria-current={isActive ? "page" : undefined}
-                  className="inline-flex items-center min-h-11 px-3 font-mono text-sm text-ink no-underline hover:underline hover:decoration-3 hover:decoration-mark aria-[current=page]:text-mark aria-[current=page]:border-b-3 aria-[current=page]:border-mark aria-[current=page]:pt-[3px]"
+                  className="inline-flex items-center min-h-11 px-3 font-mono text-sm text-ink no-underline border-b-3 border-transparent pt-[3px] hover:border-mark aria-[current=page]:text-mark aria-[current=page]:border-mark"
                 >
                   {label}
                 </Link>
@@ -125,7 +125,7 @@ export default function Nav() {
                     href={href}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setOpen(false)}
-                    className="inline-flex items-center min-h-11 px-1 font-mono text-base text-ink no-underline hover:underline hover:decoration-3 hover:decoration-mark aria-[current=page]:text-mark aria-[current=page]:border-b-3 aria-[current=page]:border-mark aria-[current=page]:pt-[3px]"
+                    className="inline-flex items-center min-h-11 px-1 font-mono text-base text-ink no-underline border-b-3 border-transparent pt-[3px] hover:border-mark aria-[current=page]:text-mark aria-[current=page]:border-mark"
                   >
                     {label}
                   </Link>
