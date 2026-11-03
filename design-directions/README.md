@@ -42,6 +42,25 @@ node shell.mjs "$PWD/../out" "$PWD/../out/shots"   # comparison page, light and 
 `/Applications/Google Chrome.app`. `palettes.mjs` holds every color pair
 each direction uses; the build fails loudly if one drops below AA.
 
+## Testing the Next site
+
+The `site-*.mjs` scripts in `tools/` run the same kinds of checks against the
+built site. Serve `out/` under `/portfolio` first (as GitHub Pages does); the
+scripts set PasswordGate's localStorage flag before each page loads.
+
+```sh
+npm run build                                        # in the repo root
+cd design-directions/tools
+node site-test.mjs http://localhost:4321/portfolio <shots dir>       # axe, ring on every Tab stop, header occlusion, clicks, forced colors, reflow, motion
+node site-behavior.mjs http://localhost:4321/portfolio               # gate, menu + Escape, aria-current, basePath, figures, prev/next, drafts
+node --no-warnings site-contrast.mjs                                 # every color pair, read from app/globals.css
+node site-ring-shots.mjs http://localhost:4321/portfolio <shots dir> # ring close-ups, normal and forced colors
+node site-shot.mjs http://localhost:4321/portfolio <shots dir> 1280 /:home
+```
+
+`site-behavior.mjs` reads `NEXT_PUBLIC_PASSWORD` from `.env.local` to test
+unlocking; it never prints it.
+
 ## Lessons from the first pass
 
 - Single-column CSS grids need `grid-template-columns: minmax(0, 1fr)`, or a

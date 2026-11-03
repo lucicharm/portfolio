@@ -23,53 +23,47 @@ export default function ProjectNav({ slug }: { slug: string }) {
 
   if (!prev && !next && !parent) return null;
 
+  const cellClass =
+    "grid content-start gap-1 border border-rule-strong p-4 text-ink no-underline hover:border-mark hover:bg-panel";
+  const dirClass = "font-mono text-sm tracking-[0.02em] text-mark";
+
   return (
-    <nav
-      aria-label="Project navigation"
-      className="max-w-5xl mx-auto px-6 py-12 border-t border-border"
-    >
-      {parent && (
-        <p className="font-sans text-sm text-muted mb-8">
-          Appendix to{" "}
-          <Link
-            href={`/work/${parent.slug}`}
-            className="font-medium text-secondary underline underline-offset-4"
-          >
-            {parent.title.split(":")[0]}
-          </Link>
-        </p>
-      )}
-      <div className="flex flex-col sm:flex-row justify-between gap-6">
-        {prev ? (
-          <Link
-            href={`/work/${prev.slug}`}
-            className="flex flex-col gap-1 group max-w-xs"
-          >
-            <span className="font-sans text-xs text-muted">
-              <span aria-hidden="true">← </span>Previous
-              <span className="sr-only"> project:</span>
-            </span>
-            <span className="font-display font-semibold text-primary group-hover:text-secondary transition-colors">
-              {shortTitle(prev.title)}
-            </span>
-          </Link>
-        ) : (
-          <div />
+    <nav aria-label="Project navigation" className="border-t border-ink py-10">
+      <div className="wrap">
+        {parent && (
+          <p className="mb-6 text-ink-2">
+            Appendix to{" "}
+            <Link href={`/work/${parent.slug}`}>
+              {parent.title.split(":")[0]}
+            </Link>
+          </p>
         )}
-        {next && (
-          <Link
-            href={`/work/${next.slug}`}
-            className="flex flex-col gap-1 group max-w-xs sm:text-right"
-          >
-            <span className="font-sans text-xs text-muted">
-              Next<span className="sr-only"> project:</span>
-              <span aria-hidden="true"> →</span>
-            </span>
-            <span className="font-display font-semibold text-primary group-hover:text-secondary transition-colors">
-              {shortTitle(next.title)}
-            </span>
-          </Link>
-        )}
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">
+          {prev ? (
+            <Link href={`/work/${prev.slug}`} className={cellClass}>
+              <span className={dirClass}>
+                <span aria-hidden="true">← </span>Previous
+                <span className="sr-only"> project:</span>
+              </span>
+              <span className="font-semibold">{shortTitle(prev.title)}</span>
+            </Link>
+          ) : (
+            // Keeps Next in the right-hand cell on wide screens.
+            <div className="hidden sm:block" />
+          )}
+          {next && (
+            <Link
+              href={`/work/${next.slug}`}
+              className={`${cellClass} sm:text-right`}
+            >
+              <span className={dirClass}>
+                Next<span className="sr-only"> project:</span>
+                <span aria-hidden="true"> →</span>
+              </span>
+              <span className="font-semibold">{shortTitle(next.title)}</span>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

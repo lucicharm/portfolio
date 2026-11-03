@@ -11,6 +11,8 @@ type Props = {
   // instead of being cropped to `aspect`, and links to the full-size file.
   width?: number;
   height?: number;
+  // Shown as "Fig. n" before the caption.
+  number?: number;
 };
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -19,8 +21,6 @@ function withBasePath(src: string) {
   return src.startsWith("/") ? `${basePath}${src}` : src;
 }
 
-// Captions use #4b5563 rather than text-muted: they also sit on tinted
-// section backgrounds, where text-muted drops below 4.5:1.
 const aspectClass: Record<ImageAspect, string> = {
   wide: "aspect-video",      // 16:9  — screenshots, dashboards, flow diagrams
   standard: "aspect-[4/3]",  // 4:3   — general UI, wireframes
@@ -34,30 +34,32 @@ export default function ProjectImage({
   aspect = "wide",
   width,
   height,
+  number,
 }: Props) {
+  // ink-2 captions stay above 4.5:1 on paper and on panel sections.
+  const figcaption = caption && (
+    <figcaption className="text-sm leading-normal text-ink-2">
+      <FigureNumber number={number} />
+      {caption}
+    </figcaption>
+  );
+
   if (src && width && height) {
     const fullSrc = withBasePath(src);
     return (
-      <figure className="my-2">
+      <figure className="grid grid-cols-[minmax(0,1fr)] gap-2">
         <Image
           src={fullSrc}
           alt={alt}
           width={width}
           height={height}
-          className="w-full h-auto rounded-lg border border-border"
-          sizes="(max-width: 768px) 100vw, 672px"
+          className="w-full h-auto border border-rule-strong"
+          sizes="(max-width: 768px) 100vw, 704px"
         />
-        {caption && (
-          <figcaption className="font-sans text-sm text-[#4b5563] mt-2 leading-relaxed">
-            {caption}
-          </figcaption>
-        )}
+        {figcaption}
         {/* Screenshots of text shrink at column width; offer the original. */}
         <p>
-          <a
-            href={fullSrc}
-            className="inline-block py-1 font-sans text-sm text-secondary underline underline-offset-2 hover:text-primary"
-          >
+          <a href={fullSrc} className="inline-block py-1 font-mono text-sm">
             View full-size image
             <span className="sr-only">: {caption ?? alt}</span>
           </a>
@@ -67,15 +69,15 @@ export default function ProjectImage({
   }
 
   return (
-    <figure className="my-2">
-      <div className={`relative w-full ${aspectClass[aspect]} rounded-lg overflow-hidden`}>
+    <figure className="grid grid-cols-[minmax(0,1fr)] gap-2">
+      <div className={`relative w-full ${aspectClass[aspect]} overflow-hidden`}>
         {src ? (
           <Image
             src={withBasePath(src)}
             alt={alt}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 672px"
+            sizes="(max-width: 768px) 100vw, 704px"
           />
         ) : (
           /* ── Placeholder ──────────────────────────────────────────────────
@@ -83,7 +85,7 @@ export default function ProjectImage({
              or an external URL. Remove this comment block when done.
           ─────────────────────────────────────────────────────────────────── */
           <div
-            className="absolute inset-0 bg-paper border-2 border-dashed border-border-strong rounded-lg flex flex-col items-center justify-center gap-3 p-6"
+            className="absolute inset-0 bg-panel border border-dashed border-rule-strong flex flex-col items-center justify-center gap-3 p-6"
             aria-label={`Image placeholder: ${alt}`}
             role="img"
           >
@@ -96,23 +98,31 @@ export default function ProjectImage({
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-border-strong"
+              className="text-rule-strong"
               aria-hidden="true"
             >
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
               <circle cx="12" cy="13" r="4" />
             </svg>
-            <p className="font-mono text-xs text-muted text-center leading-relaxed max-w-xs">
+            <p className="text-sm text-ink-2 text-center leading-normal max-w-xs">
               {alt}
             </p>
           </div>
         )}
       </div>
-      {caption && (
-        <figcaption className="font-sans text-sm text-[#4b5563] mt-2 leading-relaxed">
-          {caption}
-        </figcaption>
-      )}
+      {figcaption}
     </figure>
+  );
+}
+
+// "Fig. n" label shared by images and the interactive figures.
+export function FigureNumber({ number }: { number?: number }) {
+  if (!number) return null;
+  return (
+    <>
+      <span className="mr-1 font-mono tracking-[0.02em] text-mark">
+        Fig. {number}
+      </span>{" "}
+    </>
   );
 }

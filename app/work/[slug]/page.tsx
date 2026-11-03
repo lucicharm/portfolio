@@ -13,7 +13,10 @@ import {
   PairingRules,
 } from "@/components/TokenFigures";
 
-const figures = {
+const figures: Record<
+  Extract<Block, { type: "figure" }>["name"],
+  React.ComponentType<{ number?: number }>
+> = {
   "token-diagram": TokenDiagram,
   "contrast-checks": ContrastChecks,
   "focus-rings": FocusRingSamples,
@@ -60,28 +63,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function renderBlock(block: Block, idx: number) {
+// Figures are numbered in reading order. Only figures with a caption get a
+// number, so the visible sequence has no gaps.
+type FigureCounter = { next: () => number };
+
+function figureCounter(): FigureCounter {
+  let n = 0;
+  return { next: () => ++n };
+}
+
+function renderBlock(block: Block, idx: number, figs: FigureCounter) {
   switch (block.type) {
     case "paragraph":
-      return (
-        <p key={idx} className="font-sans text-base text-body leading-relaxed">
-          {block.text}
-        </p>
-      );
+      return <p key={idx}>{block.text}</p>;
 
     case "list":
       return (
-        <ul key={idx} className="space-y-2" role="list">
+        <ul key={idx} className="dash-list grid gap-2 pl-5" role="list">
           {block.items.map((item, i) => (
-            <li
-              key={i}
-              className="font-sans text-base text-body leading-relaxed flex gap-3"
-            >
-              <span className="text-secondary mt-1 shrink-0" aria-hidden="true">
-                ·
-              </span>
-              {item}
-            </li>
+            <li key={i}>{item}</li>
           ))}
         </ul>
       );
@@ -90,64 +90,62 @@ function renderBlock(block: Block, idx: number) {
       return (
         <blockquote
           key={idx}
-          className="border-l-2 border-secondary pl-5 py-1 bg-paper rounded-r-md"
+          className="quote-mark border border-rule-strong p-6"
         >
-          <p className="font-sans text-base text-body leading-relaxed italic">
-            {block.text}
-          </p>
+          <p className="text-lg leading-normal">{block.text}</p>
         </blockquote>
       );
 
     case "metrics":
       return (
-        <dl key={idx} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <ul
+          key={idx}
+          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,14rem),1fr))] border-t border-ink"
+          role="list"
+        >
           {block.items.map((metric, i) => (
-            <div
+            <li
               key={i}
-              className="border border-border rounded-lg p-6 bg-paper flex flex-col gap-1"
+              className="grid content-start gap-1 border-b border-rule py-4 pr-4"
             >
-              <dt className="sr-only">{metric.label}</dt>
-              <dd>
-                <span className="font-display font-bold text-4xl text-secondary">
-                  {metric.value}
-                </span>
-                <p className="font-sans text-sm font-medium text-primary mt-1">
-                  {metric.label}
-                </p>
-                {metric.note && (
-                  <p className="font-sans text-xs text-muted mt-1 leading-relaxed">
-                    {metric.note}
-                  </p>
-                )}
-              </dd>
-            </div>
+              <p className="text-2xl font-extrabold tabular-nums text-mark">
+                {metric.value}
+              </p>
+              <p className="font-semibold">{metric.label}</p>
+              {metric.note && (
+                <p className="text-sm text-ink-2">{metric.note}</p>
+              )}
+            </li>
           ))}
-        </dl>
+        </ul>
       );
 
     case "stages":
       return (
-        <ol key={idx} className="relative border-l-2 border-border ml-3" role="list">
+        <ol key={idx} className="ml-3 grid border-l border-ink" role="list">
           {block.items.map((stage, i) => (
-            <li key={stage.title} className="relative pl-8 pb-8 last:pb-0">
+            <li
+              key={stage.title}
+              className="grid grid-cols-[2.5rem_minmax(0,1fr)] pb-7 last:pb-0"
+            >
               <span
-                className="absolute -left-[15px] top-0 flex h-7 w-7 items-center justify-center rounded-full bg-secondary font-mono text-sm text-surface"
+                className="-ml-3 grid size-6 place-items-center border border-mark bg-paper font-mono text-sm text-mark"
                 aria-hidden="true"
               >
                 {i + 1}
               </span>
-              {stage.when && (
-                <p className="font-mono text-sm text-[#4b5563] mb-1">
-                  {stage.when}
-                </p>
-              )}
-              <h3 className="font-display font-semibold text-lg text-primary leading-snug">
-                <span className="sr-only">Stage {i + 1}: </span>
-                {stage.title}
-              </h3>
-              <p className="font-sans text-base text-body leading-relaxed mt-1">
-                {stage.text}
-              </p>
+              <div className="grid grid-cols-[minmax(0,1fr)] gap-1">
+                {stage.when && (
+                  <p className="font-mono text-sm tracking-[0.02em] text-ink-2">
+                    {stage.when}
+                  </p>
+                )}
+                <h3 className="text-lg font-semibold">
+                  <span className="sr-only">Stage {i + 1}: </span>
+                  {stage.title}
+                </h3>
+                <p>{stage.text}</p>
+              </div>
             </li>
           ))}
         </ol>
@@ -155,27 +153,28 @@ function renderBlock(block: Block, idx: number) {
 
     case "links":
       return (
-        <ul key={idx} className="grid grid-cols-1 sm:grid-cols-2 gap-6" role="list">
+        <ul
+          key={idx}
+          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))] gap-4"
+          role="list"
+        >
           {block.items.map((link) => (
             <li
               key={link.href}
-              className="relative border border-border rounded-lg p-6 bg-paper hover:border-secondary transition-colors flex flex-col gap-2"
+              className="link-row relative grid content-start gap-2 border border-rule-strong p-5 hover:border-mark hover:bg-panel focus-within:border-mark focus-within:bg-panel"
             >
               {link.eyebrow && (
-                <p className="font-mono text-sm text-[#4b5563]">{link.eyebrow}</p>
+                <p className="font-mono text-sm tracking-[0.02em] text-ink-2">
+                  {link.eyebrow}
+                </p>
               )}
-              <h3 className="font-display font-semibold text-lg text-primary">
+              <h3 className="text-lg font-semibold">
                 {/* The stretched link makes the whole card clickable. */}
-                <Link
-                  href={link.href}
-                  className="underline decoration-1 underline-offset-4 hover:text-secondary after:absolute after:inset-0"
-                >
+                <Link href={link.href} className="stretched-link">
                   {link.title}
                 </Link>
               </h3>
-              <p className="font-sans text-base text-body leading-relaxed">
-                {link.text}
-              </p>
+              <p>{link.text}</p>
             </li>
           ))}
         </ul>
@@ -183,7 +182,7 @@ function renderBlock(block: Block, idx: number) {
 
     case "figure": {
       const Figure = figures[block.name];
-      return <Figure key={idx} />;
+      return <Figure key={idx} number={figs.next()} />;
     }
 
     case "image":
@@ -196,10 +195,31 @@ function renderBlock(block: Block, idx: number) {
           aspect={block.aspect}
           width={block.width}
           height={block.height}
+          number={block.caption ? figs.next() : undefined}
         />
       );
   }
 }
+
+const backLinkClass =
+  "inline-flex min-h-11 items-center gap-1 font-mono text-sm tracking-[0.02em] text-ink-2";
+
+function BackLink({ href, label }: { href: string; label: string }) {
+  return (
+    <p className="mb-2">
+      <Link href={href} className={backLinkClass}>
+        <span aria-hidden="true">←</span>
+        {label}
+      </Link>
+    </p>
+  );
+}
+
+const titleClass =
+  "max-w-[22ch] text-3xl font-extrabold leading-[1.08] tracking-[-0.03em]";
+const ledeClass = "max-w-[38rem] text-lg leading-normal text-ink-2";
+const headerClass = "border-b border-rule pt-8 pb-12";
+const headerInnerClass = "wrap grid grid-cols-[minmax(0,1fr)] gap-5";
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
@@ -223,24 +243,15 @@ export default async function ProjectPage({ params }: Props) {
 
     return (
       <>
-        <header className="border-b border-border bg-paper">
-          <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
-            <Link
-              href="/portfolio"
-              className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
-            >
-              <span aria-hidden="true">← </span>Back to work
-            </Link>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl text-primary leading-tight tracking-tight mb-4">
-              {selectedItem.title}
-            </h1>
-            <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl">
-              {selectedItem.description}
-            </p>
+        <header className={headerClass}>
+          <div className={headerInnerClass}>
+            <BackLink href="/portfolio" label="Back to work" />
+            <h1 className={titleClass}>{selectedItem.title}</h1>
+            <p className={ledeClass}>{selectedItem.description}</p>
           </div>
         </header>
-        <div className="max-w-3xl mx-auto px-6 py-16">
-          <p className="font-sans text-lg text-muted leading-relaxed">
+        <div className="wrap py-12">
+          <p className="max-w-[44rem]">
             Work in progress. More details coming soon.
           </p>
         </div>
@@ -252,109 +263,162 @@ export default async function ProjectPage({ params }: Props) {
   const selectedItem = selectedWork.find((item) => item.slug === slug);
   const inProgress = selectedItem?.inProgress;
   const back = backLink(selectedItem);
+  const figs = figureCounter();
 
-  const byline = [study.client, study.year, study.role].filter(
-    (item): item is string => Boolean(item),
-  );
+  const spec = (
+    [
+      ["Client", study.client],
+      ["Year", study.year],
+      ["Role", study.role],
+    ] satisfies [string, string | undefined][]
+  ).filter((row): row is [string, string] => Boolean(row[1]));
+  const hasSpec = spec.length > 0 || study.tags.length > 0 || study.heroMetric;
+  const specRowClass =
+    "grid grid-cols-[6rem_minmax(0,1fr)] gap-4 border-b border-rule py-2";
+  const specTermClass = "font-mono text-sm tracking-[0.02em] text-ink-2 pt-0.5";
 
   return (
     <>
       {/* Project Header */}
-      <header className="border-b border-border bg-paper">
-        <div className="max-w-5xl mx-auto px-6 pt-12 pb-12">
-          <Link
-            href={back.href}
-            className="font-sans text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
-          >
-            <span aria-hidden="true">← </span>{back.label}
-          </Link>
+      <header className={headerClass}>
+        <div className={headerInnerClass}>
+          <BackLink href={back.href} label={back.label} />
 
           {inProgress && (
-            <p className="font-sans text-base text-body border-l-2 border-secondary bg-surface px-4 py-3 mb-6 max-w-2xl">
+            <p className="block max-w-[40rem] border border-mark bg-mark-wash px-4 py-3 rounded-xs">
               <strong className="font-semibold">Work in progress.</strong>{" "}
               This case study is still being written.
             </p>
           )}
 
-          <div className="flex flex-wrap gap-2 mb-4">
-            {study.tags.map((tag) => (
-              <span
-                key={tag}
-                className="font-mono text-sm text-muted border border-border rounded px-2 py-0.5 bg-surface"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <h1 className={titleClass}>{study.title}</h1>
 
-          <h1 className="font-display font-bold text-4xl sm:text-5xl text-primary leading-tight tracking-tight mb-4">
-            {study.title}
-          </h1>
+          <p className={ledeClass}>{study.summary}</p>
 
-          {byline.length > 0 && (
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-1 mb-6 font-sans text-sm text-muted">
-              {byline.map((item, i) => (
-                <span key={item} className="contents">
-                  {i > 0 && <span aria-hidden="true">·</span>}
-                  <span>{item}</span>
-                </span>
-              ))}
-            </div>
-          )}
+          {hasSpec && (
+            <div className="grid max-w-[60rem] grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-6 border-t border-ink pt-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+              <dl className="grid">
+                {spec.map(([term, value]) => (
+                  <div key={term} className={specRowClass}>
+                    <dt className={specTermClass}>{term}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+                {study.tags.length > 0 && (
+                  <div className={specRowClass}>
+                    <dt className={specTermClass}>Tags</dt>
+                    <dd>
+                      <ul className="flex flex-wrap gap-1.5" role="list">
+                        {study.tags.map((tag) => (
+                          <li
+                            key={tag}
+                            className="rounded-xs border border-rule-strong px-2 font-mono text-sm"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                )}
+              </dl>
 
-          <p className="font-sans text-lg text-muted leading-relaxed max-w-2xl">
-            {study.summary}
-          </p>
-
-          {study.heroMetric && (
-            <div className="mt-10 inline-flex items-baseline gap-3 border-t border-border pt-8">
-              <span className="font-display font-bold text-5xl text-secondary">
-                {study.heroMetric.value}
-              </span>
-              <span className="font-sans text-base text-muted">
-                {study.heroMetric.label}
-              </span>
+              {study.heroMetric && (
+                <p className="grid content-start gap-1 border-l-3 border-mark pl-4">
+                  <span className="text-2xl font-extrabold leading-[1.1] tracking-[-0.02em] tabular-nums">
+                    {study.heroMetric.value}
+                  </span>{" "}
+                  <span className="text-ink-2">{study.heroMetric.label}</span>
+                </p>
+              )}
             </div>
           )}
         </div>
-
-        {/* Hero image — full width within the header band */}
-        {study.heroImage && (
-          <div className="max-w-5xl mx-auto px-6 pb-12">
-            <ProjectImage
-              src={study.heroImage.src}
-              alt={study.heroImage.alt}
-              caption={study.heroImage.caption}
-              aspect={study.heroImage.aspect}
-              width={study.heroImage.width}
-              height={study.heroImage.height}
-            />
-          </div>
-        )}
       </header>
 
-      {/* Project Body */}
-      <article
-        className="max-w-3xl mx-auto px-6 py-16 space-y-16"
-        aria-label={`Project: ${study.title}`}
+      {/* Hero image, full frame width */}
+      {study.heroImage && (
+        <div className="wrap pt-10">
+          <ProjectImage
+            src={study.heroImage.src}
+            alt={study.heroImage.alt}
+            caption={study.heroImage.caption}
+            aspect={study.heroImage.aspect}
+            width={study.heroImage.width}
+            height={study.heroImage.height}
+            number={study.heroImage.caption ? figs.next() : undefined}
+          />
+        </div>
+      )}
+
+      {/* Project Body, with an outline of its H2s */}
+      <div
+        className={`wrap grid grid-cols-[minmax(0,1fr)] gap-x-16 gap-y-8 py-12 ${
+          study.sections.length
+            ? "lg:grid-cols-[14rem_minmax(0,44rem)]"
+            : "lg:grid-cols-[minmax(0,44rem)]"
+        }`}
       >
-        {study.sections.map((section) => (
-          <section
-            key={section.heading}
-            aria-labelledby={`section-${slugify(section.heading)}`}
+        {study.sections.length > 0 && (
+          <nav
+            aria-labelledby="toc-heading"
+            className="self-start border-t border-ink pt-3 pr-2 pb-2 tall-lg:sticky tall-lg:top-22 tall-lg:max-h-[calc(100vh-7rem)] tall-lg:overflow-auto tall-lg:scroll-py-2"
           >
-            <h2
-              id={`section-${slugify(section.heading)}`}
-              className="font-display font-semibold text-2xl text-primary mb-6 pb-3 border-b border-border"
+            <p
+              id="toc-heading"
+              className="mb-2 font-mono text-sm tracking-[0.02em] text-ink-2"
             >
-              {section.heading}
-            </h2>
-            <div className="space-y-6">
-              {section.blocks.map((block, idx) => renderBlock(block, idx))}
-            </div>
-          </section>
-        ))}
-      </article>
+              On this page
+            </p>
+            <ol role="list">
+              {study.sections.map((section) => (
+                <li
+                  key={section.heading}
+                  className="grid grid-cols-[2.25rem_minmax(0,1fr)] items-baseline"
+                >
+                  {/* The level tag sits outside the link, so the link's name
+                      matches the heading it goes to. */}
+                  <span
+                    className="font-mono text-sm tracking-[0.02em] text-mark"
+                    aria-hidden="true"
+                  >
+                    H2
+                  </span>
+                  <a
+                    href={`#section-${slugify(section.heading)}`}
+                    className="block py-2 text-sm leading-[1.4] text-ink no-underline hover:underline hover:decoration-mark hover:decoration-3"
+                  >
+                    {section.heading}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+
+        <article
+          className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-16"
+          aria-label={`Project: ${study.title}`}
+        >
+          {study.sections.map((section) => (
+            <section
+              key={section.heading}
+              aria-labelledby={`section-${slugify(section.heading)}`}
+              className="grid grid-cols-[minmax(0,1fr)] gap-5"
+            >
+              <h2
+                id={`section-${slugify(section.heading)}`}
+                className="border-b border-rule pb-3 text-xl font-extrabold tracking-[-0.015em]"
+              >
+                {section.heading}
+              </h2>
+              {section.blocks.map((block, idx) =>
+                renderBlock(block, idx, figs),
+              )}
+            </section>
+          ))}
+        </article>
+      </div>
 
       <ProjectNav slug={slug} />
     </>

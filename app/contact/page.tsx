@@ -86,59 +86,55 @@ export default function ContactPage() {
     return {
       "aria-invalid": error ? true : undefined,
       "aria-describedby": error ? `${field}-error` : undefined,
-      className: `font-sans text-sm border ${
-        error ? "border-danger" : "border-border-strong"
-      } rounded px-3 py-2.5 bg-surface text-body placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-colors ${extraClass}`,
+      // Focus uses the global three-band ring.
+      className: `min-h-11 border ${
+        error ? "border-danger" : "border-rule-strong"
+      } rounded-xs px-3 py-2 bg-paper text-ink placeholder:text-ink-2 ${extraClass}`,
     };
   }
 
   function fieldError(field: Field) {
     const error = errorFor(field);
     return error ? (
-      <p id={`${field}-error`} className="font-sans text-sm text-danger">
+      <p id={`${field}-error`} className="text-sm text-danger">
         {error}
       </p>
     ) : null;
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
-      <div className="max-w-lg">
-        <p className="font-mono text-sm text-muted mb-3">Contact</p>
-        <h1 className="font-display font-bold text-4xl text-primary mb-4 leading-tight">
+    <div className="wrap py-16">
+      <div className="max-w-[36rem]">
+        <p className="font-mono text-sm tracking-[0.02em] text-ink-2 mb-5">
+          Contact
+        </p>
+        <h1 className="text-3xl font-extrabold leading-[1.08] tracking-[-0.03em] mb-5">
           Get in touch
         </h1>
-        <p className="font-sans text-base text-muted leading-relaxed mb-10">
+        <p className="text-ink-2 mb-10">
           Interested in working together or want to talk design systems and
           accessibility? Send me a note, or find me on{" "}
-          <a
-            href="https://www.linkedin.com/in/magarland/"
-            rel="me"
-            className="text-secondary underline underline-offset-2 hover:text-primary"
-          >
+          <a href="https://www.linkedin.com/in/magarland/" rel="me">
             LinkedIn
           </a>
           . All fields are required. Messages are sent through Formspree;
           see the{" "}
-          <Link
-            href="/privacy"
-            className="text-secondary underline underline-offset-2 hover:text-primary"
-          >
+          <Link href="/privacy">
             Privacy notice
           </Link>
           .
         </p>
 
         {state.succeeded ? (
-          <div className="border border-success rounded-lg p-6 bg-paper">
+          <div className="border border-success p-6">
             <h2
               ref={successRef}
               tabIndex={-1}
-              className="font-display font-semibold text-success mb-1"
+              className="text-lg font-extrabold text-success mb-1"
             >
               Message sent
             </h2>
-            <p className="font-sans text-sm text-muted">
+            <p className="text-ink-2">
               Thanks for reaching out — I&apos;ll get back to you soon.
             </p>
           </div>
@@ -148,12 +144,12 @@ export default function ContactPage() {
             onSubmit={onSubmit}
             noValidate
             aria-label="Contact form"
-            className="space-y-6"
+            className="grid gap-6"
           >
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               <label
                 htmlFor="name"
-                className="font-sans text-sm font-medium text-primary"
+                className="font-semibold"
               >
                 Name
               </label>
@@ -169,10 +165,10 @@ export default function ContactPage() {
               {fieldError("name")}
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="font-sans text-sm font-medium text-primary"
+                className="font-semibold"
               >
                 Email
               </label>
@@ -188,10 +184,10 @@ export default function ContactPage() {
               {fieldError("email")}
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               <label
                 htmlFor="message"
-                className="font-sans text-sm font-medium text-primary"
+                className="font-semibold"
               >
                 Message
               </label>
@@ -210,12 +206,12 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={state.submitting}
-              className="font-sans text-sm font-medium bg-primary text-surface px-5 py-2.5 rounded hover:bg-secondary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="justify-self-start inline-flex min-h-11 items-center rounded-xs bg-ink px-5 py-2 font-semibold text-paper hover:bg-mark disabled:cursor-not-allowed"
             >
               {state.submitting ? "Sending…" : "Send message"}
             </button>
             {/* Kept in the DOM so screen readers announce errors added later. */}
-            <div role="alert" className="font-sans text-sm text-danger">
+            <div role="alert" className="text-sm text-danger">
               {formErrors.length > 0 &&
                 `Your message wasn't sent. ${formErrors
                   .map((e) => e.message)
@@ -224,10 +220,10 @@ export default function ContactPage() {
           </form>
         )}
 
-        <div className="mt-12 pt-8 border-t border-border">
+        <div className="mt-12 pt-8 border-t border-rule">
           <Link
             href="/portfolio"
-            className="font-sans text-sm font-medium text-secondary hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 font-semibold"
           >
             <span aria-hidden="true">← </span>Back to work
           </Link>

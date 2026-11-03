@@ -7,6 +7,7 @@ import {
   tokenComponents,
   primitiveHex,
 } from "@/lib/design-tokens";
+import { FigureNumber } from "@/components/ProjectImage";
 
 const P = { x: 10, w: 200 };
 const S = { x: 340, w: 250 };
@@ -105,18 +106,15 @@ function Node({
   children: React.ReactNode;
 }) {
   return (
-    <g
-      opacity={state === "dim" ? 0.22 : 1}
-      className="transition-opacity motion-reduce:transition-none"
-    >
+    <g opacity={state === "dim" ? 0.22 : 1}>
       <rect
         x={x}
         y={y}
         width={w}
         height={NODE_HEIGHT}
         rx={6}
-        fill={state === "lit" ? "#e3eef5" : "var(--color-surface)"}
-        stroke={state === "lit" ? "var(--color-secondary)" : "var(--color-border)"}
+        fill={state === "lit" ? "var(--color-mark-wash)" : "var(--color-paper)"}
+        stroke={state === "lit" ? "var(--color-mark)" : "var(--color-rule-strong)"}
         strokeWidth={state === "lit" ? 2 : 1}
       />
       {children}
@@ -124,7 +122,7 @@ function Node({
   );
 }
 
-export default function TokenDiagram() {
+export default function TokenDiagram({ number }: { number?: number }) {
   const [choice, setChoice] = useState("All");
   const lit = litTokens(choice);
 
@@ -133,9 +131,11 @@ export default function TokenDiagram() {
     !lit ? "" : lit.has(id) ? "lit" : "dim";
 
   return (
-    <figure className="border border-border rounded-lg bg-surface p-4 sm:p-6 flex flex-col gap-4 lg:-mx-34">
+    // On wide windows the figure grows into the gap left of the text column
+    // and the free space right of it, so the diagram fits without scrolling.
+    <figure className="border border-rule bg-paper p-4 sm:p-6 flex flex-col gap-4 lg:-ml-12 lg:mr-[calc(-1*max(0px,min(100vw,74rem)-2*var(--gutter)-62rem))]">
       <div className="flex flex-wrap items-center gap-3">
-        <span id="token-path-label" className="font-sans text-sm text-[#4b5563]">
+        <span id="token-path-label" className="text-sm text-ink-2">
           Follow a path:
         </span>
         <div
@@ -149,10 +149,10 @@ export default function TokenDiagram() {
               type="button"
               aria-pressed={choice === c}
               onClick={() => setChoice(c)}
-              className={`font-sans text-sm font-medium rounded border px-3 py-1.5 transition-colors ${
+              className={`min-h-9 rounded-xs border px-3 py-1.5 text-sm font-semibold ${
                 choice === c
-                  ? "bg-secondary border-secondary text-surface"
-                  : "bg-surface border-border-strong text-primary hover:border-secondary"
+                  ? "bg-mark border-mark text-paper"
+                  : "bg-paper border-rule-strong text-ink hover:border-mark hover:bg-panel"
               }`}
             >
               {c}
@@ -161,7 +161,7 @@ export default function TokenDiagram() {
         </div>
       </div>
 
-      <p className="lg:hidden font-sans text-sm text-[#4b5563]">
+      <p className="min-[74rem]:hidden text-sm text-ink-2">
         Scroll sideways to see all three layers, or open the table below.
       </p>
       {/* Focusable so keyboard users can scroll it on narrow screens. */}
@@ -173,7 +173,7 @@ export default function TokenDiagram() {
       >
         <svg
           viewBox={`0 0 980 ${VIEW_HEIGHT}`}
-          className="block w-full min-w-[860px] h-auto"
+          className="block w-full min-w-[800px] h-auto"
           role="img"
           aria-labelledby="token-svg-title token-svg-desc"
         >
@@ -185,8 +185,8 @@ export default function TokenDiagram() {
           </desc>
           <defs>
             {[
-              ["token-arrow", "var(--color-border)"],
-              ["token-arrow-lit", "var(--color-secondary)"],
+              ["token-arrow", "var(--color-rule-strong)"],
+              ["token-arrow-lit", "var(--color-mark)"],
             ].map(([id, fill]) => (
               <marker
                 key={id}
@@ -212,14 +212,14 @@ export default function TokenDiagram() {
               <text
                 x={x}
                 y={24}
-                className="font-display font-bold"
+                className="font-mono font-medium"
                 fontSize={13}
                 letterSpacing="0.04em"
-                fill="var(--color-primary)"
+                fill="var(--color-ink)"
               >
                 {head}
               </text>
-              <text x={x} y={42} className="font-sans" fontSize={12} fill="#4b5563">
+              <text x={x} y={42} className="font-sans" fontSize={12} fill="var(--color-ink-2)">
                 {sub}
               </text>
             </g>
@@ -232,12 +232,11 @@ export default function TokenDiagram() {
                 key={`${e.from}-${e.to}`}
                 d={e.d}
                 fill="none"
-                stroke={on ? "var(--color-secondary)" : "var(--color-border)"}
+                stroke={on ? "var(--color-mark)" : "var(--color-rule-strong)"}
                 strokeWidth={on ? 3 : 1.5}
                 opacity={lit && !on ? 0.22 : 1}
                 markerEnd={`url(#${on ? "token-arrow-lit" : "token-arrow"})`}
-                className="transition-opacity motion-reduce:transition-none"
-              />
+                              />
             );
           })}
 
@@ -250,9 +249,9 @@ export default function TokenDiagram() {
                 height={18}
                 rx={3}
                 fill={p.hex}
-                stroke="#9ca3af"
+                stroke="var(--color-rule-strong)"
               />
-              <text x={P.x + 38} y={py(i) + 24} className="font-mono" fontSize={13} fill="var(--color-primary)">
+              <text x={P.x + 38} y={py(i) + 24} className="font-mono" fontSize={13} fill="var(--color-ink)">
                 {p.id}
               </text>
               <text
@@ -261,13 +260,14 @@ export default function TokenDiagram() {
                 textAnchor="end"
                 className="font-mono"
                 fontSize={11}
-                fill="#4b5563"
+                fill="var(--color-ink-2)"
               >
                 {p.hex}
               </text>
             </Node>
           ))}
 
+          {/* The stack is faded; its label stays at full contrast. */}
           <g opacity={0.35}>
             {[8, 4, 0].map((o) => (
               <rect
@@ -277,24 +277,24 @@ export default function TokenDiagram() {
                 width={P.w}
                 height={NODE_HEIGHT}
                 rx={6}
-                fill="var(--color-surface)"
-                stroke="var(--color-border)"
+                fill="var(--color-paper)"
+                stroke="var(--color-rule-strong)"
               />
             ))}
-            <text x={P.x + 22} y={restY + 32} className="font-mono" fontSize={13} fill="var(--color-primary)">
+          </g>
+          <text x={P.x + 22} y={restY + 32} className="font-mono" fontSize={13} fill="var(--color-ink)">
               + about 90 more colors
             </text>
-          </g>
-          <text x={P.x} y={restY + 72} className="font-sans" fontSize={12} fill="#4b5563">
+          <text x={P.x} y={restY + 72} className="font-sans" fontSize={12} fill="var(--color-ink-2)">
             Not mapped to any semantic token,
           </text>
-          <text x={P.x} y={restY + 88} className="font-sans" fontSize={12} fill="#4b5563">
+          <text x={P.x} y={restY + 88} className="font-sans" fontSize={12} fill="var(--color-ink-2)">
             so they can&apos;t carry meaning.
           </text>
 
           {semantics.map((s, i) => (
             <Node key={s.id} state={nodeState(s.id)} x={S.x} y={sy(i)} w={S.w}>
-              <text x={S.x + 14} y={sy(i) + 24} className="font-mono" fontSize={13} fill="var(--color-primary)">
+              <text x={S.x + 14} y={sy(i) + 24} className="font-mono" fontSize={13} fill="var(--color-ink)">
                 {s.id}
               </text>
             </Node>
@@ -302,7 +302,7 @@ export default function TokenDiagram() {
 
           {tokenComponents.map((c, i) => (
             <Node key={c.id} state={nodeState(c.id)} x={C.x} y={cy(i)} w={C.w}>
-              <text x={C.x + 14} y={cy(i) + 24} className="font-sans" fontSize={13} fill="var(--color-primary)">
+              <text x={C.x + 14} y={cy(i) + 24} className="font-sans" fontSize={13} fill="var(--color-ink)">
                 {c.id}
               </text>
             </Node>
@@ -310,41 +310,42 @@ export default function TokenDiagram() {
         </svg>
       </div>
 
-      <figcaption className="font-sans text-sm text-[#4b5563] leading-relaxed">
+      <figcaption className="text-sm text-ink-2 leading-normal">
+        <FigureNumber number={number} />
         {captions[choice]}
       </figcaption>
 
-      <details className="border-t border-border pt-4">
-        <summary className="font-sans text-sm font-medium text-secondary cursor-pointer">
+      <details className="border-t border-rule pt-4">
+        <summary className="inline-block py-1 text-sm font-semibold text-mark cursor-pointer">
           The same mapping as a table
         </summary>
         <div className="overflow-x-auto mt-4">
-          <table className="w-full font-sans text-sm text-left border-collapse">
+          <table className="w-full text-sm text-left border-collapse">
             <thead>
-              <tr className="border-b border-border text-[#4b5563]">
-                <th scope="col" className="py-2 pr-4 font-medium">Component</th>
-                <th scope="col" className="py-2 pr-4 font-medium">Semantic token</th>
-                <th scope="col" className="py-2 font-medium">Primitive</th>
+              <tr className="border-b border-ink text-ink-2">
+                <th scope="col" className="py-2 pr-4 font-semibold">Component</th>
+                <th scope="col" className="py-2 pr-4 font-semibold">Semantic token</th>
+                <th scope="col" className="py-2 font-semibold">Primitive</th>
               </tr>
             </thead>
             <tbody>
               {tokenComponents.flatMap((c) =>
                 c.uses.map((u, i) => (
-                  <tr key={`${c.id}-${u}`} className="border-b border-border/50 align-top">
+                  <tr key={`${c.id}-${u}`} className="border-b border-rule align-top">
                     {i === 0 ? (
-                      <th scope="row" rowSpan={c.uses.length} className="py-2 pr-4 font-normal text-body">
+                      <th scope="row" rowSpan={c.uses.length} className="py-2 pr-4 font-normal text-ink">
                         {c.id}
                       </th>
                     ) : null}
-                    <td className="py-2 pr-4 font-mono text-primary">{u}</td>
-                    <td className="py-2 font-mono text-primary">
+                    <td className="py-2 pr-4 font-mono text-ink">{u}</td>
+                    <td className="py-2 font-mono text-ink">
                       {semantics
                         .find((s) => s.id === u)
                         ?.from.map((src) => (
                           <span key={src} className="flex items-center gap-2">
                             <span
                               aria-hidden="true"
-                              className="inline-block w-3 h-3 rounded-sm border border-border"
+                              className="inline-block w-3 h-3 rounded-xs border border-rule-strong"
                               style={{ background: primitiveHex(src) }}
                             />
                             {src}

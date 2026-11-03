@@ -12,7 +12,7 @@ export type SelectedWorkItem = {
   parent?: string;
   // Drawn tile for the Work page card, picked to echo the case study.
   // Items without one get a plain title tile.
-  thumbnail?: "products" | "swatches" | "schedule" | "messages";
+  thumbnail?: "products" | "swatches" | "schedule" | "messages" | "code";
 };
 
 const allWork: SelectedWorkItem[] = [
@@ -22,6 +22,7 @@ const allWork: SelectedWorkItem[] = [
     description:
       "My team built tools that let 12 designers prototype with AI in real code that follows our design system. When a design needs to break a rule, the exception and the reason are recorded for engineers.",
     inProgress: true,
+    thumbnail: "code",
   },
   {
     slug: "accessibility-program",

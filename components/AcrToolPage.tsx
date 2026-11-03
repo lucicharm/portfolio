@@ -2,8 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import ProjectImage from "@/components/ProjectImage";
 
-const INK = "text-[#14261f]";
-const TEAL = "text-[#0b5d4f]";
+const LABEL = "font-mono text-sm tracking-[0.02em]";
 
 function Band({
   id,
@@ -13,7 +12,7 @@ function Band({
   children,
 }: {
   id: string;
-  tone: "white" | "mint";
+  tone: "paper" | "panel";
   eyebrow: string;
   title: string;
   children: ReactNode;
@@ -21,17 +20,13 @@ function Band({
   return (
     <section
       aria-labelledby={id}
-      className={tone === "mint" ? "bg-[#edf2f0]" : "bg-white"}
+      className={`border-t border-rule ${tone === "panel" ? "bg-panel" : "bg-paper"}`}
     >
-      <div className="max-w-5xl mx-auto px-6 py-14 sm:py-16">
-        <p
-          className={`font-sans text-xs font-bold uppercase tracking-wider ${TEAL} mb-3`}
-        >
-          {eyebrow}
-        </p>
+      <div className="wrap py-14 sm:py-16">
+        <p className={`${LABEL} text-mark mb-3`}>{eyebrow}</p>
         <h2
           id={id}
-          className={`font-display font-semibold text-3xl ${INK} leading-tight max-w-3xl mb-6`}
+          className="text-2xl font-extrabold tracking-[-0.02em] max-w-[40rem] mb-6"
         >
           {title}
         </h2>
@@ -97,47 +92,41 @@ export default function AcrToolPage({
 }) {
   return (
     <>
-      <header className="bg-white">
-        <div className="max-w-5xl mx-auto px-6 pt-12 pb-14">
-          <Link
-            href={back.href}
-            className="font-sans text-sm text-[#374151] underline underline-offset-4 hover:text-primary transition-colors mb-10 inline-block"
-          >
-            <span aria-hidden="true">← </span>{back.label}
-          </Link>
-          <p
-            className={`font-sans text-xs font-bold uppercase tracking-wider ${TEAL} mb-4`}
-          >
-            {title}
+      <header className="pt-8 pb-12">
+        <div className="wrap grid grid-cols-[minmax(0,1fr)] gap-5">
+          <p className="mb-2">
+            <Link
+              href={back.href}
+              className={`${LABEL} inline-flex min-h-11 items-center gap-1 text-ink-2`}
+            >
+              <span aria-hidden="true">←</span>
+              {back.label}
+            </Link>
           </p>
-          <h1
-            className={`font-display font-light text-4xl sm:text-5xl ${INK} leading-[1.1] tracking-tight max-w-3xl mb-6`}
-          >
+          <p className={`${LABEL} text-mark`}>{title}</p>
+          <h1 className="max-w-[22ch] text-3xl font-extrabold leading-[1.08] tracking-[-0.03em]">
             An internal tool that turns a 40-hour accessibility report into a
             few hours
           </h1>
-          <p className="font-sans text-lg text-[#374151] leading-relaxed max-w-2xl">
+          <p className="max-w-[38rem] text-lg leading-normal text-ink-2">
             {description}
           </p>
-          <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-[#aebbb6] pt-6">
+          <dl className="grid max-w-[60rem] grid-cols-[minmax(0,1fr)] gap-x-8 border-t border-ink sm:grid-cols-3">
             {glance.map(([k, v]) => (
-              <div key={k}>
-                <dt className="font-sans text-xs font-bold uppercase tracking-wider text-[#374151] mb-1">
-                  {k}
-                </dt>
-                <dd className={`font-sans text-base font-medium ${INK}`}>
-                  {v}
-                </dd>
+              <div key={k} className="grid content-start gap-1 border-b border-rule py-3">
+                <dt className={`${LABEL} text-ink-2`}>{k}</dt>
+                <dd>{v}</dd>
               </div>
             ))}
           </dl>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 pb-14">
+      <div className="wrap pb-14">
         <ProjectImage
           src="/images/acr-updater/updater-general-tab.png"
           {...SHOT}
+          number={1}
           alt="The ACR Updater's General Information tab. A header shows the report type, WCAG 2.2 Level A and AA, and the report's Jira label, with Logout and Export to Word buttons. Tabs for General Information, WCAG 2.2, Revised Section 508, and EN 301 549 sit above a form with fields for product name, version, report date, product description, and evaluation methods."
           caption="The working view: product details, four standards tabs, and export to Word."
         />
@@ -145,11 +134,11 @@ export default function AcrToolPage({
 
       <Band
         id="problem"
-        tone="white"
+        tone="paper"
         eyebrow="The problem"
         title="Customers needed current accessibility reports. We could only afford them every two years."
       >
-        <p className="font-sans text-lg text-[#374151] leading-relaxed max-w-3xl">
+        <p className="text-lg leading-normal text-ink-2 max-w-[44rem]">
           Vendors typically updated our ACRs about every two years, and
           commissioning them more often wasn&apos;t practical. Doing it in-house
           took more than 40 hours per report. The audit data existed. Turning it
@@ -159,43 +148,38 @@ export default function AcrToolPage({
 
       <Band
         id="solution"
-        tone="mint"
+        tone="panel"
         eyebrow="The solution"
         title="Automate the busywork, keep the judgment human"
       >
-        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ol className="grid grid-cols-[minmax(0,1fr)] sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map(([t, d], i) => (
-            <li
-              key={t}
-              className="bg-white border border-[#c9d3cf] rounded-xl p-5"
-            >
-              <p className={`font-mono text-xs ${TEAL} mb-2`}>
+            <li key={t} className="bg-paper border border-rule-strong p-5">
+              <p className={`${LABEL} text-mark mb-2`}>
                 <span className="sr-only">Step </span>
                 {i + 1}
               </p>
-              <h3 className={`font-display font-semibold text-lg ${INK} mb-1`}>
-                {t}
-              </h3>
-              <p className="font-sans text-base text-[#374151] leading-relaxed">
-                {d}
-              </p>
+              <h3 className="text-lg font-semibold mb-1">{t}</h3>
+              <p className="text-ink-2">{d}</p>
             </li>
           ))}
         </ol>
-        <p className="font-sans text-base text-[#374151] leading-relaxed mt-6 max-w-3xl">
+        <p className="mt-6 max-w-[44rem]">
           AI drafts the language. It never decides whether a product conforms.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-8 grid grid-cols-[minmax(0,1fr)] md:grid-cols-2 gap-6">
           <ProjectImage
             src="/images/acr-updater/updater-login1.png"
             {...SHOT}
+            number={2}
             alt="The ACR Updater start screen. An introduction explains that the tool loads accessibility issues by Jira label, and that each issue must also carry a WCAG success criterion label in the format WCAG_X.X.X. Below, a Get Started panel offers an optional drag-and-drop upload for an existing VPAT PDF."
             caption="Start: optionally import an existing VPAT PDF."
           />
           <ProjectImage
             src="/images/acr-updater/updater-login2.png"
             {...SHOT}
+            number={3}
             alt="The rest of the start screen: required fields for Jira email address, Jira API token, and the VPAT Jira label for the report, a Continue button, and a privacy notice saying credentials stay in the browser session and are sent only to the company's Jira."
             caption="Connect: Jira credentials and the label that ties issues to this report."
           />
@@ -204,6 +188,7 @@ export default function AcrToolPage({
           <ProjectImage
             src="/images/acr-updater/updater-wcag-tab2.png"
             {...SHOT}
+            number={4}
             alt="Part of the WCAG 2.2 review table. Criterion 1.2.3, Audio Description or Media Alternative, is set to Supports, with a red asterisk marking a drafted explanation that needs review. Criterion 1.3.1, Info and Relationships, is set to Partially Supports. Its draft explanation summarizes problems with table headers, headings, and form labels, and ten related Jira issues are listed beside it with statuses from Open to Closed."
             caption="Each criterion shows a proposed conformance level, an editable draft explanation, and the Jira issues behind it. A red asterisk flags drafts that need a person's review."
           />
@@ -212,6 +197,7 @@ export default function AcrToolPage({
           <ProjectImage
             src="/images/acr-updater/updater-508-tab.png"
             {...SHOT}
+            number={5}
             alt="The Revised Section 508 tab. Criteria such as 302.1 Without Vision, 302.2 With Limited Vision, and 302.3 Without Perception of Color are each set to Partially Supports, with a remark listing the WCAG criteria that have documented issues, such as 1.4.3 Contrast (Minimum) and 1.4.11 Non-text Contrast."
             caption="Section 508 remarks point back to the WCAG criteria with documented issues."
           />
@@ -220,22 +206,22 @@ export default function AcrToolPage({
 
       <Band
         id="impact"
-        tone="white"
+        tone="paper"
         eyebrow="Projected impact"
         title="Estimated time returned to the program"
       >
-        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <ul
+          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,14rem),1fr))] border-t border-ink"
+          role="list"
+        >
           {impact.map(([big, label]) => (
-            <li
-              key={big}
-              className="border border-[#c9d3cf] rounded-xl p-6 bg-[#f4f6f5]"
-            >
-              <p className={`font-display font-light text-3xl ${INK}`}>{big}</p>
-              <p className="font-sans text-base text-[#374151] mt-1">{label}</p>
+            <li key={big} className="grid content-start gap-1 border-b border-rule py-4 pr-4">
+              <p className="text-2xl font-extrabold tabular-nums text-mark">{big}</p>
+              <p className="font-semibold">{label}</p>
             </li>
           ))}
         </ul>
-        <p className="font-sans text-sm text-[#374151] leading-relaxed mt-4 max-w-3xl">
+        <p className="text-sm text-ink-2 mt-4 max-w-[44rem]">
           Projected, not yet measured. Based on a 40-hour manual baseline and a
           4-hour upper estimate with the tool: 62 ACRs × 36 hours = 2,232 hours.
         </p>
@@ -243,27 +229,20 @@ export default function AcrToolPage({
 
       <Band
         id="lessons"
-        tone="mint"
+        tone="panel"
         eyebrow="What I learned"
         title="Most of the work was changing team habits"
       >
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-3 gap-4">
           {lessons.map(([t, d]) => (
-            <li
-              key={t}
-              className="bg-white border border-[#c9d3cf] rounded-xl p-5"
-            >
-              <h3 className={`font-display font-semibold text-lg ${INK} mb-2`}>
-                {t}
-              </h3>
-              <p className="font-sans text-base text-[#374151] leading-relaxed">
-                {d}
-              </p>
+            <li key={t} className="bg-paper border border-rule-strong p-5">
+              <h3 className="text-lg font-semibold mb-2">{t}</h3>
+              <p className="text-ink-2">{d}</p>
             </li>
           ))}
         </ul>
-        <p className="font-sans text-base text-[#374151] leading-relaxed mt-6 max-w-3xl">
-          <span className={`font-semibold ${INK}`}>Next: </span>
+        <p className="mt-6 max-w-[44rem]">
+          <span className="font-semibold">Next: </span>
           measure real production time, add version history and permissions, and
           import existing PDF ACRs to preserve their testing context.
         </p>
